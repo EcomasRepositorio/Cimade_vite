@@ -7,6 +7,7 @@ const slides: { src: string; width: number; height: number }[] = [
   { src: "/image/imagen02.png", width: 2500, height: 2000 },
   { src: "/image/imagen03.png", width: 2500, height: 2000 },
   { src: "/image/imagen04.png", width: 2500, height: 2000 },
+  { src: "/image/TAMAÑO-DE-PRUEBA.png", width: 2500, height: 2000 },
 ];
 
 const Home: React.FC = () => {

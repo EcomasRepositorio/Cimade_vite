@@ -1,3 +1,5 @@
+"use client";
+import Image from 'next/image';
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
@@ -10,8 +12,8 @@ const Header = () => {
     setMenu(!menu);
   }
   return (
-  <nav>
-    <nav className="bg-[#006eb0] border-gray-200">
+  <>
+    <div id="/" className="bg-[#006eb0] border-gray-200">
     <div className="flex lg:justify-between justify-center mx-auto max-w-screen-2xl p-2 ">
       <div className="hidden lg:flex">
       <Link href="#" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
@@ -21,8 +23,8 @@ const Header = () => {
             <Link href="#" className="text-lg text-gray-50 hover:underline font-semibold">Aula virtual</Link>
         </div>
     </div>
-</nav>
-<nav className="bg-[#ffffff] ">
+</div>
+<div className="bg-white">
     <div className="max-w-screen-2xl mx-auto">
         <div className="flex items-center justify-between">
                 <Link href="https://flowbite.com" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -40,13 +42,13 @@ const Header = () => {
 
             <ul className="hidden lg:flex flex-wrap font-medium p-4 mx-auto space-x-8 rtl:space-x-reverse text-lg">
                 <li>
-                    <Link href="#" className="text-gray-900 hover:underline" aria-current="page">Inicio</Link>
+                    <Link href="/" className="text-gray-900 hover:underline" aria-current="page">Inicio</Link>
                 </li>
                 <li>
                     <Link href="#" className="text-gray-900 hover:underline">Diplomados</Link>
                 </li>
                 <li>
-                    <Link href="#" className="text-gray-900 hover:underline">Certificados</Link>
+                    <Link href="/certificate" className="text-gray-900 hover:underline">Certificados</Link>
                 </li>
                 <li>
                     <Link href="#" className="text-gray-900 hover:underline">Nosotros</Link>
@@ -63,29 +65,32 @@ const Header = () => {
                 </div>
         </div>
     </div>
-</nav>
+</div>
 
   <div className={menu ?
     'lg:hidden top-[100px] right-0 bottom-0 left-0 flex justify-center items-center w-full h-screen bg-slate-800 text-white text-center ease-in duration-300 fixed z-10'
     :
     'lg:hidden absolute top-[100px] right-0 left-[-1000px] flex justify-center items-center w-full h-screen bg-slate-800 text-white text-center ease-in duration-300'
   }>
-      <div className="w-full">
-        <ul className="uppercase font-bold text-2xl">
+      <div className="w-full mt-[-310px]">
+        <ul className="uppercase font-mono font-bold text-xl">
+          <li onClick={handleMenu} className='py-5'>
+            <Link href={'/'}>LOGO</Link>
+          </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
             <Link href='/'>Inicio</Link>
           </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
-            <Link href='/'>Home</Link>
+            <Link href='/'>Diplomados</Link>
           </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
-            <Link href='/'>Home</Link>
+            <Link href='/certificate'>Certificados</Link>
           </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
-            <Link href='/'>Home</Link>
+            <Link href='/'>Nosotros</Link>
           </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
-            <Link href='/'>Home</Link>
+            <Link href='/'>Blog</Link>
           </li>
         </ul>
         <div className="flex flex-col justify-center items-center mt-16">
@@ -98,7 +103,7 @@ const Header = () => {
         </div>
       </div>
   </div>
-</nav>
+</>
   )
 }
 
