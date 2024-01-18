@@ -1,11 +1,12 @@
+"use client";
 import React from 'react';
 import Slider from './Slider';
 import Image from 'next/image';
 
-const slides: string[] = [
-  "/imagen02.png",
-  "/imagen03.png",
-  "/imagen04.png",
+const slides: { src: string; width: number; height: number }[] = [
+  { src: "/image/imagen02.png", width: 2500, height: 2000 },
+  { src: "/image/imagen03.png", width: 2500, height: 2000 },
+  { src: "/image/imagen04.png", width: 2500, height: 2000 },
 ];
 
 const Home: React.FC = () => {

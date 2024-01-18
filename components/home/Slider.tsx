@@ -1,6 +1,6 @@
-import { useState, useEffect, ReactNode, useCallback } from "react";
+"use client";
+import { useState, useEffect, ReactNode } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-
 
 type SliderProps = {
     children: ReactNode;
@@ -28,24 +28,23 @@ const Slider: React.FC<SliderProps> = ({
   }, [autoSlide, autoSlideInterval, next]);
 
   return (
-    <div className="overflow-hidden relative w-full lg:h-[850px] h-auto min-h-[410px] object-cover rounded-[40px] flex justify-center items-center">
+    <div
+      id="slider-container"
+      className="overflow-hidden relative w-full lg:h-full h-full object-cover flex justify-center items-center">
       <div
         className="flex transition-transform ease-out duration-500"
-        style={{ transform: `translateX(-${curr * 100}%)` }}
-      >
+        style={{ transform: `translateX(-${curr * 100}%)` }}>
         {slides}
       </div>
       <div className="absolute inset-0 flex items-center justify-between p-4">
         <button
           onClick={prev}
-          className="p-1 rounded-full shadow bg-white/30 text-gray-800 hover:bg-white/60"
-        >
+          className="p-1 rounded-full shadow bg-white/30 text-gray-800 hover:bg-white/60">
           <HiChevronLeft size={40} />
         </button>
         <button
           onClick={next}
-          className="p-1 rounded-full shadow bg-white/30 text-gray-800 hover:bg-white/60"
-        >
+          className="p-1 rounded-full shadow bg-white/30 text-gray-800 hover:bg-white/60">
           <HiChevronRight size={40} />
         </button>
       </div>
@@ -54,10 +53,8 @@ const Slider: React.FC<SliderProps> = ({
         <div className="flex items-center justify-center gap-2">
           {(slides as ReactNode[]).map((_, i) => (
             <div
-              className={`
-              transition-all w-3 h-3 bg-white rounded-full
-              ${curr === i ? "p-2" : "bg-opacity-50"}
-            `}
+              className={`transition-all w-3 h-3 bg-white rounded-full
+              ${curr === i ? "p-2" : "bg-opacity-50"}`}
               key={i}
             />
           ))}
