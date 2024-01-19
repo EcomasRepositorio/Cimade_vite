@@ -61,7 +61,7 @@ const Header = () => {
             </ul>
             <div className="hidden lg:flex flex-wrap justify-end max-w-screen-2xl space-x-6">
                   <Link href="tel:5541251234" className="text-lg  text-gray-500 hover:underline">(555) 412-1234</Link>
-                  <Link href="#" className="text-lg  text-blue-600 dark:text-blue-500 hover:underline">Login</Link>
+                  <Link href="/login" className="text-lg  text-blue-600 dark:text-blue-500 hover:underline">Login</Link>
                 </div>
         </div>
     </div>
