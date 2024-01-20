@@ -23,8 +23,71 @@ const HomeContend = () => {
     <div className="lg:max-w-lg lg:w-full md:w-1/2 w-full md:w-1/2 mx-auto my-auto">
       <img className="object-cover object-center rounded" alt="hero" src="/image/TAMAÑO-DE-PRUEBA.png" />
     </div>
+{/* Sección de grid */}
+    <div className="container mx-auto mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="text-center">
+          <a href="https://www.cecavasac.com/course-category/diplomado-ambiental/" target="_blank">
+            <img
+              src="https://www.cecavasac.com/wp-content/uploads/2023/09/dip-ambiental.png"
+              alt="Diplomado Ambiental"
+              className="w-full h-auto"
+            />
+          </a>
+        </div>
+        <div className="flex flex-col justify-center">
+          <h3 className="text-2xl font-bold mb-4">AMBIENTALES</h3>
+          <div className="text-gray-700 mb-6">
+            Explora soluciones sostenibles y prácticas para abordar los desafíos medioambientales globales.
+          </div>
+          <div className="mb-8">
+            <a
+              href="https://www.cecavasac.com/course-category/diplomado-ambiental/"
+              target="_blank"
+              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+            >
+              Saber más
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+{/* Sección de grid */}
+    <div className="container mx-auto mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="text-center">
+          <a href="https://www.cecavasac.com/course-category/diplomado-ambiental/" target="_blank">
+            <img
+              src="https://www.cecavasac.com/wp-content/uploads/2023/09/dip-ambiental.png"
+              alt="Diplomado Ambiental"
+              className="w-full h-auto"
+            />
+          </a>
+        </div>
+        <div className="flex flex-col justify-center">
+          <h3 className="text-2xl font-bold mb-4">AMBIENTALES</h3>
+          <div className="text-gray-700 mb-6">
+            Explora soluciones sostenibles y prácticas para abordar los desafíos medioambientales globales.
+          </div>
+          <div className="mb-8">
+            <a
+              href="https://www.cecavasac.com/course-category/diplomado-ambiental/"
+              target="_blank"
+              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+            >
+              Saber más
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
   
+   
+
   )
 }
 
