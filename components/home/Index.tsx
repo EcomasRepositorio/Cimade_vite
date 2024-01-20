@@ -12,12 +12,17 @@ const slides: { src: string; width: number; height: number }[] = [
 
 const Home: React.FC = () => {
   return (
-    <div>
-      <Slider autoSlide={true} autoSlideInterval={5000}>
-        {slides.map((s, index) => (
-          <Image key={index} src={s} alt={`Slide ${index}`} />
-        ))}
-      </Slider>
+    <div className="flex flex-cool">
+      {/* Contenido principal */}
+      <div className="flex-1">
+        <Slider autoSlide={true} autoSlideInterval={5000}>
+          {slides.map((s, index) => (
+            <Image key={index} src={s} alt={`Slide ${index}`} />
+          ))}
+        </Slider>
+      </div>
+
+    
     </div>
   );
 };
