@@ -1,31 +1,36 @@
 "use client";
 import React, { useState, FormEvent} from 'react';
 import axios from 'axios';
+import { useRouteData } from '@/components/hooks/hooks';
+import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 
 const page = () => {
-  // Estado para almacenar el término de búsqueda
-  const [search, setSearch] = useState('');
+  const [isActive, setIsActive] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState<any[]>();
+  const token = useRouteData("root");
 
-  // Función para manejar el cambio en el campo de búsqueda
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
+  const toogleIsActive = () => {
+    setIsActive(!isActive);
   };
-
-  // Función para manejar el envío del formulario de búsqueda
-  const handleSearchSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-
-    try {
-      // Realizar la solicitud al backend utilizando Axios
-      const response = await axios.get(`https//localhost:8000/api/v1/search?term=${search}`);
-      
-      // Manejar la respuesta del backend aquí, por ejemplo, actualizar el estado con los resultados
-      console.log(response.data);
-    } catch (error) {
-      // Manejar errores de la solicitud
-      console.error('Error en la búsqueda:', error);
+  const onSubmit = async ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = target;
+    if (value.length !== 0) {
+      setLoading(true);
+      const res = await axios
+        .get(`${URL()}/student/?search=${value}`, tokenConfig(token))
+        .then((_res) => {
+          setQuery(_res.data);
+          return _res.data;
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+      return res;
+    } else {
+      setQuery([]);
     }
   };
+
   return (
     <div id="/certificate" className="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
       <div className="mb-4 lg:mt-0 justify-center text-5xl font-extrabold tracking-tight text-gray-900">
