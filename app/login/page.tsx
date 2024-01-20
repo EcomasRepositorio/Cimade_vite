@@ -34,7 +34,7 @@ const Login: React.FC = () => {
       const response = await axios.post('http://localhost:8000/api/v1/user/login', form);
         console.log(response.data);
       if (response.data.token) {
-        window.location.href = '/certificate';
+        window.location.href = '/student';
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -48,8 +48,7 @@ const Login: React.FC = () => {
           setResErrors({ message: 'Datos incorrectos', errorContent: '' });
         }
       } else {
-        console.error('Error desconocido:', error);
-        setResErrors({ message: 'Error desconocido', errorContent: '' });
+        setResErrors({ message: 'Error en el servidor', errorContent: '' });
       }
     }
   };
