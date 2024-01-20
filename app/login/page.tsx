@@ -1,8 +1,5 @@
 "use client"
-import React, { useState } from 'react'
-import { redirect, json } from "@remix-run/node";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { loginUser, getUser } from '@/components/utils/auth.server';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 type ResErrors = {
@@ -10,30 +7,19 @@ type ResErrors = {
   errorContent: string;
 };
 
-export const action: ActionFunction = async ({ request }) => {
-  const form = await request.formData();
-  const email = form.get("email");
-  const password = form.get("password");
-  if (typeof email !== "string" || typeof password !== "string") {
-    return json({ error: "Invalid Form Data" }, { status: 400 });
-  }
-  const user = await loginUser({ email, password });
-  return user;
-};
-
-export const loader: LoaderFunction = async ({ request }) => {
-  const token = await getUser(request);
-  return token ? redirect("/") : null;
+type Auth = {
+  email: string;
+  password: string;
 };
 
 const dataForm = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
-const Login = () => {
+const Login: React.FC = () => {
   const [resErrors, setResErrors] = useState<ResErrors | null>(null);
-  const [form, setForm] = useState(dataForm);
+  const [form, setForm] = useState<Auth>(dataForm);
 
   const handleFormData = (
     { target }: React.ChangeEvent<HTMLInputElement>,
@@ -43,25 +29,42 @@ const Login = () => {
     setForm({ ...form, [textField]: value });
   };
 
-  const onSubmit = () => {
-    axios
-      .post(`https://localhost:8000/api/v1/auth/login`, form)
-      .catch((error) => {
-        setResErrors(error.response.data);
-      });
-  };
+  const onSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/v1/user/login', form);
+        console.log(response.data);
+      if (response.data.token) {
+        window.location.href = '/certificate';
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const { data } = error.response;
 
+        if (data.error === 'invalid_password') {
+          setResErrors({ message: 'Contraseña incorrecta', errorContent: data.errorContent });
+        } else if (data.error === 'user_not_found') {
+          setResErrors({ message: 'Email no encontrado', errorContent: data.errorContent });
+        } else {
+          setResErrors({ message: 'Datos incorrectos', errorContent: '' });
+        }
+      } else {
+        console.error('Error desconocido:', error);
+        setResErrors({ message: 'Error desconocido', errorContent: '' });
+      }
+    }
+  };
   const buttonStyle = {
       background: "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
     };
+
   return (
-  <section className="flex justify-center gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
+  <section className="flex justify-center gradient-form h-full bg-neutral-600">
     <div className="container h-full p-10">
       <div
         className="g-6 flex h-full flex-wrap items-center justify-center text-white">
         <div className="w-full">
           <div
-            className="block rounded-3xl bg-white shadow-lg dark:bg-neutral-800">
+            className="block rounded-3xl bg-neutral-800 shadow-lg">
             <div className="g-0 lg:flex lg:flex-wrap">
 
               <div className="px-4 md:px-0 lg:w-6/12">
@@ -78,36 +81,37 @@ const Login = () => {
                   </div>
 
                   <form>
-                    <p className="flex justify-center mb-4 font-semibold text-xl">Iniciar sesión</p>
+                    <p className="flex justify-center mb-8 font-semibold text-xl">Iniciar sesión</p>
                       {resErrors?.message && (
                         <span className="text-error text-sm">{resErrors.message}</span>
                       )}
-                    <div className="flex justify-center relative mb-4" data-te-input-wrapper-init>
+
+                    <div className="flex justify-center relative mb-6" data-te-input-wrapper-init>
                       <input
                         type="text"
-                        className="peer block min-h-[auto] lg:w-96 w-full rounded-lg border-2 border-gray-500 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                        className="peer block min-h-[auto] lg:w-96 w-full rounded-lg border-2 border-gray-500 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none "
                         id="exampleFormControlInput1"
-                        placeholder="email"
+                        placeholder="Email"
                         onChange={(event) => handleFormData(event, "email")}/>
                       <label
                         htmlFor="exampleFormControlInput1"
-                        className="pointer-events-none absolute lg:left-28 left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none"
-                        >Email
+                        className=""
+                        >
                       </label>
                     </div>
 
                     <div className="flex justify-center relative mb-4" data-te-input-wrapper-init>
                       <input
                         type="password"
-                        className="peer block min-h-[auto] lg:w-96 w-full rounded-lg border-2 border-gray-500 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                        className="peer block min-h-[auto] lg:w-96 w-full rounded-lg border-2 border-gray-500 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none"
                         id="exampleFormControlInput11"
                         placeholder="Password"
                         autoComplete="on"
                         onChange={(event) => handleFormData(event, "password")}/>
                       <label
                         htmlFor="exampleFormControlInput11"
-                        className="pointer-events-none absolute lg:left-28 left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-white transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none"
-                        >Password
+                        className=""
+                        >
                       </label>
                     </div>
 
@@ -120,7 +124,7 @@ const Login = () => {
                         style={buttonStyle}
                         value="login"
                         onClick={() => onSubmit()}>
-                        Login
+                        Iniciar sesión
                       </button>
                     </div>
 
