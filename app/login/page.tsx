@@ -10,11 +10,13 @@ type ResErrors = {
 type Auth = {
   email: string;
   password: string;
+  token: string;
 };
 
 const dataForm = {
   email: '',
   password: '',
+  token:'',
 };
 
 const Login: React.FC = () => {
@@ -34,7 +36,7 @@ const Login: React.FC = () => {
       const response = await axios.post('http://localhost:8000/api/v1/user/login', form);
         console.log(response.data);
       if (response.data.token) {
-        window.location.href = '/student';
+        window.location.href = 'certificate';
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
