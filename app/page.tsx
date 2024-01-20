@@ -7,9 +7,10 @@ import HomeContend from '@/components/HomeContend/Index'
 
 export default function Main() {
   return (
-    <main >
-      <Home />
-      <HomeContend />
-    </main>
+    <div className="min-h-screen flex flex-col">
+            
+            <Home />
+            <HomeContend />
+    </div>
   )
 }
