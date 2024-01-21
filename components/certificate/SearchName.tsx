@@ -25,7 +25,27 @@ const SearchName = () => {
     setQueryValue(event.target.value);
   };
 
-  const onSubmit = async (event: FormEvent) => {
+  const onSubmit = async () => {
+    try {
+      if (queryValue.trim() === '' || !searchType) {
+        // Campo vacío, no realizar la solicitud
+        return;
+      }
+      const url = `${URL()}/student/name/${queryValue.trim()}/type/${searchType}`;
+      const response = await axios.get(url);
+      console.log(response)
+    } catch (error: any) {
+      if (error && typeof error === 'object' && 'response' in error) {
+        console.log(error.response.data);
+      } else if (error instanceof Error) {
+        console.log("Error desconocido", error.message)
+      } else {
+        console.log("Error:")
+      }
+    }
+  };
+
+ /*  const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
     if (searchType && queryValue.trim() !== '') {
@@ -38,8 +58,9 @@ const SearchName = () => {
         const encodedValue = encodeURIComponent(queryValue);
         const apiUrl = `${URL()}/student/name/=${encodedValue}&type=${searchType}`
         console.log(apiUrl)
+
       const res = await axios
-        .get(`${URL()}/student/name/=${encodedValue.trim().toLowerCase()}&type=${searchType}`,
+        .get(`${URL()}/student/name/=${encodedValue}&type=${searchType}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -57,7 +78,7 @@ const SearchName = () => {
         setLoading(false);
       }
     }
-  };
+  }; */
 
   return (
     <div className="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
@@ -96,7 +117,7 @@ const SearchName = () => {
           </div>
 
         </div>
-        <form onSubmit={onSubmit}>
+        <form >
     <label htmlFor="default-search" className="mb-2 text-sm font-medium "></label>
     <div className="relative lg:mx-auto mr-4 ml-4">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -108,11 +129,17 @@ const SearchName = () => {
           type="search"
           id="default-search"
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-black"
-          placeholder="Buscar..."
+          placeholder="Buscar por nombre"
           required
           onClick={toggleIsActive}
-          onChange={onChange} />
-        <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
+          onChange={onChange}
+          />
+        <button
+          type="submit"
+          className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+          onClick={onSubmit}>
+            Buscar
+          </button>
     </div>
 </form>
     </div>
