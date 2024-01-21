@@ -2,11 +2,15 @@
 import React, { useState, FormEvent} from 'react';
 import axios from 'axios';
 import { URL } from '@/components/utils/format/tokenConfig';
+import SearchCode from '@/components/certificate/SearchCode';
+import SearchDNI from '@/components/certificate/SearchDNI';
+import SearchName from '@/components/certificate/SearchName';
 
-const SearchName = () => {
+const Certificate: React.FC = () => {
+
   const [isActive, setIsActive] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState<string[]>();
+  //const [loading, setLoading] = useState(false);
+  //const [query, setQuery] = useState<string[]>();
   const [queryValue, setQueryValue] = useState<string>('');
   const [searchType, setSearchType] = useState<string | null>(null);
   const [studentData, setStudentData] = useState<any | null>(null);
@@ -14,7 +18,7 @@ const SearchName = () => {
   const toggleIsActive = () => {
     setIsActive(!isActive);
   };
-  const handleSearch = (type: string) => {
+  const handleButton = (type: string) => {
     setSearchType(type);
     setIsActive(true);
     setQueryValue('');
@@ -23,29 +27,10 @@ const SearchName = () => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryValue(event.target.value);
   };
-  const onSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-    if (queryValue !== undefined && queryValue !== null) {
-    const value = queryValue?.toString().trim();
-    if (searchType && value !== '') {
-      setLoading(true);
-    //const validToken = typeof token === "string" ? token: '';
-    try {
-        const apiUrl = `${URL()}/student/name/${value}/type/${searchType}`
-        console.log(apiUrl)
-      const res = await axios
-        .get(`${URL()}/student/name/${queryValue.trim()}/type/${searchType}`,
-        );
-        console.log(res)
-          setStudentData(res.data);
-      } catch(error) {
-          console.error("Error: Nombre invalido", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-  }
-};
+
+  const handleSearch = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <div className="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
@@ -64,27 +49,46 @@ const SearchName = () => {
           </p>
           <div className='lg:flex flex-wrap justify-center items-center p-4 text-center lg:gap-16'>
             <button
-            onClick={() => handleSearch('documentNumber')}
+            onClick={() => handleButton('documentNumber')}
             className={`mb-6 text-white bg-indigo-600 hover:bg-indigo-700 font-semibold rounded-lg text-md px-5 py-2.5 text-center
               ${searchType === 'documentNumber' && 'bg-indigo-700'}`}>
               Buscar por DNI
             </button>
             <button
-            onClick={() => handleSearch('name')}
+            onClick={() => handleButton('name')}
             className={`mb-6 ml-6 mr-6 text-white bg-indigo-600 hover:bg-indigo-700 font-semibold rounded-lg text-md px-5 py-2.5 text-center
               ${searchType === 'name' && 'bg-indigo-700'}`}>
               Buscar por nombre
             </button>
             <button
-            onClick={() => handleSearch('code')}
+            onClick={() => handleButton('code')}
             className={`mb-6 text-white bg-indigo-600 hover:bg-indigo-700 font-semibold rounded-lg text-md px-5 py-2.5 text-center
             ${searchType === 'code' && 'bg-indigo-700'}`}>
               Buscar por código
             </button>
           </div>
 
+          {isActive && (
+        <div>
+
+          {searchType === 'documentNumber' && <SearchDNI onSearchDNI={handleSearch} />}
+          {searchType === 'name' && <SearchName onSearchName={handleSearch} />}
+          {searchType === 'code' && <SearchCode onSearchCode={handleSearch} />}
+
         </div>
-        <form onSubmit={onSubmit}>
+      )}
+        </div>
+
+        {/* <div>
+        {searchType === 'code' ? (
+          <SearchCode />
+        ) : searchType === 'name' ? (
+          <SearchNamee />
+        ) : searchType === 'documentNumber' ? (
+          <SearchDNI />
+        ) : null}
+        </div> */}
+ {/*  <form onSubmit={SearchName}>
     <label htmlFor="default-search" className="mb-2 text-sm font-medium "></label>
     <div className="relative lg:mx-auto mr-4 ml-4">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -96,13 +100,18 @@ const SearchName = () => {
           type="search"
           id="default-search"
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-black"
-          placeholder={`Buscar por ${searchType === 'name' ? 'nombre' : searchType === 'documentNumber' ? 'DNI' : searchType === 'code' ? 'codigo' : ''}`}
+          placeholder={`Buscar por ${searchType === 'name'
+            ?'nombre' : searchType === 'documentNumber'
+            ? 'DNI' : searchType === 'code'
+            ? 'codigo' : ''}`}
           required
           onClick={toggleIsActive}
-          onChange={onChange} />
+          onChange={onChange}
+          value={queryValue}
+          />
         <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
     </div>
-</form>
+  </form> */}
 
 {studentData && (
   <div className="mt-8">
@@ -156,4 +165,4 @@ const SearchName = () => {
   )
 }
 
-export default SearchName;
+export default Certificate;

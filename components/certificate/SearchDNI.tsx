@@ -1,10 +1,10 @@
 import React, { useState, FormEvent} from 'react'
 import { URL } from '@/components/utils/format/tokenConfig';
 import axios from 'axios'
-import { SearchNameProps } from '../data/Interface/interface';
+import { SearchDNIProps } from '../data/Interface/interface';
 
 
-const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
+const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
 
     const [isActive, setIsActive] = useState(false);
     const [queryValue, setQueryValue] = useState<string>('');
@@ -31,16 +31,16 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
         //const validToken = typeof token === "string" ? token: '';
         try {
             const value = queryValue.trim();
-            const apiUrl = `${URL()}/student/name/${value}/type/${searchType}`
+            const apiUrl = `${URL()}/student/dni/${value}/type/${searchType}`
             console.log(apiUrl)
           const res = await axios
-            .get(`${URL()}/student/name/${value.trim()}/type/${searchType}`,
+            .get(`${URL()}/student/dni/${value.trim()}/type/${searchType}`,
             );
             console.log(res)
               setStudentData(res.data);
-              onSearchName(res.data);
+              onSearchDNI(res.data);
           } catch(error) {
-              console.error("Error: Nombre invalido", error);
+              console.error("Error: DNI invalido", error);
           } finally {
             setLoading(false);
           }
@@ -59,7 +59,7 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
           type="search"
           id="default-search"
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-black"
-          placeholder={`Buscar por nombre ${searchType === 'name' ? 'nombre' : ''}`}
+          placeholder={`Buscar por DNI ${searchType === 'documentNumber' ? 'DNI' : ''}`}
           required
           onClick={toggleIsActive}
           onChange={onChange}
