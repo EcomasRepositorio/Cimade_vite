@@ -16,7 +16,7 @@ const Header = () => {
     <div id="/" className="bg-[#006eb0] border-gray-200">
     <div className="flex lg:justify-between justify-center mx-auto max-w-screen-2xl p-2 ">
       <div className="hidden lg:flex">
-      <Link href="#" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
+      <Link href="#" className="text-lg text-gray-50 hover:underline font-semibold"></Link>
       </div>
         <div className="flex space-x-6 rtl:space-x-reverse">
             <Link href="#" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
@@ -27,11 +27,9 @@ const Header = () => {
 <div className="bg-white">
     <div className="max-w-screen-2xl mx-auto">
         <div className="flex items-center justify-between">
-                <Link href="https://flowbite.com" className="flex items-center space-x-3 rtl:space-x-reverse">
-                  <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mx-2" alt="Flowbite Logo" />
-                  <span className="self-center text-2xl font-semibold whitespace-nowrap ">Flowbite</span>
-                </Link>
-
+               
+               <img src="/image/logo_main.webp" className="h-8 mx-2" alt="Logo" />
+                  
                 <div onClick={handleMenu} className="flex lg:hidden justify-end p-4">
                   {menu?
                   ( <AiOutlineClose size={25} className="flex justify-end"/> )

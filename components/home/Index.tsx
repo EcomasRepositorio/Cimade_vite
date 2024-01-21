@@ -4,10 +4,10 @@ import Slider from './Slider';
 import Image from 'next/image';
 
 const slides: { src: string; width: number; height: number }[] = [
-  { src: "/image/imagen02.png", width: 2500, height: 2000 },
-  { src: "/image/imagen03.png", width: 2500, height: 2000 },
-  { src: "/image/imagen04.png", width: 2500, height: 2000 },
-  { src: "/image/TAMAÑO-DE-PRUEBA.png", width: 2500, height: 2000 },
+  { src: "/image/1.webp", width: 2500, height: 2000 },
+  { src: "/image/2.webp", width: 2500, height: 2000 },
+  { src: "/image/3.webp", width: 2500, height: 2000 },
+  
 ];
 
 const Home: React.FC = () => {
@@ -24,6 +24,7 @@ const Home: React.FC = () => {
 
     
     </div>
+    
   );
 };
 
