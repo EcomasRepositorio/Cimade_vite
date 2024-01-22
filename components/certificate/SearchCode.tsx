@@ -9,7 +9,7 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
     const [queryValue, setQueryValue] = useState<string>('');
     const [searchType, setSearchType] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
-    const [studentData, setStudentData] = useState<any | null>(null);
+    const [studentData, setStudentData] = useState<any>({});
 
     const toggleIsActive = () => {
       setIsActive(!isActive);
@@ -44,7 +44,7 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
           }
     };
   return (
-    <div className="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
+    <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
       <form onSubmit={searchName}>
     <label htmlFor="default-search" className="mb-2 text-sm font-medium "></label>
     <div className="relative lg:mx-auto mr-4 ml-4">
@@ -69,18 +69,108 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
 
       {loading && <p>Cargando...</p>}
 
-      {studentData && (
-        <div className="mt-8">
-          <h3 className="text-2xl font-bold mb-4">Datos del estudiante</h3>
-          <form>
-            <div>
-              <label htmlFor="name">Nombre:</label>
-              <input type="text" id="name" value={studentData.name} readOnly />
-            </div>
-            {/* Repite esto para los demás campos */}
-          </form>
-        </div>
-      )}
+  <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" className="px-6 py-3">
+                    #
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Nombre
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    DNI
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Actividad academica
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    institucion
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    participacion
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    <span className="sr-only">Edit</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <input type="text" id="id" defaultValue={studentData.id || ''} readOnly />
+                </th>
+                <td className="px-6 py-4">
+                <input type="text" id="name" value={studentData.name} readOnly />
+                </td>
+                <td className="px-6 py-4">
+                <input type="text" id="documentNumber" value={studentData.documentNumber} readOnly />
+                </td>
+                <td className="px-6 py-4">
+                <input type="text" id="name" value={studentData.activityAcademy} readOnly />
+                </td>
+                <td className="px-6 py-4">
+                <input type="text" id="name" value={studentData.institute} readOnly />
+                </td>
+                <td className="px-6 py-4">
+                <input type="text" id="name" value={studentData.participation} readOnly />
+                </td>
+                <td className="px-6 py-4 text-right">
+                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+     {/*  {studentData && (
+  <div className="mt-8">
+    <h3 className="text-2xl font-bold mb-4">Datos del estudiante</h3>
+    <form>
+      <div>
+        <label htmlFor="id">ID:</label>
+        <input type="text" id="id" value={studentData.id} readOnly />
+      </div>
+      <div>
+        <label htmlFor="documentNumber">Número de Documento:</label>
+        <input type="text" id="documentNumber" value={studentData.documentNumber} readOnly />
+      </div>
+      <div>
+        <label htmlFor="name">Nombre:</label>
+        <input type="text" id="name" value={studentData.name} readOnly />
+      </div>
+      <div>
+        <label htmlFor="code">Código:</label>
+        <input type="text" id="code" value={studentData.code} readOnly />
+      </div>
+      <div>
+        <label htmlFor="activityAcademy">Actividad Académica:</label>
+        <input type="text" id="activityAcademy" value={studentData.activityAcademy} readOnly />
+      </div>
+      <div>
+        <label htmlFor="participation">Participación:</label>
+        <input type="text" id="participation" value={studentData.participation} readOnly />
+      </div>
+      <div>
+        <label htmlFor="institute">Instituto:</label>
+        <input type="text" id="institute" value={studentData.institute} readOnly />
+      </div>
+      <div>
+        <label htmlFor="hour">Hora:</label>
+        <input type="text" id="hour" value={studentData.hour} readOnly />
+      </div>
+      <div>
+        <label htmlFor="date">Fecha:</label>
+        <input type="text" id="date" value={studentData.date} readOnly />
+      </div>
+      <div>
+        <label htmlFor="imageCertificate">Certificado de Imagen:</label>
+        <input type="text" id="imageCertificate" value={studentData.imageCertificate} readOnly />
+      </div>
+    </form>
+  </div>
+)} */}
     </div>
   )
 }

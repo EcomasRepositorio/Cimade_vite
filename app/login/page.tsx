@@ -10,12 +10,14 @@ type ResErrors = {
 type Auth = {
   email: string;
   password: string;
+  role: boolean;
   token: string;
 };
 
 const dataForm = {
   email: '',
   password: '',
+  role: true,
   token:'',
 };
 
