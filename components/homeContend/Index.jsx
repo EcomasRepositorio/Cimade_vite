@@ -1,5 +1,7 @@
-import React from 'react'
-import { ItemCard } from "./ItemCard";
+import React from 'react';
+import Counter from "./Counter";
+
+
 
 
 
@@ -8,6 +10,7 @@ const HomeContend = () => {
   return (
     
     <>
+    
     <div className="animate__animated animate__backInLeft">
     </div>
   
@@ -16,7 +19,7 @@ const HomeContend = () => {
       <div className="border-0">
         <div>
           <h1 className='flex-1 font-semibold font-montserrat text-4xl sm:text-6xl lg:text-9xl text-[#002e79] sm:leading-76 md:leading-100 leading-75 text-center sm:text-left'>
-            ¿Por qué? <br className='sm:block hidden' />
+            ¿Porqué? <br className='sm:block hidden' />
             <span className='bg-gradient-to-r from-[#002e79] to-[#ff00d4] text-transparent bg-clip-text'>CIMADE</span>
           </h1>
         </div>
@@ -164,13 +167,13 @@ const HomeContend = () => {
             <div className="flex justify-center items-center flex-col">
              <div className="mt-20">
               <h1 className="lg:text-6xl md:text-5xl text-4xl font-black leading-10 text-white text-center">
-               Bienvenidos a Cimade
+              Cimade: Tu Socio en el Éxito Profesional.
              </h1>
              </div>
             <div className="mt-6 mx-2 md:mx-0 text-center">
-                <p className="lg:text-lg md:text-base leading-6 text-sm text-white subtitulo">
-                  Somos una empresa dedicada al rubro de la tecnología, <br />
-                  con más de 5 años de experiencia.
+                <p className="lg:text-xl md:text-lg leading-6 text-sm text-white subtitulo">
+                ¡Únete a nosotros y marca la diferencia en tu trayectoria profesional!  <br />
+                  
                </p>
             </div>
           </div>
@@ -179,17 +182,8 @@ const HomeContend = () => {
  
 
         {/* TARJETAS DE CONTEO */}
-        <div className="mx-auto container md:-mt-28 -mt-20 flex justify-center items-center">
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2 gap-x-2 gap-y-2 lg:gap-x-6 md:gap-x-6 md:gap-y-6">
-            <ItemCard number={"40+"} description={"Clientes Satisfechos"} />
-            <ItemCard number={"30+"} description={"Trabajos Realizados"} />
-            <ItemCard number={"10+"} description={"Servicios disponibles"} />
-            <ItemCard number={"10"} description={"Trabajadores"} />
-          </div>
-
-
-        </div>
-
+       
+        <Counter/>
         
       </div>
     </>
