@@ -1,12 +1,27 @@
 
 export interface SearchNameProps {
-  onSearchName: (data: any) => void;
+  onSearchName: (data: string) => void;
 }
 
 export interface SearchCodeProps {
-  onSearchCode: (data: any) => void;
+  onSearchCode: (data: string) => void;
 }
 
 export interface SearchDNIProps {
-  onSearchDNI: (data: any) => void;
+  onSearchDNI: (data: string) => void;
 }
+
+export interface Student {
+  id: number;
+  name: string;
+  activityAcademy: string;
+  date: string;
+};
+
+export interface StudentCode {
+  institute: string;
+  activityAcademy: string;
+  name: string;
+  hour: string;
+  date: string;
+};

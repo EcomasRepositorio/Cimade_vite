@@ -24,16 +24,16 @@ const Certificate: React.FC = () => {
     setQueryValue('');
     setStudentData(null);
   };
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  /* const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryValue(event.target.value);
-  };
+  }; */
 
   const handleSearch = (data: any) => {
     console.log(data);
   };
 
   return (
-    <div className="max-w-screen-md mx-auto mb-8 text-center lg:mb-12">
+    <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12 p-2">
       <div className="mb-4 lg:mt-0 justify-center text-5xl font-extrabold tracking-tight text-gray-900">
         LOGO
       </div>
@@ -70,9 +70,9 @@ const Certificate: React.FC = () => {
 
           {isActive && (
         <div>
-          {searchType === 'documentNumber' && <SearchDNI onSearchDNI={handleSearch} />}
-          {searchType === 'name' && <SearchName onSearchName={handleSearch} />}
-          {searchType === 'code' && <SearchCode onSearchCode={handleSearch} />}
+          {searchType === 'documentNumber' && (<SearchDNI onSearchDNI={handleSearch} />)}
+          {searchType === 'name' && (<SearchName onSearchName={handleSearch} />)}
+          {searchType === 'code' && (<SearchCode onSearchCode={handleSearch} />)}
         </div>
       )}
         </div>

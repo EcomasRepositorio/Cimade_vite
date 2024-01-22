@@ -1,51 +1,61 @@
 import React, { useState, FormEvent} from 'react'
 import { URL } from '@/components/utils/format/tokenConfig';
 import axios from 'axios'
-import { SearchCodeProps } from '../data/Interface/interface';
+import { SearchCodeProps, StudentCode } from '../data/Interface/interface';
+import Modal from '../modal/Index';
 
 const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
 
-    const [isActive, setIsActive] = useState(false);
-    const [queryValue, setQueryValue] = useState<string>('');
-    const [searchType, setSearchType] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [studentData, setStudentData] = useState<any>({});
+  const [isActive, setIsActive] = useState(false);
+  const [queryValue, setQueryValue] = useState<string>('');
+  const [searchType, setSearchType] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [studentData, setStudentData] = useState<StudentCode>();
+  const [closeTable, setCloseTable] = useState(false);
+  const [open, setOpen] = useState<boolean>(false)
 
-    const toggleIsActive = () => {
-      setIsActive(!isActive);
+  const toggleIsActive = () => {
+    setIsActive(!isActive);
+  };
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value, 'onChange ejecutado');
+    setQueryValue(event.target.value);
+    setCloseTable(false);
     };
+  const searchName = async (event: FormEvent) => {
+    event.preventDefault();
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(event.target.value, 'onChange ejecutado');
-      setQueryValue(event.target.value);
-      };
-
-    const searchName = async (event: FormEvent) => {
-        event.preventDefault();
-
-        if (queryValue.trim()) {
-          setLoading(true);
-        }
-        //const validToken = typeof token === "string" ? token: '';
-        try {
-            const value = queryValue.trim();
-            const apiUrl = `${URL()}/student/code/${value}/type/${searchType}`
-            console.log(apiUrl)
-          const res = await axios
-            .get(`${URL()}/student/code/${value.trim()}/type/${searchType}`,
-            );
-            console.log(res)
-              setStudentData(res.data);
-              onSearchCode(res.data);
-          } catch(error) {
-              console.error("Error: Codigo invalido", error);
-          } finally {
-            setLoading(false);
-          }
-    };
+    if (queryValue.trim()) {
+      setLoading(true);
+    }
+    //const validToken = typeof token === "string" ? token: '';
+    try {
+      const value = queryValue.trim();
+      const apiUrl = `${URL()}/student/code/${value}/type/${searchType}`
+      console.log(apiUrl)
+      const res = await axios
+      .get(`${URL()}/student/code/${value.trim()}/type/${searchType}`,
+      );
+      console.log(res)
+        setStudentData(res.data);
+        onSearchCode(res.data);
+        setCloseTable(true);
+    } catch(error) {
+        console.error("Error: Codigo invalido", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const tableRows = [
+    { label: 'Organizado por:', value: studentData?.institute },
+    { label: 'Otorgado a:', value: studentData?.name },
+    { label: 'Nombre del evento:', value: studentData?.activityAcademy },
+    { label: 'Creditos/Horas:', value: studentData?.hour },
+    { label: 'Fecha de emisión:', value: studentData?.date },
+  ];
   return (
-    <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
-      <form onSubmit={searchName}>
+  <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
+    <form onSubmit={searchName} className="w-full md:w-2/3 lg:w-full xl:w-2/3 mx-auto">
     <label htmlFor="default-search" className="mb-2 text-sm font-medium "></label>
     <div className="relative lg:mx-auto mr-4 ml-4">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -63,15 +73,52 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
           onChange={onChange}
           value={queryValue}
           />
-        <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
+        <button
+          type="submit"
+          className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+          onClick={() => setOpen(true)}>
+            Buscar
+        </button>
     </div>
   </form>
+  {loading && <p>Cargando...</p>}
+  {studentData && (
+   <Modal open={open} onClose={() => setOpen(false)}>
+   <table className="max-w-md text-sm text-left rtl:text-right text-gray-600 font-semibold">
+     <thead className="text-xm text-center text-gray-600 uppercase">
+       {tableRows.length > 0 && (
+         <tr>
+           <th scope="col" className="px-6 py-3">
+             LOGO
+           </th>
+         </tr>
+       )}
+     </thead>
+     <tbody>
+      {tableRows.map((row, index) => (
+        <React.Fragment key={index}>
+          <tr key={index} className="bg-slate-700 text-gray-300 text-center">
+           <th scope="row" className="p-1.5 rounded-lg font-medium whitespace-nowrap w-3/4">
+             <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{row.label}</span>
+           </th>
+          </tr>
+          <tr key={index + 'value'} className="max-w-md bg-white text-center hover:bg-gray-300">
+          <td className="max-w-sm px-6 py-4">
+           <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{row.value}</span>
+          </td>
+          </tr>
+        </React.Fragment>
+       ))}
+     </tbody>
+   </table>
+ </Modal>
+  )}
+    {/* {loading && <p>Cargando...</p>}
+  {closeTable && studentData && (
 
-      {loading && <p>Cargando...</p>}
-
-  <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+  <div className="relative overflow-x-auto shadow-xl sm:rounded-lg mt-8">
+    <table className="w-full text-sm text-left rtl:text-right text-gray-500 font-semibold">
+        <thead className="text-xs text-center text-gray-700 uppercase bg-gray-300">
             <tr>
                 <th scope="col" className="px-6 py-3">
                     #
@@ -80,98 +127,41 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
                     Nombre
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    DNI
-                </th>
-                <th scope="col" className="px-6 py-3">
                     Actividad academica
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    institucion
+                    Fecha
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    participacion
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    <span className="sr-only">Edit</span>
+                    Accción
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <input type="text" id="id" defaultValue={studentData.id || ''} readOnly />
+            <tr className="bg-white border-b text-center hover:bg-gray-100">
+                <th
+                scope="row"
+                className="px-6 py-4 font-medium whitespace-nowrap w-12">
+                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{studentData.id}</span>
                 </th>
                 <td className="px-6 py-4">
-                <input type="text" id="name" value={studentData.name} readOnly />
+                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{studentData.name}</span>
                 </td>
                 <td className="px-6 py-4">
-                <input type="text" id="documentNumber" value={studentData.documentNumber} readOnly />
+                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{studentData.activityAcademy}</span>
                 </td>
                 <td className="px-6 py-4">
-                <input type="text" id="name" value={studentData.activityAcademy} readOnly />
+                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{studentData.date}</span>
                 </td>
                 <td className="px-6 py-4">
-                <input type="text" id="name" value={studentData.institute} readOnly />
-                </td>
-                <td className="px-6 py-4">
-                <input type="text" id="name" value={studentData.participation} readOnly />
-                </td>
-                <td className="px-6 py-4 text-right">
-                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                  <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-
-     {/*  {studentData && (
-  <div className="mt-8">
-    <h3 className="text-2xl font-bold mb-4">Datos del estudiante</h3>
-    <form>
-      <div>
-        <label htmlFor="id">ID:</label>
-        <input type="text" id="id" value={studentData.id} readOnly />
-      </div>
-      <div>
-        <label htmlFor="documentNumber">Número de Documento:</label>
-        <input type="text" id="documentNumber" value={studentData.documentNumber} readOnly />
-      </div>
-      <div>
-        <label htmlFor="name">Nombre:</label>
-        <input type="text" id="name" value={studentData.name} readOnly />
-      </div>
-      <div>
-        <label htmlFor="code">Código:</label>
-        <input type="text" id="code" value={studentData.code} readOnly />
-      </div>
-      <div>
-        <label htmlFor="activityAcademy">Actividad Académica:</label>
-        <input type="text" id="activityAcademy" value={studentData.activityAcademy} readOnly />
-      </div>
-      <div>
-        <label htmlFor="participation">Participación:</label>
-        <input type="text" id="participation" value={studentData.participation} readOnly />
-      </div>
-      <div>
-        <label htmlFor="institute">Instituto:</label>
-        <input type="text" id="institute" value={studentData.institute} readOnly />
-      </div>
-      <div>
-        <label htmlFor="hour">Hora:</label>
-        <input type="text" id="hour" value={studentData.hour} readOnly />
-      </div>
-      <div>
-        <label htmlFor="date">Fecha:</label>
-        <input type="text" id="date" value={studentData.date} readOnly />
-      </div>
-      <div>
-        <label htmlFor="imageCertificate">Certificado de Imagen:</label>
-        <input type="text" id="imageCertificate" value={studentData.imageCertificate} readOnly />
-      </div>
-    </form>
-  </div>
-)} */}
-    </div>
+  )} */}
+</div>
   )
 }
 
