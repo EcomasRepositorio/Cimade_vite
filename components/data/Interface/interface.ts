@@ -25,3 +25,15 @@ export interface StudentCode {
   hour: string;
   date: string;
 };
+
+export interface StudentData {
+  id: number;
+  name: string;
+  code: string;
+  activityAcademy: string;
+  participation: string;
+  institute: string;
+  hour: string;
+  date: string;
+  certificate?: string;
+};
