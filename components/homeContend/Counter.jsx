@@ -5,6 +5,7 @@ import animationAlumnos from '/ecomas/cimade/Cimade_vite/public/icons/alumnos.js
 import animationDiplomados from '/ecomas/cimade/Cimade_vite/public/icons/diplomados.json';
 import animationCursos from '/ecomas/cimade/Cimade_vite/public/icons/cursos.json';
 
+{/* LOGICA DE , INICIAR CUANDO SE VEA EL COMPONENTE*/}
 const Counter = () => {
   const [counterAnimated, setCounterAnimated] = useState(false);
 
@@ -25,6 +26,8 @@ const Counter = () => {
     };
   }, [counterAnimated]);
 
+
+  {/*ICONOS DEL CONTADOR*/}
   return (
     <div id="counter-section">
       <div className="mx-auto container md:-mt-28 -mt-20 flex justify-center items-center">

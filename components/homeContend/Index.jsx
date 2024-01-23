@@ -1,5 +1,6 @@
 import React from 'react';
 import Counter from "./Counter";
+import Footer from "./Footer";
 
 
 
@@ -304,8 +305,10 @@ const HomeContend = () => {
            </div>
         </div>
       </div>
+      
     </div>
-     
+     <Footer/>
+
   </>
   
   
