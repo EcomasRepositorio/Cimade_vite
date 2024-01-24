@@ -29,6 +29,7 @@ export interface StudentCode {
 export interface StudentData {
   id: number;
   name: string;
+  documentNumber: string;
   code: string;
   activityAcademy: string;
   participation: string;

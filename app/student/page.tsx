@@ -1,11 +1,13 @@
 "use client";
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useRouteData } from '@/hooks/hooks';
 import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
-import { StudentData } from '@/components/data/Interface/interface';
+import { StudentData } from '@/interface/interface';
+import { CustomToolEdit } from '@/components/share/button';
+import { CustomToolDelete } from '@/components/share/button'
 
 const Student = () => {
   const [isActive, setIsActive] = useState(false);
@@ -22,10 +24,6 @@ const Student = () => {
     setIsActive(!isActive);
   };
 
-  const handleSearch = (type: string) => {
-    setSearchType(type);
-  };
-
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryValue(event.target.value);
   };
@@ -33,10 +31,6 @@ const Student = () => {
   const onSubmit = async () => {
     const validToken = typeof token === "string" ? token: '';
     try {
-      if (queryValue.trim() === '' || !searchType) {
-        // Campo vacío, no realizar la solicitud
-        return;
-      }
       const url = `${URL()}/students`;
       const response = await axios.get(url, tokenConfig(validToken)
       );
@@ -53,18 +47,23 @@ const Student = () => {
       }
     }
   };
+
+  useEffect(() => {
+    onSubmit();
+  }, []);
+
   return (
-<section>
+  <section className="p-2">
   <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
     <h1>ADMINISTRAR ESTUDIANTES</h1>
   </div>
-  <div className="flex flex-col sm:flex-row items-center justify-between p-2 bg-white">
+  <div className="flex flex-col sm:flex-row border-2 rounded-xl items-center lg:ml-64 lg:mr-64 justify-between p-2 bg-white">
   <div className="relative m-[2px] mb-2 sm:mb-0">
     <label htmlFor="inputSearch" className="sr-only">Search</label>
     <input id="inputSearch"
     type="text"
     placeholder="Buscar..."
-    className="block lg:w-96 w-80 rounded-lg border-2 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
+    className="block lg:w-96 w-80 rounded-lg border-4 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
     onClick={toggleIsActive}
     onChange={onChange}
     value={queryValue}/>
@@ -76,10 +75,10 @@ const Student = () => {
   </div>
 
   <div className="mt-2 sm:mb-0">
-  <button type="button" className="text-red-700 uppercase hover:text-white border-2 border-red-700 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-xs px-5 py-2 text-center me-5 mb-1 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-200">
+  <button type="button" className="text-red-700 uppercase hover:text-white border-4 border-red-700 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-xs px-5 py-2 text-center me-5 mb-1 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-200">
     Agregar
   </button>
-  <button type="button" className="text-green-700 uppercase hover:text-white border-2 border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-5 py-2 text-center me-5 mb-1 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200">
+  <button type="button" className="text-green-700 uppercase hover:text-white border-4 border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-5 py-2 text-center mb-1 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200">
     Importar
   </button>
   </div>
@@ -87,7 +86,7 @@ const Student = () => {
 </div>
 {loading && <p>Cargando...</p>}
 {deleteSearch && studentData && (
-<div className="overflow-x-auto bg-white p-2">
+<div className="overflow-x-auto bg-white p-2 mt-4">
 
   <table className="min-w-full text-sm whitespace-nowrap shadow-2xl">
 
@@ -96,6 +95,7 @@ const Student = () => {
         <th scope="col" className="px-6 py-4">#</th>
         <th scope="col" className="px-6 py-4">Nombre</th>
         <th scope="col" className="px-6 py-4">DNI</th>
+        <th scope="col" className="px-6 py-4">Código</th>
         <th scope="col" className="px-6 py-4">Actividad academica</th>
         <th scope="col" className="px-6 py-4">Participación</th>
         <th scope="col" className="px-6 py-4">Instituto</th>
@@ -107,12 +107,15 @@ const Student = () => {
     </thead>
     <tbody>
       {studentData.map((student, index) => (
-      <tr className="text-center text-gray-500 font-semibold hover:bg-gray-100">
+      <tr className="text-center text-gray-500 border-b font-semibold hover:bg-gray-100">
         <th scope="row" className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.id}</span>
         </th>
         <td className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.name}</span>
+        </td>
+        <td className="px-6 py-4">
+        <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.documentNumber}</span>
         </td>
         <td className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.code}</span>
@@ -138,18 +141,22 @@ const Student = () => {
             <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.certificate}</span>
           </a>
         </td>
-        <td className="flex justify-center px-6 py-3">
+        <td className="flex justify-center px-6 py-3 ">
         <div className="flex items-center gap-6">
-        <div content="Edit user" className='border-2 border-green-500 p-0.5 rounded-lg text-green-500'>
+        <CustomToolEdit text="Editar">
+        <button className='border-2 border-green-500 p-0.5 rounded-md text-green-500 transition ease-in-out delay-300 hover:scale-125'>
               <span className="text-xl text-default-400 cursor-pointer active:opacity-50">
                 <FaRegEdit />
               </span>
-            </div>
-            <div color="danger" content="Delete user" className='border-2 border-red-500 p-0.5 rounded-lg text-red-500'>
+            </button>
+            </CustomToolEdit>
+            <CustomToolDelete text="Eliminar">
+            <button className='border-2 border-red-500 p-0.5 rounded-md text-red-500 transition ease-in-out delay-300 hover:scale-125'>
               <span className="text-xl text-danger cursor-pointer active:opacity-50">
                 <RiDeleteBin5Line />
               </span>
-            </div>
+            </button>
+            </CustomToolDelete>
             </div>
         </td>
       </tr>

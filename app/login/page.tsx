@@ -36,9 +36,9 @@ const Login: React.FC = () => {
   const onSubmit = async () => {
     try {
       const response = await axios.post('http://localhost:8000/api/v1/user/login', form);
-        console.log(response.data);
+        console.log(response);
       if (response.data.token) {
-        window.location.href = 'certificate';
+        window.location.href = 'student';
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

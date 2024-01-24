@@ -13,19 +13,19 @@ const Header = () => {
   }
   return (
   <>
-    <div id="/" className="bg-[#006eb0] border-gray-200">
+    <div className="bg-[#006eb0] border-gray-200">
     <div className="flex lg:justify-between justify-center mx-auto max-w-screen-2xl p-2 ">
       <div className="hidden lg:flex">
-      <Link href="#" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
+      <Link href="/certificate" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
       </div>
         <div className="flex space-x-6 rtl:space-x-reverse">
-            <Link href="#" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
+            <Link href="/certificate" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
             <Link href="#" className="text-lg text-gray-50 hover:underline font-semibold">Aula virtual</Link>
         </div>
     </div>
 </div>
 <div className="bg-white">
-    <div className="max-w-screen-2xl mx-auto">
+    <div className="max-w-screen-2xl mx-auto p-2">
         <div className="flex items-center justify-between">
                 <Link href="https://flowbite.com" className="flex items-center space-x-3 rtl:space-x-reverse">
                   <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mx-2" alt="Flowbite Logo" />
@@ -40,28 +40,28 @@ const Header = () => {
                 }
                 </div>
 
-            <ul className="hidden lg:flex flex-wrap font-medium p-4 mx-auto space-x-8 rtl:space-x-reverse text-lg">
+            <ul className="hidden uppercase font-semibold lg:flex text-gray-600 flex-wrap p-3 mx-auto space-x-8 rtl:space-x-reverse text-xm">
                 <li>
-                    <Link href="/" className="text-gray-900 hover:underline" aria-current="page">Inicio</Link>
+                    <Link href="/" className="hover:text-pink-500" aria-current="page">Inicio</Link>
                 </li>
                 <li>
-                    <Link href="#" className="text-gray-900 hover:underline">Diplomados</Link>
+                    <Link href="#" className="hover:text-pink-500">Diplomados</Link>
                 </li>
                 <li>
-                    <Link href="/certificate" className="text-gray-900 hover:underline">Certificados</Link>
+                    <Link href="/certificate" className="hover:text-pink-500">Certificados</Link>
                 </li>
                 <li>
-                    <Link href="/about" className="text-gray-900 hover:underline">Nosotros</Link>
+                    <Link href="/about" className="hover:text-pink-500">Nosotros</Link>
                 </li>
                 <li>
-                    <Link href="#" className="text-gray-900 hover:underline">Blog</Link>
+                    <Link href="#" className="hover:text-pink-500">Blog</Link>
                 </li>
                 <li>
                 </li>
             </ul>
-            <div className="hidden lg:flex flex-wrap justify-end max-w-screen-2xl space-x-6">
-                  <Link href="tel:5541251234" className="text-lg  text-gray-500 hover:underline">(555) 412-1234</Link>
-                  <Link href="/login" className="text-lg  text-blue-600 dark:text-blue-500 hover:underline">Login</Link>
+            <div className="hidden lg:flex flex-wrap justify-end max-w-screen-2xl space-x-9">
+                  <Link href="tel:5541251234" className="text-lg font-semibold text-gray-600 hover:text-green-500">(555) 412-1234</Link>
+                  <Link href="/login" className="uppercase text-xs p-1.5 font-semibold px-6 text-blue-600 hover:text-white border-4 border-pink-500 rounded-lg hover:bg-pink-500">Login</Link>
                 </div>
         </div>
     </div>

@@ -1,56 +1,66 @@
 import React, { useState, FormEvent} from 'react'
 import { URL } from '@/components/utils/format/tokenConfig';
 import axios from 'axios'
-import { SearchDNIProps, Student } from '../data/Interface/interface';
+import { SearchDNIProps, Student } from '@/interface/interface';
+import Modal from '../share/Modal';
 
 
 const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
 
-    const [isActive, setIsActive] = useState(false);
-    const [queryValue, setQueryValue] = useState<string>('');
-    const [searchType, setSearchType] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [studentData, setStudentData] = useState<Student[]>();
-    const [closeTable, setCloseTable] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [queryValue, setQueryValue] = useState<string>('');
+  const [searchType, setSearchType] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [studentData, setStudentData] = useState<Student[]>();
+  const [closeTable, setCloseTable] = useState(false);
+  const [ modalOpen, setModalOpen] = useState(false);
 
-    const toggleIsActive = () => {
-      setIsActive(!isActive);
+  const toggleIsActive = () => {
+    setIsActive(!isActive);
+  };
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value, 'onChange ejecutado');
+    setQueryValue(event.target.value);
+    setCloseTable(false);
+    setSearchType(queryValue);
     };
+  const openErrorModal = () => {
+    setModalOpen(true);
+  };
+  const closeErrorModal = () => {
+    setModalOpen(false);
+  };
 
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(event.target.value, 'onChange ejecutado');
-      setQueryValue(event.target.value);
-      setCloseTable(false);
-      };
+  const searchDNI = async (event: FormEvent) => {
+    event.preventDefault();
 
-    const searchName = async (event: FormEvent) => {
-        event.preventDefault();
+    if (queryValue.trim()) {
+      setLoading(true);
+    }
 
-        if (queryValue.trim()) {
-          setLoading(true);
-        }
-
-        //const validToken = typeof token === "string" ? token: '';
-        try {
-          const value = queryValue.trim();
-          const apiUrl = `${URL()}/student/dni/${value}/type/${searchType}`
-            console.log(apiUrl)
-          const res = await axios
-            .get(`${URL()}/student/dni/${value.trim()}/type/${searchType}`,
-            );
-            console.log(res)
-              setStudentData(res.data);
-              onSearchDNI(res.data);
-              setCloseTable(true);
-          } catch(error) {
-              console.error("Error: DNI invalido", error);
-          } finally {
-            setLoading(false);
-          }
-    };
+    //const validToken = typeof token === "string" ? token: '';
+    try {
+      const value = queryValue.trim();
+      const apiUrl = `${URL()}/student/dni/${value}/type/${searchType}`
+        console.log(apiUrl)
+      const res = await axios
+        .get(`${URL()}/student/dni/${value.trim()}/type/${searchType}`,
+        );
+        console.log(res)
+        setStudentData(res.data);
+        onSearchDNI(res.data);
+        setCloseTable(true);
+      } catch(error) {
+        console.error("Error: DNI invalido", error);
+        openErrorModal();
+      } finally {
+        setLoading(false);
+    }
+  };
   return (
     <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
-      <form onSubmit={searchName} className="w-full md:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+      <form onSubmit={searchDNI} className="w-full md:w-2/3 lg:w-full xl:w-2/3 mx-auto">
     <label htmlFor="default-search" className="mb-2 text-sm font-medium "></label>
     <div className="relative lg:mx-auto mr-4 ml-4">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -120,6 +130,12 @@ const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
     </table>
   </div>
   )}
+  <Modal open={modalOpen} onClose={closeErrorModal}>
+      <div className="border-2 p-2 rounded-lg">
+        <h2 className="text-md font-bold text-red-600 mb-4">DNI incorrecto</h2>
+        <h3 className="text-sm font-semibold text-gray-600">El DNI que ingresaste no se encuentra en nuestra base de datos.</h3>
+      </div>
+    </Modal>
     </div>
   )
 }

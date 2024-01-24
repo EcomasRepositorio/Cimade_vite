@@ -1,50 +1,62 @@
 import React, { useState, FormEvent} from 'react'
 import { URL } from '@/components/utils/format/tokenConfig';
 import axios from 'axios'
-import { SearchNameProps, Student } from '../data/Interface/interface';
+import { SearchNameProps, Student } from '@/interface/interface';
+import Modal from '../share/Modal';
 
 
 const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
 
-    const [isActive, setIsActive] = useState(false);
-    const [queryValue, setQueryValue] = useState<string>('');
-    const [searchType, setSearchType] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [studentData, setStudentData] = useState<Student[]>();
-    const [closeTable, setCloseTable] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [queryValue, setQueryValue] = useState<string>('');
+  const [searchType, setSearchType] = useState<string>();
+  const [loading, setLoading] = useState(false);
+  const [studentData, setStudentData] = useState<Student[]>();
+  const [closeTable, setCloseTable] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-    const toggleIsActive = () => {
-      setIsActive(!isActive);
-    };
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      console.log(event.target.value, 'onChange ejecutado');
-      setQueryValue(event.target.value);
-      setCloseTable(false);
-      };
-    const searchName = async (event: FormEvent) => {
-        event.preventDefault();
+  const toggleIsActive = () => {
+    setIsActive(!isActive);
+  };
 
-        if (queryValue.trim()) {
-          setLoading(true);
-        }
-        //const validToken = typeof token === "string" ? token: '';
-        try {
-            const value = queryValue.trim();
-            const apiUrl = `${URL()}/student/name/${value}/type/${searchType}`
-            console.log(apiUrl)
-          const res = await axios
-            .get(`${URL()}/student/name/${value.trim()}/type/${searchType}`,
-            );
-            console.log(res)
-              setStudentData(res.data);
-              onSearchName(res.data);
-              setCloseTable(true);
-          } catch(error) {
-              console.error("Error: Nombre invalido", error);
-          } finally {
-            setLoading(false);
-          }
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value, 'onChange ejecutado');
+    setQueryValue(event.target.value);
+    setCloseTable(false);
+    setSearchType(queryValue);
     };
+
+  const openErrorModal = () => {
+    setModalOpen(true);
+  };
+  const closeErrorModal = () => {
+    setModalOpen(false);
+  };
+
+  const searchName = async (event: FormEvent) => {
+    event.preventDefault();
+
+    if (queryValue.trim()) {
+      setLoading(true);
+    }
+    try {
+      const value = queryValue.trim();
+      const apiUrl = `${URL()}/student/name/${value}/type/${searchType}`
+      console.log(apiUrl)
+      const res = await axios
+      .get(`${URL()}/student/name/${value.trim()}/type/${searchType}`,
+      );
+      console.log(res)
+        setStudentData(res.data);
+        onSearchName(res.data);
+        setCloseTable(true);
+    } catch(error) {
+        console.error("Error: Nombre invalido", error);
+        openErrorModal();
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
   <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
     <form onSubmit={searchName} className="w-full md:w-2/3 lg:w-full xl:w-2/3 mx-auto">
@@ -109,6 +121,12 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
       </table>
     </div>
     )}
+    <Modal open={modalOpen} onClose={closeErrorModal}>
+      <div className="border-2 p-2 rounded-lg">
+        <h2 className="text-md font-bold text-red-600 mb-4">Nombre incorrecto</h2>
+        <h3 className="text-sm font-semibold text-gray-600">El nombre que ingresaste no se encuentra en nuestra base de datos.</h3>
+      </div>
+    </Modal>
   </div>
   )
 };

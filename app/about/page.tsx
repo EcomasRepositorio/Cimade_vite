@@ -1,6 +1,6 @@
 "use client";
 import React, { useState} from 'react'
-import Modal from '@/components/modal/Index';
+import Modal from '@/components/share/Modal';
 
 const About = () => {
 

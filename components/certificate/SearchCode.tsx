@@ -1,8 +1,8 @@
 import React, { useState, FormEvent} from 'react'
 import { URL } from '@/components/utils/format/tokenConfig';
 import axios from 'axios'
-import { SearchCodeProps, StudentCode } from '../data/Interface/interface';
-import Modal from '../modal/Index';
+import { SearchCodeProps, StudentCode } from '../../interface/interface';
+import Modal from '../share/Modal';
 
 const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
 
@@ -11,8 +11,8 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
   const [searchType, setSearchType] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [studentData, setStudentData] = useState<StudentCode>();
-  const [closeTable, setCloseTable] = useState(false);
   const [open, setOpen] = useState<boolean>(false)
+  const [ modalOpen, setModalOpen] = useState(false);
 
   const toggleIsActive = () => {
     setIsActive(!isActive);
@@ -20,15 +20,22 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value, 'onChange ejecutado');
     setQueryValue(event.target.value);
-    setCloseTable(false);
+    setSearchType(event.target.value);
     };
-  const searchName = async (event: FormEvent) => {
+
+  const openErrorModal = () => {
+    setModalOpen(true);
+  };
+  const closeErrorModal = () => {
+    setModalOpen(false);
+  };
+
+  const searchCode = async (event: FormEvent) => {
     event.preventDefault();
 
     if (queryValue.trim()) {
       setLoading(true);
     }
-    //const validToken = typeof token === "string" ? token: '';
     try {
       const value = queryValue.trim();
       const apiUrl = `${URL()}/student/code/${value}/type/${searchType}`
@@ -39,9 +46,13 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
       console.log(res)
         setStudentData(res.data);
         onSearchCode(res.data);
-        setCloseTable(true);
+        if (queryValue.trim() !== '') {
+          setOpen(true);
+        }
     } catch(error) {
         console.error("Error: Codigo invalido", error);
+        openErrorModal();
+        setOpen(false);
     } finally {
       setLoading(false);
     }
@@ -55,7 +66,7 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
   ];
   return (
   <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
-    <form onSubmit={searchName} className="w-full md:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+    <form onSubmit={searchCode} className="w-full md:w-2/3 lg:w-full xl:w-2/3 mx-auto">
     <label htmlFor="default-search" className="mb-2 text-sm font-medium "></label>
     <div className="relative lg:mx-auto mr-4 ml-4">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -113,54 +124,12 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
    </table>
  </Modal>
   )}
-    {/* {loading && <p>Cargando...</p>}
-  {closeTable && studentData && (
-
-  <div className="relative overflow-x-auto shadow-xl sm:rounded-lg mt-8">
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 font-semibold">
-        <thead className="text-xs text-center text-gray-700 uppercase bg-gray-300">
-            <tr>
-                <th scope="col" className="px-6 py-3">
-                    #
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    Nombre
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    Actividad academica
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    Fecha
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    Accción
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr className="bg-white border-b text-center hover:bg-gray-100">
-                <th
-                scope="row"
-                className="px-6 py-4 font-medium whitespace-nowrap w-12">
-                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{studentData.id}</span>
-                </th>
-                <td className="px-6 py-4">
-                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{studentData.name}</span>
-                </td>
-                <td className="px-6 py-4">
-                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{studentData.activityAcademy}</span>
-                </td>
-                <td className="px-6 py-4">
-                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{studentData.date}</span>
-                </td>
-                <td className="px-6 py-4">
-                  <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-  )} */}
+  <Modal open={modalOpen} onClose={closeErrorModal}>
+      <div className="border-2 p-2 rounded-lg">
+        <h2 className="text-md font-bold text-red-600 mb-4">Código incorrecto</h2>
+        <h3 className="text-sm font-semibold text-gray-600">El código que ingresaste no se encuentra en nuestra base de datos.</h3>
+      </div>
+    </Modal>
 </div>
   )
 }
