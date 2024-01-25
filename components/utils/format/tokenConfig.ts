@@ -1,4 +1,4 @@
-export const tokenConfig = (value: string) => {
+export const tokenConfig = (value: string ) => {
     return {
       headers: { Authorization: `Bearer ${value}` },
     };

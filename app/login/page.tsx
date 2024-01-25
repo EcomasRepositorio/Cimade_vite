@@ -33,11 +33,20 @@ const Login: React.FC = () => {
     setForm({ ...form, [textField]: value });
   };
 
+  const saveToken = (token: string) => {
+    // Aquí puedes guardar el token en el estado local, en una cookie, o en otro lugar seguro.
+    // Por ejemplo, utilizando localStorage:
+    localStorage.setItem('token', token);
+  };
+
   const onSubmit = async () => {
     try {
       const response = await axios.post('http://localhost:8000/api/v1/user/login', form);
         console.log(response);
       if (response.data.token) {
+        const token = response.data.token;
+        // Guarda el token
+        saveToken(token);
         window.location.href = 'student';
       }
     } catch (error) {

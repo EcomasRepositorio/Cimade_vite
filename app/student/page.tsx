@@ -6,8 +6,9 @@ import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { StudentData } from '@/interface/interface';
-import { CustomToolEdit } from '@/components/share/button';
-import { CustomToolDelete } from '@/components/share/button'
+import { CustomToolEdit, CustomToolDelete } from '@/components/share/button';
+import Modal from '@/components/share/Modal';
+import StudentForm from '@/components/certificate/StudentForm';
 
 const Student = () => {
   const [isActive, setIsActive] = useState(false);
@@ -17,6 +18,14 @@ const Student = () => {
   const [searchType, setSearchType] = useState<string | null>(null);
   const [studentData, setStudentData] = useState<StudentData[]>();
   const [deleteSearch, setDeleteSearch] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const token = useRouteData("parameter");
 
@@ -143,22 +152,27 @@ const Student = () => {
         </td>
         <td className="flex justify-center px-6 py-3 ">
         <div className="flex items-center gap-6">
-        <CustomToolEdit text="Editar">
-        <button className='border-2 border-green-500 p-0.5 rounded-md text-green-500 transition ease-in-out delay-300 hover:scale-125'>
-              <span className="text-xl text-default-400 cursor-pointer active:opacity-50">
-                <FaRegEdit />
-              </span>
-            </button>
-            </CustomToolEdit>
-            <CustomToolDelete text="Eliminar">
-            <button className='border-2 border-red-500 p-0.5 rounded-md text-red-500 transition ease-in-out delay-300 hover:scale-125'>
-              <span className="text-xl text-danger cursor-pointer active:opacity-50">
-                <RiDeleteBin5Line />
-              </span>
-            </button>
-            </CustomToolDelete>
-            </div>
-        </td>
+      <CustomToolEdit text="Editar">
+        <button
+        onClick={handleOpenModal}
+        className='border-2 border-green-500 p-0.5 rounded-md text-green-500 transition ease-in-out delay-300 hover:scale-125'>
+          <span className="text-xl text-default-400 cursor-pointer active:opacity-50">
+            <FaRegEdit />
+          </span>
+        </button>
+          <Modal open={isModalOpen} onClose={handleCloseModal}>
+            <StudentForm id="123" onCloseModal={handleCloseModal}/>
+          </Modal>
+      </CustomToolEdit>
+      <CustomToolDelete text="Eliminar">
+        <button className='border-2 border-red-500 p-0.5 rounded-md text-red-500 transition ease-in-out delay-300 hover:scale-125'>
+          <span className="text-xl text-danger cursor-pointer active:opacity-50">
+            <RiDeleteBin5Line />
+          </span>
+        </button>
+      </CustomToolDelete>
+    </div>
+    </td>
       </tr>
       ))}
     </tbody>
