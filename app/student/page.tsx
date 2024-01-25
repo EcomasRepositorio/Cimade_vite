@@ -6,9 +6,12 @@ import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { StudentData } from '@/interface/interface';
-import { CustomToolEdit, CustomToolDelete } from '@/components/share/button';
+import { CustomToolEdit, CustomToolDelete, CustomLogout } from '@/components/share/button';
 import Modal from '@/components/share/Modal';
 import StudentForm from '@/components/certificate/StudentForm';
+import { RiFileExcel2Line } from "react-icons/ri";
+import { FaRegAddressBook } from "react-icons/fa6";
+import { FiLogOut } from "react-icons/fi";
 
 const Student = () => {
   const [isActive, setIsActive] = useState(false);
@@ -27,15 +30,14 @@ const Student = () => {
     setIsModalOpen(false);
   };
 
-  const token = useRouteData("parameter");
-
   const toggleIsActive = () => {
     setIsActive(!isActive);
   };
-
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryValue(event.target.value);
   };
+
+  const token = useRouteData("parameter");
 
   const onSubmit = async () => {
     const validToken = typeof token === "string" ? token: '';
@@ -66,7 +68,7 @@ const Student = () => {
   <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
     <h1>ADMINISTRAR ESTUDIANTES</h1>
   </div>
-  <div className="flex flex-col sm:flex-row border-2 rounded-xl items-center lg:ml-64 lg:mr-64 justify-between p-2 bg-white">
+  <div className="flex flex-col sm:flex-row border-2 rounded-xl items-center lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
   <div className="relative m-[2px] mb-2 sm:mb-0">
     <label htmlFor="inputSearch" className="sr-only">Search</label>
     <input id="inputSearch"
@@ -84,12 +86,18 @@ const Student = () => {
   </div>
 
   <div className="mt-2 sm:mb-0">
-  <button type="button" className="text-red-700 uppercase hover:text-white border-4 border-red-700 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-semibold rounded-lg text-xs px-5 py-2 text-center me-5 mb-1 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-200">
+  <button type="button" className="text-[#006eb0] uppercase hover:text-white border-2 border-[#006eb0] hover:bg-[#006eb0] focus:ring-4 focus:outline-none font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-[#BFE9FB] inline-flex items-center">
+    <FaRegAddressBook className='mr-1 text-lg' />
     Agregar
   </button>
-  <button type="button" className="text-green-700 uppercase hover:text-white border-4 border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-5 py-2 text-center mb-1 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200">
-    Importar
+  <button type="button" className="text-green-700 uppercase hover:text-white border-2 border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center">
+    <RiFileExcel2Line className='mr-1 text-lg' /> Importar
   </button>
+  <CustomLogout text="Salir">
+  <button type="button" className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none rounded-lg text-xs px-2 py-2 text-center mb-1 dark:hover:text-white dark:focus:ring-red-200">
+    <FiLogOut className='text-lg' />
+  </button>
+  </CustomLogout>
   </div>
 
 </div>
@@ -161,7 +169,7 @@ const Student = () => {
           </span>
         </button>
           <Modal open={isModalOpen} onClose={handleCloseModal}>
-            <StudentForm id="123" onCloseModal={handleCloseModal}/>
+            <StudentForm id='662' onCloseModal={handleCloseModal}/>
           </Modal>
       </CustomToolEdit>
       <CustomToolDelete text="Eliminar">

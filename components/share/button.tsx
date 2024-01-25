@@ -38,4 +38,20 @@ CustomToolDelete.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+export const CustomLogout: React.FC<CustomTooltipProps> = ({ text, children }) => {
+  return (
+    <div className="relative inline-block group">
+      <div className={`font-bold opacity-0 pointer-events-none group-hover:opacity-100 text-red-500 text-xs p-2 absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-1 transition-all duration-1000`}>
+        {text}
+      </div>
+      {children}
+    </div>
+  );
+};
+
+CustomToolDelete.propTypes = {
+  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
 
