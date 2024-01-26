@@ -3,26 +3,35 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios';
 import { useRouteData } from '@/hooks/hooks';
 import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { StudentData } from '@/interface/interface';
-import { CustomToolEdit, CustomToolDelete, CustomLogout, CustomRegister } from '@/components/share/button';
+import { CustomLogout, CustomRegister } from '@/components/share/button';
 import Modal from '@/components/share/Modal';
-import StudentForm from '@/components/certificate/StudentForm';
+import StudentForm from '@/components/student/StudentForm';
 import { RiFileExcel2Line } from "react-icons/ri";
 import { FaRegAddressBook } from "react-icons/fa6";
 import { FiUserPlus } from "react-icons/fi";
 import { FiLogOut } from "react-icons/fi";
+import StudentDelete from '@/components/student/StudentDelete';
+import CreateStudentForm from '@/components/student/StudentAdd';
 
 const Student = () => {
   const [isActive, setIsActive] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState<any[]>();
   const [queryValue, setQueryValue] = useState<string>('');
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [studentData, setStudentData] = useState<StudentData[]>();
   const [deleteSearch, setDeleteSearch] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateFormOpen, setIsCreateFormOpen] = useState(false);
+
+  const handleCreateSuccess = (createStudentId: number) => {}
+  const handleCloseCreateForm = () => {
+    setIsCreateFormOpen(false);
+  };
+  const handleOpenCreateForm = () => {
+    setIsCreateFormOpen(true);
+  };
 
   const handleOpenModal = (id: number) => {
     setSelectedId(id);
@@ -41,6 +50,7 @@ const Student = () => {
   };
 
   const handleUpdateSuccess = () => {}
+  const handleDeleteSuccess = () => {}
 
   const token = useRouteData("parameter");
 
@@ -91,10 +101,16 @@ const Student = () => {
   </div>
 
   <div className="mt-2 sm:mb-0">
-  <button type="button" className="text-[#006eb0] uppercase hover:text-white border-2 border-[#006eb0] hover:bg-[#006eb0] focus:ring-4 focus:outline-none font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-[#BFE9FB] inline-flex items-center">
+  <button
+  type="button"
+  className="text-[#006eb0] uppercase hover:text-white border-2 border-[#006eb0] hover:bg-[#006eb0] focus:ring-4 focus:outline-none font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-[#BFE9FB] inline-flex items-center"
+  onClick={handleOpenCreateForm}>
     <FaRegAddressBook className='mr-1 text-lg' />
     Agregar
   </button>
+  {isCreateFormOpen && (
+    <CreateStudentForm onCreateSuccess={handleCreateSuccess} onCloseModal={handleCloseCreateForm}/>
+  )}
   <button type="button" className="text-green-600 uppercase hover:text-white border-2 border-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1  dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center">
     <RiFileExcel2Line className='mr-1 text-lg' /> Importar
   </button>
@@ -170,7 +186,7 @@ const Student = () => {
         </td>
         <td className="flex justify-center px-6 py-3 ">
         <div className="flex items-center gap-6">
-      <CustomToolEdit text='Editar'>
+      <div>
         <button
         onClick={() => handleOpenModal(student.id)}
         className='border-2 border-green-500 p-0.5 rounded-md text-green-500 transition ease-in-out delay-300 hover:scale-125'>
@@ -181,14 +197,8 @@ const Student = () => {
           <Modal open={isModalOpen} onClose={handleCloseModal}>
               <StudentForm id={selectedId} onCloseModal={handleCloseModal} onUpdateSuccess={handleUpdateSuccess}/>
           </Modal>
-      </CustomToolEdit>
-      <CustomToolDelete text='Eliminar'>
-        <button className='border-2 border-red-500 p-0.5 rounded-md text-red-500 transition ease-in-out delay-300 hover:scale-125'>
-          <div className="text-xl text-danger cursor-pointer active:opacity-50">
-            <RiDeleteBin5Line />
-          </div>
-        </button>
-      </CustomToolDelete>
+      </div>
+        <StudentDelete id={student.id} onDeleteSuccess={handleDeleteSuccess} />
     </div>
     </td>
       </tr>

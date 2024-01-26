@@ -82,14 +82,16 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
     <div className="max-w-screen-lg mx-auto border p-4 rounded-xl">
       <h1 className='text-md font-bold bg-[#006eb0] text-gray-100 border p-2 rounded-lg mb-4 uppercase'>Actualizar estudiante</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 uppercase md:grid-cols-2 gap-2">
-        <div className="mb-4 lg:mr-0 mr-4">
+      <div  className='flex justify-between col-span-2 whitespace-pre-wrap'>
+        <div className="mb-4">
           <label className="text-xs font-bold">DNI: </label>
           <input {...register('documentNumber')} className="border rounded-lg p-2 lg:w-36 w-24" />
         </div>
         <div className="mb-4">
           <label className="text-xs font-bold">Código: </label>
-          <input {...register('code')} className="border rounded-lg p-2 lg:w-32 w-20" />
+          <input {...register('code')} className="border rounded-lg p-2 lg:w-32 w-28" />
         </div>
+      </div>
         <div className="mb-4 text-xs col-span-full md:col-span-2 lg:col-span-3">
           <label className="block font-bold">Nombres: </label>
           <input {...register('name')} className="border rounded-lg p-2 w-full" />
@@ -106,27 +108,31 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
           <label className="block font-bold">Instituto: </label>
           <input {...register('institute')} className="border rounded-lg p-2 w-full" />
         </div>
+        <div  className='flex justify-between col-span-2 whitespace-pre-wrap'>
         <div className="mb-4">
           <label className="text-xs font-bold">Hora: </label>
-          <input {...register('hour')} className="border rounded-lg p-2 lg:w-32 w-20" />
+          <input {...register('hour')} className="border rounded-lg p-2 lg:w-32 w-24" />
         </div>
-        <div className="mb-4 lg:ml-3">
+        <div className="mb-4">
           <label className="text-xs font-bold ">Fecha: </label>
-          <input {...register('date')} className="border rounded-lg p-2 lg:w-32 w-20" />
+          <input {...register('date')} className="border rounded-lg p-2 lg:w-32 w-28" />
         </div>
+      </div>
         <div className="mb-4 text-xs col-span-full md:col-span-2">
           <label className="block font-bold">Imagen: </label>
           <input {...register('imageCertificate')} className="border rounded-lg p-2 w-full" />
         </div>
         <div className="col-span-full flex justify-center">
-          <button type="submit" className="w-auto sm:w-auto bg-[#006eb0] text-white rounded-lg px-4 py-2 hover:bg-blue-700">
+          <button type="submit" className="w-auto uppercase text-sm font-bold sm:w-auto bg-[#006eb0] text-white rounded-lg px-4 py-2 hover:bg-blue-700">
             Actualizar
           </button>
         </div>
       </form>
       {modalOpen && (
         <Modal open={modalOpen} onClose={closeModal}>
-         Actualizacion exitosa...!
+        <div className='font-bold border p-4 rounded-xl text-[#006eb0]'>
+          Actualización exitosa.
+        </div>
         </Modal>
       )}
     </div>
