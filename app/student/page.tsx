@@ -6,11 +6,12 @@ import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { FaRegEdit } from "react-icons/fa";
 import { StudentData } from '@/interface/interface';
-import { CustomToolEdit, CustomToolDelete, CustomLogout } from '@/components/share/button';
+import { CustomToolEdit, CustomToolDelete, CustomLogout, CustomRegister } from '@/components/share/button';
 import Modal from '@/components/share/Modal';
 import StudentForm from '@/components/certificate/StudentForm';
 import { RiFileExcel2Line } from "react-icons/ri";
 import { FaRegAddressBook } from "react-icons/fa6";
+import { FiUserPlus } from "react-icons/fi";
 import { FiLogOut } from "react-icons/fi";
 
 const Student = () => {
@@ -18,15 +19,17 @@ const Student = () => {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState<any[]>();
   const [queryValue, setQueryValue] = useState<string>('');
-  const [searchType, setSearchType] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const [studentData, setStudentData] = useState<StudentData[]>();
   const [deleteSearch, setDeleteSearch] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (id: number) => {
+    setSelectedId(id);
     setIsModalOpen(true);
   };
   const handleCloseModal = () => {
+    setSelectedId(null);
     setIsModalOpen(false);
   };
 
@@ -36,6 +39,8 @@ const Student = () => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryValue(event.target.value);
   };
+
+  const handleUpdateSuccess = () => {}
 
   const token = useRouteData("parameter");
 
@@ -73,7 +78,7 @@ const Student = () => {
     <label htmlFor="inputSearch" className="sr-only">Search</label>
     <input id="inputSearch"
     type="text"
-    placeholder="Buscar..."
+    placeholder="Buscar por DNI o nombre..."
     className="block lg:w-96 w-80 rounded-lg border-4 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
     onClick={toggleIsActive}
     onChange={onChange}
@@ -90,11 +95,16 @@ const Student = () => {
     <FaRegAddressBook className='mr-1 text-lg' />
     Agregar
   </button>
-  <button type="button" className="text-green-700 uppercase hover:text-white border-2 border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center">
+  <button type="button" className="text-green-600 uppercase hover:text-white border-2 border-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1  dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center">
     <RiFileExcel2Line className='mr-1 text-lg' /> Importar
   </button>
+  <CustomRegister text="Registrar">
+  <button type="button" className="text-yellow-500 hover:text-white border-2 border-yellow-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-xs px-2 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-yellow-200">
+    <FiUserPlus  className='text-lg' />
+  </button>
+  </CustomRegister>
   <CustomLogout text="Salir">
-  <button type="button" className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none rounded-lg text-xs px-2 py-2 text-center mb-1 dark:hover:text-white dark:focus:ring-red-200">
+  <button type="button" className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-xs px-2 py-2 text-center mb-1 dark:hover:text-white dark:focus:ring-red-200">
     <FiLogOut className='text-lg' />
   </button>
   </CustomLogout>
@@ -160,23 +170,23 @@ const Student = () => {
         </td>
         <td className="flex justify-center px-6 py-3 ">
         <div className="flex items-center gap-6">
-      <CustomToolEdit text="Editar">
+      <CustomToolEdit text='Editar'>
         <button
-        onClick={handleOpenModal}
+        onClick={() => handleOpenModal(student.id)}
         className='border-2 border-green-500 p-0.5 rounded-md text-green-500 transition ease-in-out delay-300 hover:scale-125'>
-          <span className="text-xl text-default-400 cursor-pointer active:opacity-50">
+          <div className="text-xl text-default-400 cursor-pointer active:opacity-50">
             <FaRegEdit />
-          </span>
+          </div>
         </button>
           <Modal open={isModalOpen} onClose={handleCloseModal}>
-            <StudentForm id='662' onCloseModal={handleCloseModal}/>
+              <StudentForm id={selectedId} onCloseModal={handleCloseModal} onUpdateSuccess={handleUpdateSuccess}/>
           </Modal>
       </CustomToolEdit>
-      <CustomToolDelete text="Eliminar">
+      <CustomToolDelete text='Eliminar'>
         <button className='border-2 border-red-500 p-0.5 rounded-md text-red-500 transition ease-in-out delay-300 hover:scale-125'>
-          <span className="text-xl text-danger cursor-pointer active:opacity-50">
+          <div className="text-xl text-danger cursor-pointer active:opacity-50">
             <RiDeleteBin5Line />
-          </span>
+          </div>
         </button>
       </CustomToolDelete>
     </div>
@@ -190,15 +200,15 @@ const Student = () => {
     <p>Showing <strong>1-5</strong> of <strong>10</strong></p>
     <ul className="list-style-none flex">
       <li>
-        <a className="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
+        <a className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
           href="#!">Previous</a>
       </li>
       <li>
-        <a className="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
+        <a className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
           href="#!">1</a>
       </li>
       <li aria-current="page">
-        <a className="relative block rounded bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300"
+        <a className="block rounded bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300"
           href="#!">2
           <span className="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]">
             (current)
@@ -206,7 +216,7 @@ const Student = () => {
         </a>
       </li>
       <li>
-        <a className="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
+        <a className=" block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
           href="#!">Next</a>
       </li>
     </ul>

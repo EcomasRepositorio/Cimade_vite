@@ -1,15 +1,15 @@
 // components/StudentForm.tsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import ReactDatePicker from "react-datepicker";
+import { useForm, SubmitHandler } from 'react-hook-form';
 import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 import { useRouteData } from '@/hooks/hooks';
 import Modal from '../share/Modal';
 
 interface StudentFormProps {
-  id: string;
+  id: number | null;
   onCloseModal: () => void;
+  onUpdateSuccess: () => void;
 }
 
 type StudentFormData = {
@@ -24,8 +24,8 @@ type StudentFormData = {
   imageCertificate?: string;
 };
 
-const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal }) => {
-  const { register, handleSubmit, setValue, control } = useForm<StudentFormData>();
+const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuccess }) => {
+  const { register, handleSubmit, setValue } = useForm<StudentFormData>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -64,9 +64,12 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal }) => {
 
   const onSubmit: SubmitHandler<StudentFormData> = async (data) => {
     try {
+      if (id) {
       await axios.put(`${URL()}/student/${id}`, data, tokenConfig(validToken));
       setIsModalOpen(true);
       setModalOpen(true);
+      onUpdateSuccess();
+      }
     } catch (error) {
       console.error('Error al actualizar estudiante:', error);
     }
@@ -77,14 +80,15 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal }) => {
 
   return (
     <div className="max-w-screen-lg mx-auto border p-4 rounded-xl">
-      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 uppercase md:grid-cols-2 gap-2">
-        <div className="mb-4">
+      <h1 className='text-md font-bold bg-[#006eb0] text-gray-100 border p-2 rounded-lg mb-4 uppercase'>Actualizar estudiante</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 uppercase md:grid-cols-2 gap-2">
+        <div className="mb-4 lg:mr-0 mr-4">
           <label className="text-xs font-bold">DNI: </label>
-          <input {...register('documentNumber')} className="border rounded-lg p-2 w-36" />
+          <input {...register('documentNumber')} className="border rounded-lg p-2 lg:w-36 w-24" />
         </div>
         <div className="mb-4">
           <label className="text-xs font-bold">Código: </label>
-          <input {...register('code')} className="border rounded-lg p-2 w-32" />
+          <input {...register('code')} className="border rounded-lg p-2 lg:w-32 w-20" />
         </div>
         <div className="mb-4 text-xs col-span-full md:col-span-2 lg:col-span-3">
           <label className="block font-bold">Nombres: </label>
@@ -104,19 +108,19 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal }) => {
         </div>
         <div className="mb-4">
           <label className="text-xs font-bold">Hora: </label>
-          <input {...register('hour')} className="border rounded-lg p-2 w-32" />
+          <input {...register('hour')} className="border rounded-lg p-2 lg:w-32 w-20" />
         </div>
         <div className="mb-4 lg:ml-3">
           <label className="text-xs font-bold ">Fecha: </label>
-          <input {...register('date')} className="border rounded-lg p-2 w-32" />
+          <input {...register('date')} className="border rounded-lg p-2 lg:w-32 w-20" />
         </div>
         <div className="mb-4 text-xs col-span-full md:col-span-2">
           <label className="block font-bold">Imagen: </label>
           <input {...register('imageCertificate')} className="border rounded-lg p-2 w-full" />
         </div>
         <div className="col-span-full flex justify-center">
-          <button type="submit" className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-700">
-            Actualizar Estudiante
+          <button type="submit" className="w-auto sm:w-auto bg-[#006eb0] text-white rounded-lg px-4 py-2 hover:bg-blue-700">
+            Actualizar
           </button>
         </div>
       </form>

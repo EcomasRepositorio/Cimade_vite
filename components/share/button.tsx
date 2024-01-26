@@ -54,4 +54,20 @@ CustomToolDelete.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+export const CustomRegister: React.FC<CustomTooltipProps> = ({ text, children }) => {
+  return (
+    <div className="relative inline-block group">
+      <div className={`font-semibold opacity-0 pointer-events-none group-hover:opacity-100 text-yellow-500 text-xs p-2 absolute bottom-full left-1/2 transform -translate-x-10 translate-y-1 transition-all duration-1000`}>
+        {text}
+      </div>
+      {children}
+    </div>
+  );
+};
+
+CustomToolDelete.propTypes = {
+  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
 
