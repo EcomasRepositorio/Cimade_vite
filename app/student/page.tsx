@@ -14,6 +14,7 @@ import { FiUserPlus } from "react-icons/fi";
 import { FiLogOut } from "react-icons/fi";
 import StudentDelete from '@/components/student/StudentDelete';
 import CreateStudentForm from '@/components/student/StudentAdd';
+import CreateStudentExcel from '@/components/student/StudentsAll';
 
 const Student = () => {
   const [isActive, setIsActive] = useState(false);
@@ -24,6 +25,15 @@ const Student = () => {
   const [deleteSearch, setDeleteSearch] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreateFormOpen, setIsCreateFormOpen] = useState(false);
+  const [createStudentExcel, setCreateStudentExcel] = useState(false);
+
+  const handleCreateStudentExcel = () => {
+    setCreateStudentExcel(true);
+  };
+  const handleCloseCreateExcel = () => {
+    setCreateStudentExcel(false);
+  };
+  const handleCreateExcelSuccess = () => {}
 
   const handleCreateSuccess = (createStudentId: number) => {}
   const handleCloseCreateForm = () => {
@@ -111,9 +121,15 @@ const Student = () => {
   {isCreateFormOpen && (
     <CreateStudentForm onCreateSuccess={handleCreateSuccess} onCloseModal={handleCloseCreateForm}/>
   )}
-  <button type="button" className="text-green-600 uppercase hover:text-white border-2 border-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1  dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center">
+  <button
+  type="button"
+  className="text-green-600 uppercase hover:text-white border-2 border-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1  dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center"
+  onClick={handleCreateStudentExcel}>
     <RiFileExcel2Line className='mr-1 text-lg' /> Importar
   </button>
+  {createStudentExcel && (
+    <CreateStudentExcel onCloseModal={handleCloseCreateExcel} onCreateSuccess={handleCreateExcelSuccess}/>
+  )}
   <CustomRegister text="Registrar">
   <button type="button" className="text-yellow-500 hover:text-white border-2 border-yellow-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-xs px-2 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-yellow-200">
     <FiUserPlus  className='text-lg' />
