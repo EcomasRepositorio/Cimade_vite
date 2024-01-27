@@ -4,6 +4,7 @@ import Presentation from "./presentation";
 import Graduates from "./Graduates";
 import CounterMain from "./CounterMain";
 import Courses from "./Courses";
+import ContactForm from "./ContactForm";
 
 
 
@@ -20,7 +21,7 @@ const HomeContend = () => {
     <Graduates/>
     <CounterMain/>
     <Courses/>
-    
+    <ContactForm/>
 
   </>
   
