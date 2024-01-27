@@ -28,7 +28,9 @@ const Student = () => {
   const [createStudentExcel, setCreateStudentExcel] = useState(false);
 
   const handleCreateStudentExcel = () => {
+    console.log('Antes de setCreateStudentExcel(true):', createStudentExcel);
     setCreateStudentExcel(true);
+    console.log('Después de setCreateStudentExcel(true):', createStudentExcel);
   };
   const handleCloseCreateExcel = () => {
     setCreateStudentExcel(false);
@@ -87,6 +89,7 @@ const Student = () => {
   useEffect(() => {
     onSubmit();
   }, []);
+  console.log('hola', createStudentExcel)
 
   return (
   <section className="p-2">
@@ -122,13 +125,16 @@ const Student = () => {
     <CreateStudentForm onCreateSuccess={handleCreateSuccess} onCloseModal={handleCloseCreateForm}/>
   )}
   <button
-  type="button"
-  className="text-green-600 uppercase hover:text-white border-2 border-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1  dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center"
-  onClick={handleCreateStudentExcel}>
-    <RiFileExcel2Line className='mr-1 text-lg' /> Importar
+    type="button"
+    className="text-green-600 uppercase hover:text-white border-2 border-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1  dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center"
+    onClick={handleCreateStudentExcel}>
+      <RiFileExcel2Line className='mr-1 text-lg' /> Importar
   </button>
-  {createStudentExcel && (
-    <CreateStudentExcel onCloseModal={handleCloseCreateExcel} onCreateSuccess={handleCreateExcelSuccess}/>
+    {createStudentExcel && (
+      <CreateStudentExcel
+      onCreateSuccess={handleCreateExcelSuccess}
+      onCloseModal={handleCloseCreateExcel}
+      />
   )}
   <CustomRegister text="Registrar">
   <button type="button" className="text-yellow-500 hover:text-white border-2 border-yellow-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-xs px-2 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-yellow-200">
@@ -152,8 +158,8 @@ const Student = () => {
     <thead className="uppercase text-center tracking-wider bg-neutral-300">
       <tr className="text-gray-700 ">
         <th scope="col" className="px-6 py-4">#</th>
-        <th scope="col" className="px-6 py-4">Nombre</th>
         <th scope="col" className="px-6 py-4">DNI</th>
+        <th scope="col" className="px-6 py-4">Nombre</th>
         <th scope="col" className="px-6 py-4">Código</th>
         <th scope="col" className="px-6 py-4">Actividad academica</th>
         <th scope="col" className="px-6 py-4">Participación</th>
@@ -171,10 +177,10 @@ const Student = () => {
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.id}</span>
         </th>
         <td className="px-6 py-4">
-        <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.name}</span>
+        <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.documentNumber}</span>
         </td>
         <td className="px-6 py-4">
-        <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.documentNumber}</span>
+        <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.name}</span>
         </td>
         <td className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.code}</span>

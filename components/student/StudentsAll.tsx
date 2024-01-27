@@ -17,8 +17,9 @@ type StudentFormData = {
 
 const CreateStudentExcel: React.FC<CreateStudentFormProps> = ({ onCloseModal, onCreateSuccess }) => {
   const { register, handleSubmit } = useForm<StudentFormData>();
-  const [isModalOpen, setIsModalOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [duplicateCodes, setDuplicateCodes] = useState<string[]>([]);
+  const [insertionSuccess, setInsertionSuccess] = useState(false);
 
   const token = useRouteData("parameter") as string;
   const validToken: string = token || '';
@@ -29,25 +30,37 @@ const CreateStudentExcel: React.FC<CreateStudentFormProps> = ({ onCloseModal, on
       formData.append('excelFile', data.excelFile[0]);
 
       const response = await axios.post(`${URL()}/students/many`, formData, tokenConfig(validToken));
-      console.log(response.data);
-      setIsModalOpen(true);
-      setModalOpen(true);
-      onCloseModal();
+
+      if (response.data && response.data.errorContent && response.data.errorContent.duplicateCode) {
+        // Si hay códigos duplicados, actualiza el estado
+        setDuplicateCodes(response.data.errorContent.duplicateCode);
+        setModalOpen(true);
+      } else {
+        // Si no hay códigos duplicados, muestra el mensaje de inserción exitosa
+        setInsertionSuccess(true);
+        setModalOpen(true);
+      }
+
       onCreateSuccess();
     } catch (error) {
       console.error('Error al crear estudiantes:', error);
     } finally {
-      setIsModalOpen(false);
+      setTimeout(() => {
+        setModalOpen(false);
+        onCloseModal();
+      }, 3000);
     }
   };
 
   const closeModal = () => {
     setModalOpen(false);
+    setDuplicateCodes([]);
+    setInsertionSuccess(false);
     onCloseModal();
   };
 
   return (
-    <Modal open={isModalOpen} onClose={onCloseModal}>
+    <Modal open={true} onClose={closeModal}>
       <div className="max-w-screen-lg mx-auto border p-4 rounded-xl">
         <h1 className='text-sm text-center font-bold bg-[#006eb0] text-gray-200 border p-2 rounded-lg mb-4 uppercase'>
           Agregar estudiantes desde Excel
@@ -67,8 +80,19 @@ const CreateStudentExcel: React.FC<CreateStudentFormProps> = ({ onCloseModal, on
         </form>
         {modalOpen && (
           <Modal open={modalOpen} onClose={closeModal}>
-            <div className='font-bold border p-4 rounded-xl text-[#006eb0]'>
-              Creación exitosa.
+            <div className='font-bold border p-3 rounded-xl text-[#006eb0]'>
+              {insertionSuccess ? (
+                <p>Insersión exitosa.</p>
+              ) : (
+                <div>
+                  <p>Error: Códigos duplicados</p>
+                  <ul>
+                    {duplicateCodes.map((code, index) => (
+                      <li key={index}>{code}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </Modal>
         )}
