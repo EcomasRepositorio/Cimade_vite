@@ -65,7 +65,7 @@ const Courses = () => {
     
      {/* 3 ULTIMO RECUADROS */}
      
-     <div className="p-5 mb-32" style={{ backgroundImage: "linear-gradient(to right, #002e79, #006eb0)" }}>
+     <div className="p-5" style={{ backgroundImage: "linear-gradient(to right, #002e79, #006eb0)" }}>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 place-items-center mb-16">
         <div className="max-w-md bg-white rounded-md overflow-hidden shadow-md">
           {/* ... Contenido de la cuarta tarjeta ... */}
