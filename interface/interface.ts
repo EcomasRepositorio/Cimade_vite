@@ -38,3 +38,18 @@ export interface StudentData {
   date: string;
   certificate?: string;
 };
+
+export interface UserData {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  role: Role;
+  token: string;
+}
+
+enum Role {
+  ADMIN,
+  USER
+}
