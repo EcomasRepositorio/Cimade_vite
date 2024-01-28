@@ -42,11 +42,11 @@ export interface StudentData {
 export interface UserData {
   id: number;
   email: string;
+  password: string;
   firstName: string;
   lastName: string;
-  phone: string;
+  phone?: number;
   role: Role;
-  token: string;
 }
 
 enum Role {
