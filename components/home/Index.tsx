@@ -21,8 +21,6 @@ const Home: React.FC = () => {
           ))}
         </Slider>
       </div>
-
-    
     </div>
     
   );
