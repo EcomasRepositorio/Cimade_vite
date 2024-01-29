@@ -1,10 +1,6 @@
-// Importa los módulos necesarios
-import { FieldValues, SubmitHandler, useForm, UseFormRegister } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import axios, { AxiosError } from 'axios';
-import Modal from '../share/Modal'; // Ajusta la ruta según la ubicación de tu componente Modal
-import { FaRegEdit } from 'react-icons/fa';
-import { RiDeleteBin5Line } from 'react-icons/ri';
-import { FaRegAddressBook } from "react-icons/fa6";
+import Modal from '../share/Modal';
 import React, { useEffect, useState } from 'react';
 import { useRouteData } from '@/hooks/hooks';
 import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
@@ -22,9 +18,8 @@ const UserRegister: React.FC<CreateUserModal> = ({ onCloseModal, onCreateSuccess
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
-  const [specificError, setSpecificError] = useState<string | null>(null);
   const [isUserRegisteredModalOpen, setIsUserRegisteredModalOpen] = useState(false);
-  //const [users, setUsers] = useState<UserData[]>([])
+  const [isLoading, setIsLoading] = useState(false)
   const token = useRouteData("parameter");
   const validToken = typeof token === "string" ? token : '';
 
@@ -32,48 +27,31 @@ const UserRegister: React.FC<CreateUserModal> = ({ onCloseModal, onCreateSuccess
     if (axios.isAxiosError(error)) {
       const axiosError = error as AxiosError<{ errorContent: string }>;
       const errorContent = axiosError.response?.data?.errorContent;
-
-      if (errorContent) {
-        setErrorModalOpen(true);
-        setError(errorContent);
-        setSpecificError(parseSpecificError(errorContent));
-      } else {
-        setError('Hubo un error al registrar el usuario. Por favor, intenta nuevamente.');
-        setErrorModalOpen(true);
-      }
+      setErrorModalOpen(true);
+      setError(errorContent || 'Email duplicado. Por favor, intenta con otro nuevamente.');
     } else {
-      setError('Hubo un error al procesar la solicitud. Por favor, intenta nuevamente.');
+      setError('Email duplicado. Por favor, intenta nuevamente.');
       setErrorModalOpen(true);
     }
   };
 
-  const parseSpecificError = (errorContent: string): string | null => {
-    // Lógica para identificar y retornar el error específico, por ejemplo, email duplicado.
-    if (errorContent.includes('Duplicate email')) {
-      return 'El correo electrónico ya está registrado. Por favor, utiliza otro.';
-    }
-    // Añadir más lógica según sea necesario.
-    return null;
-  };
-
   useEffect(() => {
-    // Ejemplo de validación de formato de correo electrónico
     register('email', {
       required: true,
       pattern: {
-        value:/^[a-zA-Z0-9._-]+@gmail\.com$/,
+        value: /^[a-zA-Z0-9._-]+@cimade\.com$/,
         message: 'Ingresa un correo electrónico válido de Gmail.',
-      }
+      },
+    });
+    register('password', {
+      required: true,
     });
   }, [register]);
 
   const onSubmit: SubmitHandler<UserData> = async (data) => {
     try {
+      setIsLoading(true);
       console.log(data);
-      if (!/^[a-zA-Z0-9._-]+@gmail\.com$/.test(data.email)) {
-        console.error('Ingresa un correo electrónico válido de Gmail.');
-        return;
-      }
       if (data && data.role) {
       const url = `${URL()}/user/register`;
       const response = await axios.post(url, data, tokenConfig(validToken));
@@ -90,10 +68,9 @@ const UserRegister: React.FC<CreateUserModal> = ({ onCloseModal, onCreateSuccess
         setError('Hubo un error al registrar el usuario. Por favor, intenta nuevamente.');
         handleError(error as AxiosError);
       } finally {
-      setDataLoaded(false);
+        setIsLoading(false);
     }
   };
-
 
   const closeModal = () => {
     setErrorModalOpen(false);
@@ -147,15 +124,15 @@ const UserRegister: React.FC<CreateUserModal> = ({ onCloseModal, onCreateSuccess
         </form>
        {isUserRegisteredModalOpen && (
         <Modal open={isUserRegisteredModalOpen} onClose={closeModal}>
-          <div className='font-bold border p-4 rounded-xl text-[#006eb0]'>
-            Usuario registrado.
+          <div className='font-bold border text-center p-4 rounded-xl text-[#006eb0]'>
+            Usuario registrado correctamente.
           </div>
         </Modal>
         )}
         {errorModalOpen && (
           <Modal open={errorModalOpen} onClose={closeModal}>
-          <div className='font-bold border p-4 rounded-xl text-[#ff0000]'>
-            {specificError || error}
+          <div className='font-bold border text-center p-4 rounded-xl text-[#ff0000]'>
+            {error}
           </div>
         </Modal>
         )}

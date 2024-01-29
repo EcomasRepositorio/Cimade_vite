@@ -48,6 +48,13 @@ export interface UserData {
   phone?: string;
   role: Role;
 }
+export interface UserUpdateData {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  role?: Role;
+}
 
 enum Role {
   ADMIN,

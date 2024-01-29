@@ -9,11 +9,14 @@ import { useRouteData } from '@/hooks/hooks';
 import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 import { UserData } from '@/interface/interface';
 import UserRegister from '@/components/user/userRegister';
+import UserUpdate from '@/components/user/userUpdate';
 
 const User = () => {
   const [userData, setUserData] = useState<UserData[]>();
   const [deleteSearch, setDeleteSearch] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpenUpdate, setModalOpenUpdate] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
   const token = useRouteData("parameter");
 
@@ -53,6 +56,22 @@ const User = () => {
       console.error('Error al obtener la lista de usuarios después de crear uno nuevo:', error);
     }
   }
+
+  //UpdateUser
+  const handleEditClick = (userId: number) => {
+    console.log('selectedUserId before update:', selectedUserId);
+    setSelectedUserId(userId);
+    console.log('selectedUserId after update:', selectedUserId);
+    setModalOpenUpdate(true);
+  }
+  const handleUpdateSuccess = () => {
+    setModalOpenUpdate(false);
+  }
+  const handleCloseUpdateForm = () => {
+    setModalOpenUpdate(false);
+  }
+
+  //CreateUser
   const handleCloseCreateForm = () => {
     setModalOpen(false);
   };
@@ -127,12 +146,22 @@ const User = () => {
                     </td>
                     <td>
                       <div className='px-6 py-4 flex justify-center gap-5'>
+                        <div>
                         <button
+                          onClick={() => handleEditClick(user.id)}
                           className='border-2 border-green-500 p-0.5 rounded-md text-green-500 transition ease-in-out delay-300 hover:scale-125'>
                           <div className="text-xl text-default-400 cursor-pointer active:opacity-50">
                             <FaRegEdit />
                           </div>
                         </button>
+                        {modalOpenUpdate && (
+                          <UserUpdate
+                            userId={selectedUserId}
+                            onUpdateSuccess={handleUpdateSuccess}
+                            onCloseModal={handleCloseUpdateForm}
+                          />
+                        )}
+                        </div>
                         <button
                           className='border-2 border-red-500 p-0.5 rounded-md text-red-500 transition ease-in-out delay-300 hover:scale-125'>
                           <div className="text-xl text-danger cursor-pointer active:opacity-50">
