@@ -41,8 +41,18 @@ const User = () => {
     onSubmit();
   }, []);
 
-  const handleRegisterSuccess = (createdUserId: number) => {
-  };
+  const handleRegisterSuccess = async (createdUserId: number) => {
+    try {
+      // Llamas a la API para obtener la lista actualizada de usuarios después de crear uno nuevo
+      const url = `${URL()}/users`;
+      const response = await axios.get(url, tokenConfig(validToken));
+
+      setUserData(response.data);
+      setDeleteSearch(true);
+    } catch (error) {
+      console.error('Error al obtener la lista de usuarios después de crear uno nuevo:', error);
+    }
+  }
   const handleCloseCreateForm = () => {
     setModalOpen(false);
   };
@@ -113,7 +123,7 @@ const User = () => {
                       {user.phone}
                     </td>
                     <td className="px-6 py-4">
-                          {user.role}
+                      {user.role}
                     </td>
                     <td>
                       <div className='px-6 py-4 flex justify-center gap-5'>

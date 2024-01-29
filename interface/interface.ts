@@ -45,7 +45,7 @@ export interface UserData {
   password: string;
   firstName: string;
   lastName: string;
-  phone?: number;
+  phone?: string;
   role: Role;
 }
 
