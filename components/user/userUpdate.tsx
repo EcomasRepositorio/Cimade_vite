@@ -65,19 +65,18 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
     try {
       setIsLoading(true);
       console.log(data);
-      if (!data || !data.role) {
+      if (!data || !data.role === undefined || userId === null || userId === undefined) {
         console.error('El objeto data no contiene la propiedad "role" o es undefined.');
         return;
       }
       const url = `${URL()}/user/${userId}`;
       await axios.put(url, data, tokenConfig(validToken));
-      console.log();
+      setUpdateModalOpen(true);
       onUpdateSuccess();
       setDataLoaded(true);
-      setUpdateModalOpen(true);
     } catch (error) {
       console.error('Error al actualizar el usuario:', error);
-      setError('Error al actualizar el usuario. Por favor, intenta nuevamente.');
+      //setError('Error al actualizar el usuario. Por favor, intenta nuevamente.');
       handleError(error as AxiosError);
     } finally {
       setIsLoading(false);
@@ -118,7 +117,8 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
         </div>
         <div className="text-xs col-span-full md:col-span-2 lg:col-span-3">
           <label className=''>Rol:</label>
-          <select {...register('role')} className='border p-2 rounded-lg ml-2'>
+          <select {...register('role', { required: true })} className='border p-2 rounded-lg ml-2'>
+          <option value="" disabled>Select Role</option>
             <option value="USER">USER</option>
             <option value="ADMIN">ADMIN</option>
           </select>
