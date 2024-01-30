@@ -22,37 +22,10 @@ const Student = () => {
   const [queryValue, setQueryValue] = useState<string>('');
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [studentData, setStudentData] = useState<StudentData[]>();
-  const [deleteSearch, setDeleteSearch] = useState(false);
+  const [dataLoading, setDataLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreateFormOpen, setIsCreateFormOpen] = useState(false);
   const [createStudentExcel, setCreateStudentExcel] = useState(false);
-
-  const handleCreateStudentExcel = () => {
-    console.log('Antes de setCreateStudentExcel(true):', createStudentExcel);
-    setCreateStudentExcel(true);
-    console.log('Después de setCreateStudentExcel(true):', createStudentExcel);
-  };
-  const handleCloseCreateExcel = () => {
-    setCreateStudentExcel(false);
-  };
-  const handleCreateExcelSuccess = () => {}
-
-  const handleCreateSuccess = (createStudentId: number) => {}
-  const handleCloseCreateForm = () => {
-    setIsCreateFormOpen(false);
-  };
-  const handleOpenCreateForm = () => {
-    setIsCreateFormOpen(true);
-  };
-
-  const handleOpenModal = (id: number) => {
-    setSelectedId(id);
-    setIsModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setSelectedId(null);
-    setIsModalOpen(false);
-  };
 
   const toggleIsActive = () => {
     setIsActive(!isActive);
@@ -60,21 +33,17 @@ const Student = () => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryValue(event.target.value);
   };
-
-  const handleUpdateSuccess = () => {}
-  const handleDeleteSuccess = () => {}
-
   const token = useRouteData("parameter");
+  const validToken = typeof token === "string" ? token: '';
 
   const onSubmit = async () => {
-    const validToken = typeof token === "string" ? token: '';
     try {
       const url = `${URL()}/students`;
       const response = await axios.get(url, tokenConfig(validToken)
       );
       console.log(response)
       setStudentData(response.data);
-      setDeleteSearch(true);
+      setDataLoading(true);
     } catch (error: any) {
       if (error && typeof error === 'object' && 'response' in error) {
         console.log(error.response.data);
@@ -91,8 +60,62 @@ const Student = () => {
   }, []);
   console.log('hola', createStudentExcel)
 
+  //CreateStudents
+  const handleCreateSuccess = async (createStudentId: number) => {
+    try {
+      const url = `${URL()}/students`;
+      const response = await axios.get(url, tokenConfig(validToken));
+      setStudentData(response.data);
+      setDataLoading(true);
+    } catch (error) {
+      console.error('Error al obtener la lista de usuarios después de crear uno nuevo:', error);
+    }
+  }
+  const handleOpenCreateForm = () => {
+    setIsCreateFormOpen(true);
+  };
+  const handleCloseCreateForm = () => {
+    setIsCreateFormOpen(false);
+  };
+
+  //ImportExcel
+  const handleCreateStudentExcel = () => {
+    console.log('Antes de setCreateStudentExcel(true):', createStudentExcel);
+    setCreateStudentExcel(true);
+    console.log('Después de setCreateStudentExcel(true):', createStudentExcel);
+  };
+  const handleCloseCreateExcel = () => {
+    setCreateStudentExcel(false);
+  };
+  const handleCreateExcelSuccess = () => {}
+
+  //UpdateStudent
+  const handleUpdateOpenModal = (id: number) => {
+    setSelectedId(id);
+    setIsModalOpen(true);
+  };
+  const handleUpdateCloseModal = () => {
+    setSelectedId(null);
+    setIsModalOpen(false);
+  };
+  const handleUpdateSuccess = async (updateUserId: number) => {
+    try {
+      const url = `${URL()}/students`;
+      const response = await axios.get(url, tokenConfig(validToken));
+      setStudentData(response.data);
+      setDataLoading(true);
+    } catch (error) {
+      console.error('Error al obtener la lista de usuarios después de actualizar uno existente:', error);
+    }
+  }
+
+  //DeleteStudent
+  const handleDeleteSuccess = () => {
+    onSubmit();
+  };
+
   return (
-  <section className="p-2">
+    <section className="p-2">
   <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
     <h1>ADMINISTRAR ESTUDIANTES</h1>
   </div>
@@ -150,7 +173,7 @@ const Student = () => {
 
 </div>
 {loading && <p>Cargando...</p>}
-{deleteSearch && studentData && (
+{dataLoading && studentData && (
 <div className="overflow-x-auto bg-white p-2 mt-4">
 
   <table className="min-w-full text-sm whitespace-nowrap shadow-2xl">
@@ -172,7 +195,7 @@ const Student = () => {
     </thead>
     <tbody>
       {studentData.map((student, index) => (
-      <tr className="text-center text-gray-500 border-b font-semibold hover:bg-gray-100">
+      <tr key={index} className="text-center text-gray-500 border-b font-semibold hover:bg-gray-100">
         <th scope="row" className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.id}</span>
         </th>
@@ -210,15 +233,17 @@ const Student = () => {
         <div className="flex items-center gap-6">
       <div>
         <button
-        onClick={() => handleOpenModal(student.id)}
+        onClick={() => handleUpdateOpenModal(student.id)}
         className='border-2 border-green-500 p-0.5 rounded-md text-green-500 transition ease-in-out delay-300 hover:scale-125'>
           <div className="text-xl text-default-400 cursor-pointer active:opacity-50">
             <FaRegEdit />
           </div>
         </button>
-          <Modal open={isModalOpen} onClose={handleCloseModal}>
-              <StudentForm id={selectedId} onCloseModal={handleCloseModal} onUpdateSuccess={handleUpdateSuccess}/>
-          </Modal>
+          {isModalOpen && (
+            <StudentForm id={selectedId}
+            onUpdateSuccess={() => handleUpdateSuccess(student.id)}
+            onCloseModal={handleUpdateCloseModal}/>
+          )}
       </div>
         <StudentDelete id={student.id} onDeleteSuccess={handleDeleteSuccess} />
     </div>
@@ -249,7 +274,7 @@ const Student = () => {
       </li>
       <li>
         <a className=" block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
-          href="#!">Next</a>
+          href="#">Next</a>
       </li>
     </ul>
   </nav>

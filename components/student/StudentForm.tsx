@@ -1,33 +1,25 @@
-// components/StudentForm.tsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 import { useRouteData } from '@/hooks/hooks';
 import Modal from '../share/Modal';
+import { StudentFormData } from '@/interface/interface';
+import ErrorModal from '../share/errorModal';
 
 interface StudentFormProps {
   id: number | null;
   onCloseModal: () => void;
   onUpdateSuccess: () => void;
-}
-
-type StudentFormData = {
-  documentNumber: string;
-  name: string;
-  code: string;
-  activityAcademy: string;
-  participation: string;
-  institute: string;
-  hour: string;
-  date: string;
-  imageCertificate?: string;
 };
 
 const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuccess }) => {
-  const { register, handleSubmit, setValue } = useForm<StudentFormData>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<StudentFormData>();
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const token = useRouteData("parameter") as string;
   const validToken: string = token || '';
@@ -52,44 +44,69 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
           setValue('hour', studentData.hour);
           setValue('date', studentData.date);
           setValue('imageCertificate', studentData.imageCertificate);
+          setDataLoaded(true);
       } catch (error) {
         console.error('Error al cargar datos del estudiante:', error);
         if (axios.isAxiosError(error) && error.response) {
           console.error('Respuesta del servidor:', error.response.data);
+          setErrorMessage('Error al cargar datos del estudiante:' +error.response.data);
+        } else {
+          setErrorMessage('Error al cargar datos del estudiante');
         }
+        setErrorModalOpen(true);
       }
     };
     fetchStudentData();
-  }, [id, setValue]);
+  }, [setValue, id, token, validToken]);
 
   const onSubmit: SubmitHandler<StudentFormData> = async (data) => {
     try {
+      setIsLoading(true);
+      const codeValidationResponse = await axios.get(`${URL()}/student/code/${data.code}`, tokenConfig(validToken));
+      const isCodeUnique = codeValidationResponse.data.isUnique;
+      if (!isCodeUnique) {
+        setErrorModalOpen(true);
+        return;
+      }
+
       if (id) {
       await axios.put(`${URL()}/student/${id}`, data, tokenConfig(validToken));
-      setIsModalOpen(true);
       setModalOpen(true);
       onUpdateSuccess();
       }
     } catch (error) {
       console.error('Error al actualizar estudiante:', error);
+      setErrorMessage('Error al actualizar estudiante. Por favor intentelo de nuevo')
+    } finally {
+      setIsLoading(false);
     }
   };
   const closeModal = () => {
     setModalOpen(false);
+    setErrorModalOpen(false);
+    onCloseModal();
   };
 
   return (
+    <Modal open={dataLoaded} onClose={onCloseModal}>
     <div className="max-w-screen-lg mx-auto border p-4 rounded-xl">
       <h1 className='text-md font-bold bg-[#006eb0] text-gray-100 border p-2 rounded-lg mb-4 uppercase'>Actualizar estudiante</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 uppercase md:grid-cols-2 gap-2">
       <div  className='flex justify-between col-span-2 whitespace-pre-wrap'>
         <div className="mb-4">
           <label className="text-xs font-bold">DNI: </label>
-          <input {...register('documentNumber')} className="border rounded-lg p-2 lg:w-36 w-24" />
+          <input
+    {...register('documentNumber', { required: true, maxLength: 8, minLength: 8 })}
+    className={`border rounded-lg p-2 lg:w-36 w-24 ${errors?.documentNumber ? 'border-red-500' : ''}`}
+  />
+  {errors?.documentNumber && (
+    <span className="text-xs text-red-500">El DNI debe tener exactamente 8 dígitos.</span>
+  )}
         </div>
         <div className="mb-4">
           <label className="text-xs font-bold">Código: </label>
-          <input {...register('code')} className="border rounded-lg p-2 lg:w-32 w-28" />
+          <input {...register('code', { required: true })}
+          className='border rounded-lg p-2 lg:w-32 w-28' />
         </div>
       </div>
         <div className="mb-4 text-xs col-span-full md:col-span-2 lg:col-span-3">
@@ -135,7 +152,9 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
         </div>
         </Modal>
       )}
+      <ErrorModal open={errorModalOpen} onClose={() => setErrorModalOpen(false)} errorMessage={errorMessage} />
     </div>
+    </Modal>
   );
 };
 

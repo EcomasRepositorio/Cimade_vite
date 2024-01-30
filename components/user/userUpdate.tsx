@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouteData } from '@/hooks/hooks';
 import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 import { UserUpdateData } from '@/interface/interface';
-import PasswordInput from '../utils/format/passwordHash';
 
 interface UpdateUserModal {
   onCloseModal: () => void;
@@ -17,11 +16,12 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
 
   const { register, handleSubmit, setValue } = useForm<UserUpdateData>();
   const [dataLoaded, setDataLoaded] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
+
   const token = useRouteData("parameter");
   const validToken = typeof token === "string" ? token : '';
 
@@ -38,20 +38,18 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
   };
 
   useEffect(() => {
-    // Aquí debes hacer una petición GET para obtener los datos del usuario y prellenar el formulario
+
     const fetchData = async () => {
       try {
         const url = `${URL()}/user/${userId}`;
         const response = await axios.get(url, tokenConfig(validToken));
-        const userData = response.data; // Ajusta según la estructura de tu respuesta
-        // Prensa los campos del formulario con los datos existentes
+        const userData = response.data;
         setValue('email', userData.email);
         setValue('firstName', userData.firstName);
         setValue('lastName', userData.lastName);
         setValue('phone', userData.phone);
         setValue('role', userData.role);
         setDataLoaded(true);
-        // ... Ajusta según la estructura de tu respuesta
       } catch (error) {
         console.error('Error al obtener los datos del usuario:', error);
         if (axios.isAxiosError(error) && error.response) {
@@ -74,10 +72,8 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
       await axios.put(url, data, tokenConfig(validToken));
       setUpdateModalOpen(true);
       onUpdateSuccess();
-      //setDataLoaded(true);
     } catch (error) {
       console.error('Error al actualizar el usuario:', error);
-      //setError('Error al actualizar el usuario. Por favor, intenta nuevamente.');
       handleError(error as AxiosError);
     } finally {
       setIsLoading(false);
@@ -86,7 +82,6 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
 
   const closeModal = () => {
     setErrorModalOpen(false);
-    //setIsModalOpen(false);
     setUpdateModalOpen(false);
     onCloseModal();
   };
@@ -98,10 +93,11 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
           Actualizar usuario
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 uppercase text-gray-500 font-bold md:grid-cols-2 gap-2">
-          {/* Campos del formulario */}
           <div className="mb-4 text-xs col-span-full md:col-span-2 lg:col-span-3">
             <label>Email:</label>
-            <input {...register('email', { required: true })} className="border rounded-lg p-2 w-full"/>
+            <input {...register('email', { required: true })}
+            disabled
+            className="border rounded-lg p-2 w-full"/>
           </div>
           <div className="mb-4 text-xs col-span-full md:col-span-2 lg:col-span-3">
             <label>Nombres:</label>

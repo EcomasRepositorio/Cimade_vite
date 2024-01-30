@@ -60,3 +60,15 @@ enum Role {
   ADMIN,
   USER
 }
+
+export interface StudentFormData {
+  documentNumber: string;
+  name: string;
+  code: string;
+  activityAcademy: string;
+  participation: string;
+  institute: string;
+  hour: string;
+  date: string;
+  imageCertificate?: string;
+};

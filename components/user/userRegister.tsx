@@ -83,7 +83,7 @@ const UserRegister: React.FC<CreateUserModal> = ({ onCloseModal, onCreateSuccess
       <Modal open={dataLoaded} onClose={onCloseModal}>
         <div className="max-w-screen-lg mx-auto border p-4 rounded-xl">
          <h1 className='text-md text-center font-bold bg-[#006eb0] text-gray-200 border p-2 rounded-lg mb-4 uppercase'>
-        Agregar estudiante
+        Registrar usuario.
       </h1>
         <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 uppercase text-gray-500 font-bold md:grid-cols-2 gap-2">
         <div className="mb-4 text-xs col-span-full md:col-span-2 lg:col-span-3">

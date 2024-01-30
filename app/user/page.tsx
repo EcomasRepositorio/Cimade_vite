@@ -10,17 +10,20 @@ import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
 import { UserData } from '@/interface/interface';
 import UserRegister from '@/components/user/userRegister';
 import UserUpdate from '@/components/user/userUpdate';
+import UserDelete from '@/components/user/userDelete';
 
 const User = () => {
   const [userData, setUserData] = useState<UserData[]>();
-  const [deleteSearch, setDeleteSearch] = useState(false);
+  const [dataLoading, setDataLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalOpenUpdate, setModalOpenUpdate] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+  const [modalOpenDelete, setModalOpenDelete] = useState(false);
 
   const token = useRouteData("parameter");
 
   const validToken = typeof token === "string" ? token : '';
+
   const onSubmit = async () => {
     try {
       const url = `${URL()}/users`;
@@ -28,7 +31,7 @@ const User = () => {
       console.log(response);
 
       setUserData(response.data);
-      setDeleteSearch(true);
+      setDataLoading(true);
     } catch (error: any) {
       if (error && typeof error === 'object' && 'response' in error) {
         console.log(error.response.data);
@@ -44,19 +47,6 @@ const User = () => {
     onSubmit();
   }, []);
 
-  const handleRegisterSuccess = async (createdUserId: number) => {
-    try {
-      // Llamas a la API para obtener la lista actualizada de usuarios después de crear uno nuevo
-      const url = `${URL()}/users`;
-      const response = await axios.get(url, tokenConfig(validToken));
-
-      setUserData(response.data);
-      setDeleteSearch(true);
-    } catch (error) {
-      console.error('Error al obtener la lista de usuarios después de crear uno nuevo:', error);
-    }
-  }
-
   //UpdateUser
   const handleEditClick = (userId: number) => {
     console.log('selectedUserId before update:', selectedUserId);
@@ -69,7 +59,7 @@ const User = () => {
       const url = `${URL()}/users`;
       const response = await axios.get(url, tokenConfig(validToken));
       setUserData(response.data);
-      setDeleteSearch(true);
+      setDataLoading(true);
     } catch (error) {
       console.error('Error al obtener la lista de usuarios después de actualizar uno existente:', error);
     }
@@ -80,13 +70,28 @@ const User = () => {
   }
 
   //CreateUser
+  const handleRegisterSuccess = async (createdUserId: number) => {
+    try {
+      const url = `${URL()}/users`;
+      const response = await axios.get(url, tokenConfig(validToken));
+      setUserData(response.data);
+      setDataLoading(true);
+    } catch (error) {
+      console.error('Error al obtener la lista de usuarios después de crear uno nuevo:', error);
+    }
+  }
   const handleCloseCreateForm = () => {
     setModalOpen(false);
   };
   const handleOpenCreateForm = () => {
     setModalOpen(true);
   };
-  
+
+  //DeleteUser
+  const handleDeleteSuccess = () => {
+    onSubmit();
+  };
+
   return (
       <div>
         <h1 className="uppercase text-center text-2xl font-bold text-gray-700 p-5">Registro de usuarios</h1>
@@ -103,7 +108,7 @@ const User = () => {
         {modalOpen && (
         <UserRegister onCreateSuccess={handleRegisterSuccess} onCloseModal={handleCloseCreateForm} />
         )}
-        {deleteSearch && userData && (
+        {dataLoading && userData && (
           <div className="overflow-x-auto bg-white p-2 mt- shadow-2xl">
             <table className="w-full text-sm text-center rtl:text-right text-gray-400">
               <thead className="text-xs text-gray-500 uppercase bg-gray-300">
@@ -170,12 +175,14 @@ const User = () => {
                           />
                         )}
                         </div>
-                        <button
-                          className='border-2 border-red-500 p-0.5 rounded-md text-red-500 transition ease-in-out delay-300 hover:scale-125'>
-                          <div className="text-xl text-danger cursor-pointer active:opacity-50">
-                            <RiDeleteBin5Line />
-                          </div>
-                        </button>
+                        {/* {userData.map((user) => ( */}
+                        {/* <div key={user.id}> */}
+                          <UserDelete userId={user.id}
+                          onDeleteSuccess={handleDeleteSuccess}
+                          //onCloseModal={handleCloseDeleteForm}
+                          />
+                        {/* </div> */}
+                        {/* ))} */}
                       </div>
                     </td>
                   </tr>
