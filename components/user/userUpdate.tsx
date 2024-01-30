@@ -50,6 +50,7 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
         setValue('lastName', userData.lastName);
         setValue('phone', userData.phone);
         setValue('role', userData.role);
+        setDataLoaded(true);
         // ... Ajusta según la estructura de tu respuesta
       } catch (error) {
         console.error('Error al obtener los datos del usuario:', error);
@@ -73,7 +74,7 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
       await axios.put(url, data, tokenConfig(validToken));
       setUpdateModalOpen(true);
       onUpdateSuccess();
-      setDataLoaded(true);
+      //setDataLoaded(true);
     } catch (error) {
       console.error('Error al actualizar el usuario:', error);
       //setError('Error al actualizar el usuario. Por favor, intenta nuevamente.');
@@ -85,7 +86,7 @@ const UserUpdate: React.FC<UpdateUserModal> = ({ onCloseModal, onUpdateSuccess, 
 
   const closeModal = () => {
     setErrorModalOpen(false);
-    setIsModalOpen(false);
+    //setIsModalOpen(false);
     setUpdateModalOpen(false);
     onCloseModal();
   };

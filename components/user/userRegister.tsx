@@ -40,7 +40,7 @@ const UserRegister: React.FC<CreateUserModal> = ({ onCloseModal, onCreateSuccess
       required: true,
       pattern: {
         value: /^[a-zA-Z0-9._-]+@cimade\.com$/,
-        message: 'Ingresa un correo electrónico válido de Gmail.',
+        message: 'Ingresa un correo electrónico válido.',
       },
     });
     register('password', {

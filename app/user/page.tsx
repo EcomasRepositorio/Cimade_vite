@@ -64,8 +64,16 @@ const User = () => {
     console.log('selectedUserId after update:', selectedUserId);
     setModalOpenUpdate(true);
   }
-  const handleUpdateSuccess = () => {
-    setModalOpenUpdate(false);
+  const handleUpdateSuccess = async (updateUserId: number) => {
+    try {
+      const url = `${URL()}/users`;
+      const response = await axios.get(url, tokenConfig(validToken));
+      setUserData(response.data);
+      setDeleteSearch(true);
+    } catch (error) {
+      console.error('Error al obtener la lista de usuarios después de actualizar uno existente:', error);
+    }
+    //setModalOpenUpdate(false);
   }
   const handleCloseUpdateForm = () => {
     setModalOpenUpdate(false);
@@ -157,7 +165,7 @@ const User = () => {
                         {modalOpenUpdate && (
                           <UserUpdate
                             userId={selectedUserId}
-                            onUpdateSuccess={handleUpdateSuccess}
+                            onUpdateSuccess={() => handleUpdateSuccess(user.id)}
                             onCloseModal={handleCloseUpdateForm}
                           />
                         )}
