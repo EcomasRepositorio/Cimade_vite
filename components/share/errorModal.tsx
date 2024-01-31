@@ -10,7 +10,7 @@ interface ErrorModalProps {
 const ErrorModal: React.FC<ErrorModalProps> = ({ open, onClose, errorMessage }) => {
   return (
     <Modal open={open} onClose={onClose}>
-      <div className="font-bold border p-4 rounded-xl text-[#ff0000]">
+      <div className="font-bold border p-4 rounded-xl text-[#ff0000] whitespace-pre-wrap">
         {errorMessage}
       </div>
     </Modal>

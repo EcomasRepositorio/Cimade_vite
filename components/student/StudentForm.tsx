@@ -14,9 +14,9 @@ interface StudentFormProps {
 };
 
 const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuccess }) => {
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<StudentFormData>();
+  const { register, handleSubmit, setValue, formState: { errors }, setError } = useForm<StudentFormData>();
   const [errorModalOpen, setErrorModalOpen] = useState(false);
-  const [dataLoaded, setDataLoaded] = useState(true);
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -25,15 +25,12 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
   const validToken: string = token || '';
 
   useEffect(() => {
-    console.log(id);
-    console.log("URL:", `${URL()}/show/student/${id}`);
     const fetchStudentData = async () => {
       if (!id) {
         return;
       }
       try {
         const response = await axios.get(`${URL()}/show/student/${id}`, tokenConfig(validToken));
-        console.log(response);
         const studentData = response.data;
           setValue('documentNumber', studentData.documentNumber);
           setValue('name', studentData.name);
@@ -46,44 +43,58 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
           setValue('imageCertificate', studentData.imageCertificate);
           setDataLoaded(true);
       } catch (error) {
-        console.error('Error al cargar datos del estudiante:', error);
-        if (axios.isAxiosError(error) && error.response) {
-          console.error('Respuesta del servidor:', error.response.data);
-          setErrorMessage('Error al cargar datos del estudiante:' +error.response.data);
-        } else {
-          setErrorMessage('Error al cargar datos del estudiante');
-        }
-        setErrorModalOpen(true);
+        handleFetchError(error);
       }
     };
     fetchStudentData();
   }, [setValue, id, token, validToken]);
 
+  const handleFetchError = (error: any) => {
+    console.error('Error al cargar datos del estudiante:', error);
+    if (axios.isAxiosError(error) && error.response) {
+      console.error('Respuesta del servidor:', error.response.data);
+      setErrorMessage('Error al cargar datos del estudiante:' + error.response.data);
+    } else {
+      setErrorMessage('Error al cargar datos del estudiante');
+    }
+    setErrorModalOpen(true);
+  };
+
   const onSubmit: SubmitHandler<StudentFormData> = async (data) => {
     try {
       setIsLoading(true);
-      const codeValidationResponse = await axios.get(`${URL()}/student/code/${data.code}`, tokenConfig(validToken));
-      const isCodeUnique = codeValidationResponse.data.isUnique;
-      if (!isCodeUnique) {
-        setErrorModalOpen(true);
+      console.log('Submitting form...', data);
+      if (data.documentNumber.length !== 8) {
+        setError('documentNumber', {
+          type: 'manual',
+          message: 'El DNI debe tener exactamente 8 digitos',
+        });
         return;
       }
-
+      if (data.code. length !== 9) {
+        setError('code', {
+          type: 'manual',
+          message: 'El codigo debe tener exactamente 9 digitos',
+        });
+        return;
+      }
       if (id) {
       await axios.put(`${URL()}/student/${id}`, data, tokenConfig(validToken));
       setModalOpen(true);
       onUpdateSuccess();
-      }
+    };
     } catch (error) {
       console.error('Error al actualizar estudiante:', error);
-      setErrorMessage('Error al actualizar estudiante. Por favor intentelo de nuevo')
+      setErrorMessage('Error al actualizar estudiante. Por favor inténtelo de nuevo');
+      setErrorModalOpen(true);
     } finally {
       setIsLoading(false);
     }
   };
   const closeModal = () => {
-    setModalOpen(false);
+    setError('documentNumber', {});
     setErrorModalOpen(false);
+    setModalOpen(false);
     onCloseModal();
   };
 
@@ -96,17 +107,21 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
         <div className="mb-4">
           <label className="text-xs font-bold">DNI: </label>
           <input
-    {...register('documentNumber', { required: true, maxLength: 8, minLength: 8 })}
-    className={`border rounded-lg p-2 lg:w-36 w-24 ${errors?.documentNumber ? 'border-red-500' : ''}`}
+    {...register('documentNumber', { required: true })}
+    className={`border rounded-lg p-1.5 lg:w-36 w-24 ${errors?.documentNumber ? 'border-red-500' : ''}`}
   />
-  {errors?.documentNumber && (
-    <span className="text-xs text-red-500">El DNI debe tener exactamente 8 dígitos.</span>
-  )}
+       {errors?.documentNumber && (
+              <span className="text-xs font-mono block text-red-400">{errors.documentNumber.message}</span>
+            )}
         </div>
         <div className="mb-4">
           <label className="text-xs font-bold">Código: </label>
           <input {...register('code', { required: true })}
-          className='border rounded-lg p-2 lg:w-32 w-28' />
+          className={`border rounded-lg p-1.5 lg:w-32 w-28 ${errors?.code ? 'border-red-500' : ''}`}
+          />
+          {errors?.code && (
+            <span className="text-xs font-mono block text-red-400">{errors.code.message}</span>
+          )}
         </div>
       </div>
         <div className="mb-4 text-xs col-span-full md:col-span-2 lg:col-span-3">
@@ -152,7 +167,13 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
         </div>
         </Modal>
       )}
-      <ErrorModal open={errorModalOpen} onClose={() => setErrorModalOpen(false)} errorMessage={errorMessage} />
+      {errorModalOpen && (
+          <ErrorModal
+            open={errorModalOpen}
+            onClose={() => setErrorModalOpen(false)}
+            errorMessage={errorMessage}
+          />
+        )}
     </div>
     </Modal>
   );
