@@ -24,25 +24,48 @@ type StudentFormData = {
 };
 
 const CreateStudentForm: React.FC<CreateStudentFormProps> = ({ onCloseModal, onCreateSuccess }) => {
-  const { register, handleSubmit } = useForm<StudentFormData>();
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const { register, handleSubmit, setError, formState: { errors } } = useForm<StudentFormData>();
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const token = useRouteData("parameter") as string;
   const validToken: string = token || '';
+  const Num = (value: string) => /^\d+$/.test(value);
 
   const onSubmit: SubmitHandler<StudentFormData> = async (data) => {
     try {
+      setIsLoading(true);
+      if (!Num(data.documentNumber) || data.documentNumber.length !== 8) {
+        setError('documentNumber', {
+          type: 'manual',
+          message: 'El DNI debe contener solo números y exactamente 8 dígitos',
+        });
+        return;
+      }
+      if (!Num(data.code) || data.code.length !== 9) {
+        setError('code', {
+          type: 'manual',
+          message: 'El codigo debe contener solo números y exactamente 9 digitos',
+        });
+        return;
+      }
+      if (!Num(data.hour)) {
+        setError('hour', {
+          type: 'manual',
+          message: 'La hora debe contener solo números',
+        });
+        return;
+      }
       const response = await axios.post(`${URL()}/student`, data, tokenConfig(validToken));
       const createdStudentId = response.data.id;
       onCreateSuccess(createdStudentId);
-      setIsModalOpen(true);
+      setIsCreateModalOpen(true);
       setModalOpen(true);
     } catch (error) {
       console.error('Error al crear estudiante:', error);
     } finally {
-      onCloseModal();
-      setIsModalOpen(false);
+      setIsLoading(false)
     }
   };
 
@@ -52,7 +75,7 @@ const CreateStudentForm: React.FC<CreateStudentFormProps> = ({ onCloseModal, onC
   };
 
   return (
-    <Modal open={isModalOpen} onClose={onCloseModal}>
+    <Modal open={isCreateModalOpen} onClose={onCloseModal}>
     <div className="max-w-screen-lg mx-auto border p-4 rounded-xl">
       <h1 className='text-md text-center font-bold bg-[#006eb0] text-gray-200 border p-2 rounded-lg mb-4 uppercase'>
         Agregar estudiante
@@ -61,20 +84,28 @@ const CreateStudentForm: React.FC<CreateStudentFormProps> = ({ onCloseModal, onC
     <div  className='flex justify-between col-span-2 whitespace-pre-wrap'>
       <div className="mb-4">
           <label className="text-xs font-bold">DNI: </label>
-          <input {...register('documentNumber')} className="border rounded-lg p-1 lg:w-36 w-24" />
+          <input {...register('documentNumber', {required: true})}
+          className={`border rounded-lg p-1 lg:w-36 w-24 ${errors?.documentNumber ? 'border-red-500' : ''}`} />
+            {errors?.documentNumber && (
+              <span className="text-xs font-mono block text-red-400">{errors.documentNumber.message}</span>
+            )}
         </div>
         <div className="mb-4">
           <label className="text-xs font-bold">Código: </label>
-          <input {...register('code')} className="border rounded-lg p-1 lg:w-32 w-28" />
+          <input {...register('code', {required: true})}
+          className={`border rounded-lg p-1 lg:w-32 w-28 ${errors?.code ? 'border-red-500' : ''}`} />
+          {errors?.code && (
+            <span className="text-xs lg:ml-4 font-mono block text-red-400">{errors.code.message}</span>
+          )}
         </div>
     </div>
         <div className="mb-4 text-xs col-span-full md:col-span-2 lg:col-span-3">
           <label className="block font-bold">Nombres: </label>
-          <input {...register('name')} className="border rounded-lg p-2 w-full" />
+          <input {...register('name', {required: true})} className="border rounded-lg p-2 w-full" />
         </div>
         <div className="mb-4 col-span-full text-xs md:col-span-2 lg:col-span-3">
           <label className="block font-bold">Actividad Académica: </label>
-          <input {...register('activityAcademy')} className="border rounded-lg p-2 w-full" />
+          <input {...register('activityAcademy', {required: true})} className="border rounded-lg p-2 w-full" />
         </div>
         <div className="mb-4 col-span-full text-xs md:col-span-2 lg:col-span-3">
           <label className="block font-bold">Participación: </label>
@@ -82,16 +113,20 @@ const CreateStudentForm: React.FC<CreateStudentFormProps> = ({ onCloseModal, onC
         </div>
         <div className="mb-4 col-span-full text-xs md:col-span-2 lg:col-span-3">
           <label className="block font-bold">Instituto: </label>
-          <input {...register('institute')} className="border rounded-lg p-2 w-full" />
+          <input {...register('institute', {required: true})} className="border rounded-lg p-2 w-full" />
         </div>
     <div className='flex justify-between col-span-2 whitespace-pre-wrap'>
         <div className="mb-4">
           <label className="text-xs font-bold">Hora: </label>
-          <input {...register('hour')} className="border rounded-lg p-1 lg:w-32 w-28" />
+          <input {...register('hour', {required: true})}
+          className={`border rounded-lg p-1 lg:w-32 w-28 ${errors?.hour ? 'border-red-500' : ''}`} />
+          {errors?.hour && (
+            <span className="text-xs font-mono block text-red-400">{errors.hour.message}</span>
+          )}
         </div>
         <div className="mb-4 lg:ml-3">
           <label className="text-xs font-bold ">Fecha: </label>
-          <input {...register('date')} className="border rounded-lg p-1 lg:w-32 w-24" />
+          <input {...register('date', {required: true})} className="border rounded-lg p-1 lg:w-32 w-24" />
         </div>
     </div>
         <div className="mb-4 text-xs col-span-full md:col-span-2">
@@ -109,7 +144,7 @@ const CreateStudentForm: React.FC<CreateStudentFormProps> = ({ onCloseModal, onC
       {modalOpen && (
         <Modal open={modalOpen} onClose={closeModal}>
           <div className='font-bold border p-4 rounded-xl text-[#006eb0]'>
-            Creación exitosa.
+            Registro de estudiante correctamente.
           </div>
         </Modal>
       )}

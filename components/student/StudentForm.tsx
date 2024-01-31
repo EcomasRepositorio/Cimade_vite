@@ -23,6 +23,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
 
   const token = useRouteData("parameter") as string;
   const validToken: string = token || '';
+  const isNum = (value: string) => /^\d+$/.test(value);
 
   useEffect(() => {
     const fetchStudentData = async () => {
@@ -63,21 +64,27 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
   const onSubmit: SubmitHandler<StudentFormData> = async (data) => {
     try {
       setIsLoading(true);
-      console.log('Submitting form...', data);
-      if (data.documentNumber.length !== 8) {
+      if (!isNum(data.documentNumber) || data.documentNumber.length !== 8) {
         setError('documentNumber', {
           type: 'manual',
-          message: 'El DNI debe tener exactamente 8 digitos',
+          message: 'El DNI debe contener solo números y exactamente 8 digitos',
         });
         return;
-      }
-      if (data.code. length !== 9) {
+      };
+      if (!isNum(data.code) || data.code. length !== 9) {
         setError('code', {
           type: 'manual',
-          message: 'El codigo debe tener exactamente 9 digitos',
+          message: 'El codigo debe contener solo números y exactamente 9 digitos',
         });
         return;
-      }
+      };
+      if (!isNum(data.hour)) {
+        setError('hour', {
+          type: 'manual',
+          message: 'La hora debe contener solo números',
+        });
+        return;
+      };
       if (id) {
       await axios.put(`${URL()}/student/${id}`, data, tokenConfig(validToken));
       setModalOpen(true);
@@ -106,12 +113,11 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
       <div  className='flex justify-between col-span-2 whitespace-pre-wrap'>
         <div className="mb-4">
           <label className="text-xs font-bold">DNI: </label>
-          <input
-    {...register('documentNumber', { required: true })}
-    className={`border rounded-lg p-1.5 lg:w-36 w-24 ${errors?.documentNumber ? 'border-red-500' : ''}`}
-  />
-       {errors?.documentNumber && (
-              <span className="text-xs font-mono block text-red-400">{errors.documentNumber.message}</span>
+          <input {...register('documentNumber', { required: true })}
+            className={`border rounded-lg p-1.5 lg:w-36 w-24 ${errors?.documentNumber ? 'border-red-500' : ''}`}
+          />
+            {errors?.documentNumber && (
+              <span className="text-left text-xs font-mono block text-red-400">{errors.documentNumber.message}</span>
             )}
         </div>
         <div className="mb-4">
@@ -120,7 +126,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
           className={`border rounded-lg p-1.5 lg:w-32 w-28 ${errors?.code ? 'border-red-500' : ''}`}
           />
           {errors?.code && (
-            <span className="text-xs font-mono block text-red-400">{errors.code.message}</span>
+            <span className="text-left lg:ml-4 text-xs font-mono block text-red-400">{errors.code.message}</span>
           )}
         </div>
       </div>
@@ -143,7 +149,11 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
         <div  className='flex justify-between col-span-2 whitespace-pre-wrap'>
         <div className="mb-4">
           <label className="text-xs font-bold">Hora: </label>
-          <input {...register('hour')} className="border rounded-lg p-2 lg:w-32 w-24" />
+          <input {...register('hour')}
+          className={`border rounded-lg p-2 lg:w-32 w-24 ${errors?.hour?.message ? 'border-red-500' : ''}`} />
+          {errors?.hour && (
+            <span className="text-left text-xs font-mono block text-red-400">{errors.hour.message}</span>
+          )}
         </div>
         <div className="mb-4">
           <label className="text-xs font-bold ">Fecha: </label>
