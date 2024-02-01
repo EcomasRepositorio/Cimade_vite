@@ -42,8 +42,6 @@ const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
     //const validToken = typeof token === "string" ? token: '';
     try {
       const value = queryValue.trim();
-      const apiUrl = `${URL()}/student/dni/${value}/type/${searchType}`
-        console.log(apiUrl)
       const res = await axios
         .get(`${URL()}/student/dni/${value.trim()}/type/${searchType}`,
         );

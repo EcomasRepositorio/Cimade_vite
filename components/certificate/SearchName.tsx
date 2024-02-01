@@ -41,8 +41,6 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
     }
     try {
       const value = queryValue.trim();
-      const apiUrl = `${URL()}/student/name/${value}/type/${searchType}`
-      console.log(apiUrl)
       const res = await axios
       .get(`${URL()}/student/name/${value.trim()}/type/${searchType}`,
       );
@@ -98,7 +96,7 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
         </thead>
           <tbody>
             {studentData?.map((student, index) =>(
-              <tr className="bg-white border-b text-center hover:bg-gray-100">
+              <tr key={index} className="bg-white border-b text-center hover:bg-gray-100">
                 <th scope="row"
                 className="px-6 py-4 font-medium whitespace-nowrap w-12">
                 <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.id}</span>

@@ -1,3 +1,6 @@
+export interface SearchProps {
+  onSearch: (searchQuery: StudentData[]) => void;
+}
 
 export interface SearchNameProps {
   onSearchName: (data: string) => void;
@@ -9,6 +12,10 @@ export interface SearchCodeProps {
 
 export interface SearchDNIProps {
   onSearchDNI: (data: string) => void;
+}
+
+export interface SearchStudentDNIProps {
+  onSearchDNI: (query: string, queryValue: string) => void;
 }
 
 export interface Student {

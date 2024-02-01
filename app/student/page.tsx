@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import axios from 'axios';
 import { useRouteData } from '@/hooks/hooks';
 import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
@@ -15,6 +15,7 @@ import { FiLogOut } from "react-icons/fi";
 import StudentDelete from '@/components/student/StudentDelete';
 import CreateStudentForm from '@/components/student/StudentAdd';
 import CreateStudentExcel from '@/components/student/StudentsAll';
+import SearchStudent from '@/components/student/SearchStudent';
 
 const Student = () => {
   const [isActive, setIsActive] = useState(false);
@@ -26,12 +27,14 @@ const Student = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreateFormOpen, setIsCreateFormOpen] = useState(false);
   const [createStudentExcel, setCreateStudentExcel] = useState(false);
+  const [errorModalOpen, setErrorModalOpen] = useState(false)
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   const toggleIsActive = () => {
     setIsActive(!isActive);
   };
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQueryValue(event.target.value);
+    //setQueryValue(event.target.value);
   };
   const token = useRouteData("parameter");
   const validToken = typeof token === "string" ? token: '';
@@ -55,9 +58,9 @@ const Student = () => {
     }
   };
 
-  useEffect(() => {
+ /*  useEffect(() => {
     onSubmit();
-  }, []);
+  }, []); */
   console.log('hola', createStudentExcel)
 
   //CreateStudents
@@ -114,6 +117,42 @@ const Student = () => {
     onSubmit();
   };
 
+  //SearchStudents
+  const handleSearchStudent = async (query: string, queryValue: string) => {
+    try {
+      setLoading(true);
+      console.log('Valor de query:', query);
+      setQueryValue(queryValue);
+      if (queryValue === 'documentNumber') {
+      const url = `${URL()}/student/dni/${(queryValue)}/type/${query}`; // Reemplaza 'someType' con el tipo adecuado
+      console.log('Hola url: ',url)
+      const response = await axios.get(url);
+      setStudentData(response.data);
+      setIsSearchActive(true)
+      } else {
+        setIsSearchActive(false)
+        console.error("Error al realizar la búsqueda");
+      }
+    } catch (error) {
+      console.error("Error al realizar la búsqueda por DNI", error);
+      openErrorModal();
+    } finally {
+      setLoading(false);
+    }
+  };
+  const openErrorModal = () => {  // Agregado
+    setErrorModalOpen(true);
+  };
+  const closeErrorModal = () => {  // Agregado
+    setErrorModalOpen(false);
+  };
+
+  useEffect(() => {
+    onSubmit();
+  }, []);
+
+  const memoryData = useMemo(() => studentData, [studentData]);
+
   return (
     <section className="p-2">
   <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
@@ -121,19 +160,7 @@ const Student = () => {
   </div>
   <div className="flex flex-col sm:flex-row border-2 rounded-xl items-center lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
   <div className="relative m-[2px] mb-2 sm:mb-0">
-    <label htmlFor="inputSearch" className="sr-only">Search</label>
-    <input id="inputSearch"
-    type="text"
-    placeholder="Buscar por DNI o nombre..."
-    className="block lg:w-96 w-80 rounded-lg border-4 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400"
-    onClick={toggleIsActive}
-    onChange={onChange}
-    value={queryValue}/>
-    <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="h-4 w-4 text-neutral-500">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-      </svg>
-    </span>
+    <SearchStudent onSearchDNI={(query: string, queryValue: string) => handleSearchStudent(query, queryValue)} />
   </div>
 
   <div className="mt-2 sm:mb-0">
@@ -173,7 +200,7 @@ const Student = () => {
 
 </div>
 {loading && <p>Cargando...</p>}
-{dataLoading && studentData && (
+{dataLoading && memoryData && (
 <div className="overflow-x-auto bg-white p-2 mt-4">
 
   <table className="min-w-full text-sm whitespace-nowrap shadow-2xl">
@@ -194,7 +221,7 @@ const Student = () => {
       </tr>
     </thead>
     <tbody>
-      {studentData.map((student, index) => (
+      {memoryData.map((student, index) => (
       <tr key={index} className="text-center text-gray-500 border-b font-semibold hover:bg-gray-100">
         <th scope="row" className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.id}</span>
