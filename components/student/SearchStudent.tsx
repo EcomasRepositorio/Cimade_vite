@@ -36,29 +36,12 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
     };
     const token = useRouteData("parameter");
   const validToken = typeof token === "string" ? token: '';
-  const openErrorModal = () => {
-    setModalOpen(true);
-  };
-  const closeErrorModal = () => {
-    setModalOpen(false);
-  };
-
-  const openTableModal = () => {
-    setModalTable(false);
-    searchDNI();
-  };
-  const closeTableModal = () => {
-    setModalTable(false);
-    setQueryValue(''); // Limpiar el valor de búsqueda al cerrar el modal
-  };
- 
+  
   const searchDNI = async () => {
-
     if (queryValue.trim()) {
       setLoading(true);
-      setDataLoading(true);
+      //setDataLoading(true);
     }
-
     try {
       const value = queryValue.trim();
       //const currentSearchType = searchType || 'documentNumber';
@@ -73,10 +56,24 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
         openErrorModal();
       } finally {
         setLoading(false);
+        closeTableModal();
     }
   };
 
-  
+  const openErrorModal = () => {
+    setModalOpen(true);
+  };
+  const closeErrorModal = () => {
+    setModalOpen(false);
+  };
+
+  const openTableModal = () => {
+    searchDNI();
+  };
+  const closeTableModal = () => {
+    setQueryValue('');
+  };
+
   //UpdateStudent
   const handleUpdateOpenModal = (id: number) => {
     setSelectedId(id);
@@ -91,7 +88,7 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
       const url = `${URL()}/students`;
       const response = await axios.get(url, tokenConfig(validToken));
       setStudentData(response.data);
-      setDataLoading(true);
+      //setDataLoading(true);
     } catch (error) {
       console.error('Error al obtener la lista de usuarios después de actualizar uno existente:', error);
     }
@@ -101,6 +98,7 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
    const handleDeleteSuccess = () => {
     //searchDNI();
   };
+
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryValue(event.target.value);
   };
@@ -123,7 +121,7 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
         <input
           type="search"
           id="default-search"
-          className="block w-80 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-black"
+          className="block w-80 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
           placeholder={`Buscar por DNI ${searchType === 'documentNumber' ? 'DNI' : ''}`}
           required
           //onClick={openTableModal}

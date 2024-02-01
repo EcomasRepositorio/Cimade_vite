@@ -60,11 +60,10 @@ const Student = () => {
       }
     }
   };
-
  /*  useEffect(() => {
     onSubmit();
   }, []); */
-  console.log('hola', createStudentExcel)
+  //console.log('hola', createStudentExcel)
 
   //CreateStudents
   const handleCreateSuccess = async (createStudentId: number) => {
@@ -113,7 +112,7 @@ const Student = () => {
     } catch (error) {
       console.error('Error al obtener la lista de usuarios después de actualizar uno existente:', error);
     }
-  }
+  };
 
   //DeleteStudent
   const handleDeleteSuccess = () => {
@@ -146,17 +145,16 @@ const Student = () => {
   const openErrorModal = () => {  // Agregado
     setErrorModalOpen(true);
   };
-  const closeErrorModal = () => {  // Agregado
+  /* const closeErrorModal = () => {  // Agregado
     setErrorModalOpen(false);
-  };
-
+  }; */
   //Pagination
   const itemsPerPage = 5
   const handlePageChange = (newPage: number) => {
-    setLimit(20);
-    setOffset(10);
+    setLimit(itemsPerPage);
+    setOffset((newPage - 1 ) * itemsPerPage);
     setCurrentPage(newPage);
-  }
+  };
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -166,7 +164,46 @@ const Student = () => {
 
   const memoryData = useMemo(() => studentData, [studentData]);
   const visibleData = useMemo(() => (memoryData ? memoryData.slice(startIndex, endIndex) : []), [memoryData, startIndex, endIndex]);
+  const pageCount = Math.ceil((memoryData?.length || 0) / 5) || 1;
 
+  const renderPageButtons = () => {
+    const maxBotones = 5;
+
+    // Calcular el rango de botones de paginación
+    const inicio = Math.max(1, currentPage - Math.floor(maxBotones / 2));
+    const fin = Math.min(pageCount, inicio + maxBotones - 1);
+
+    // Generar botones de paginación
+    const botonesPagina = Array.from({ length: fin - inicio + 1 }, (_, index) => index + inicio);
+
+    return (
+      <>
+        <li>
+          <button
+            className={`block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white`}
+            onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>
+            {"<"}
+          </button>
+        </li>
+        {botonesPagina.map((index) => (
+          <li key={index}>
+            <button
+              className={`block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white ${currentPage === index ? 'font-semibold' : ''}`}
+              onClick={() => handlePageChange(index)}>
+              {index}
+            </button>
+          </li>
+        ))}
+        <li>
+          <button
+            className={`block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white`}
+            onClick={() => handlePageChange(Math.min(pageCount, currentPage + 1))}>
+            {">"}
+          </button>
+        </li>
+      </>
+    );
+  };
   return (
     <section className="p-2">
   <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
@@ -214,9 +251,7 @@ const Student = () => {
 {loading && <p>Cargando...</p>}
 {dataLoading && memoryData && (
 <div className="overflow-x-auto bg-white p-2 mt-4">
-
   <table className="min-w-full text-sm whitespace-nowrap shadow-2xl">
-
     <thead className="uppercase text-center tracking-wider bg-neutral-300">
       <tr className="text-gray-700 ">
         <th scope="col" className="px-6 py-4">#</th>
@@ -294,36 +329,31 @@ const Student = () => {
 
   <nav className="mt-5 flex items-center justify-between text-sm" aria-label="Page navigation example">
     <p>
-      Showing <strong>{startIndex +1}-{endIndex}1-5</strong> of <strong>{memoryData.length}10</strong>
+      Showing <strong>{startIndex + 1}-{endIndex}</strong> of <strong>{memoryData.length}</strong>
     </p>
     <ul className="list-style-none flex">
       <li>
         <button
-        className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
-          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>Previous
+          className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
+          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>
+            Previous
         </button>
       </li>
-      {Array.from({ length: Math.ceil(memoryData.length / itemsPerPage) }, (_, index) => (
-      <li key={index}>
+      {renderPageButtons()}
+      {/* {Array.from({ length: Math.ceil(memoryData.length / itemsPerPage) }, (_, index) => (
+      <li>
         <button
         className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
           onClick={() => handlePageChange(index + 1)}>
             {index + 1}
         </button>
       </li>
-      ))}
-      <li aria-current="page">
-        <button
-        className="block rounded bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300"
-          onClick={() => handlePageChange(Math.min(Math.ceil(memoryData.length / itemsPerPage), currentPage + 1))}>
-          {/* <span className="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]">
-            (current)
-          </span> */}
-        </button>
-      </li>
+       ))} */}
       <li>
-        <a className=" block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
-          href="#">Next</a>
+        <button className=" block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
+          onClick={() => handlePageChange(Math.min(pageCount, currentPage + 1))}>
+            Next
+        </button>
       </li>
     </ul>
   </nav>

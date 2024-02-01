@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FullScreenModal: React.FC<{
+const ModalTable: React.FC<{
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
@@ -29,4 +29,4 @@ const FullScreenModal: React.FC<{
   );
 };
 
-export default FullScreenModal;
+export default ModalTable;
