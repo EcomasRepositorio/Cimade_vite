@@ -29,6 +29,9 @@ const Student = () => {
   const [createStudentExcel, setCreateStudentExcel] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false)
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [offset, setOffset] = useState(0);
 
   const toggleIsActive = () => {
     setIsActive(!isActive);
@@ -41,7 +44,7 @@ const Student = () => {
 
   const onSubmit = async () => {
     try {
-      const url = `${URL()}/students`;
+      const url = `${URL()}/students?limit=${limit}&offset=${offset}`;
       const response = await axios.get(url, tokenConfig(validToken)
       );
       console.log(response)
@@ -147,23 +150,34 @@ const Student = () => {
     setErrorModalOpen(false);
   };
 
+  //Pagination
+  const itemsPerPage = 5
+  const handlePageChange = (newPage: number) => {
+    setLimit(20);
+    setOffset(10);
+    setCurrentPage(newPage);
+  }
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
   useEffect(() => {
     onSubmit();
-  }, []);
+  }, [currentPage]);
 
   const memoryData = useMemo(() => studentData, [studentData]);
+  const visibleData = useMemo(() => (memoryData ? memoryData.slice(startIndex, endIndex) : []), [memoryData, startIndex, endIndex]);
 
   return (
     <section className="p-2">
   <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
     <h1>ADMINISTRAR ESTUDIANTES</h1>
   </div>
-  <div className="flex flex-col sm:flex-row border-2 rounded-xl items-center lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
-  <div className="relative m-[2px] mb-2 sm:mb-0">
+  <div className="flex flex-col sm:flex-row border-2 rounded-xl lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
+  <div className="flex justify-center">
     <SearchStudent onSearchDNI={(query: string, queryValue: string) => handleSearchStudent(query, queryValue)} />
   </div>
 
-  <div className="mt-2 sm:mb-0">
+  <div className="flex justify-center mt-2 lg:mt-2 mb-1">
   <button
   type="button"
   className="text-[#006eb0] uppercase hover:text-white border-2 border-[#006eb0] hover:bg-[#006eb0] focus:ring-4 focus:outline-none font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-[#BFE9FB] inline-flex items-center"
@@ -174,6 +188,7 @@ const Student = () => {
   {isCreateFormOpen && (
     <CreateStudentForm onCreateSuccess={handleCreateSuccess} onCloseModal={handleCloseCreateForm}/>
   )}
+
   <button
     type="button"
     className="text-green-600 uppercase hover:text-white border-2 border-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1  dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center"
@@ -186,16 +201,13 @@ const Student = () => {
       onCloseModal={handleCloseCreateExcel}
       />
   )}
-  <CustomRegister text="Registrar">
   <button type="button" className="text-yellow-500 hover:text-white border-2 border-yellow-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-xs px-2 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-yellow-200">
     <FiUserPlus  className='text-lg' />
   </button>
-  </CustomRegister>
-  <CustomLogout text="Salir">
+
   <button type="button" className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-xs px-2 py-2 text-center mb-1 dark:hover:text-white dark:focus:ring-red-200">
     <FiLogOut className='text-lg' />
   </button>
-  </CustomLogout>
   </div>
 
 </div>
@@ -221,7 +233,7 @@ const Student = () => {
       </tr>
     </thead>
     <tbody>
-      {memoryData.map((student, index) => (
+      {visibleData.map((student, index) => (
       <tr key={index} className="text-center text-gray-500 border-b font-semibold hover:bg-gray-100">
         <th scope="row" className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.id}</span>
@@ -281,23 +293,33 @@ const Student = () => {
   </table>
 
   <nav className="mt-5 flex items-center justify-between text-sm" aria-label="Page navigation example">
-    <p>Showing <strong>1-5</strong> of <strong>10</strong></p>
+    <p>
+      Showing <strong>{startIndex +1}-{endIndex}1-5</strong> of <strong>{memoryData.length}10</strong>
+    </p>
     <ul className="list-style-none flex">
       <li>
-        <a className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
-          href="#!">Previous</a>
+        <button
+        className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
+          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>Previous
+        </button>
       </li>
-      <li>
-        <a className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
-          href="#!">1</a>
+      {Array.from({ length: Math.ceil(memoryData.length / itemsPerPage) }, (_, index) => (
+      <li key={index}>
+        <button
+        className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
+          onClick={() => handlePageChange(index + 1)}>
+            {index + 1}
+        </button>
       </li>
+      ))}
       <li aria-current="page">
-        <a className="block rounded bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300"
-          href="#!">2
-          <span className="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]">
+        <button
+        className="block rounded bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300"
+          onClick={() => handlePageChange(Math.min(Math.ceil(memoryData.length / itemsPerPage), currentPage + 1))}>
+          {/* <span className="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]">
             (current)
-          </span>
-        </a>
+          </span> */}
+        </button>
       </li>
       <li>
         <a className=" block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"

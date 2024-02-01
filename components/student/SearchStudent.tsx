@@ -7,6 +7,7 @@ import Modal from '../share/Modal';
 import { FaRegEdit } from 'react-icons/fa';
 import StudentForm from './StudentForm';
 import StudentDelete from './StudentDelete';
+import ModalTable from '../share/modalTable';
 
 
 const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
@@ -110,10 +111,10 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
 
   const memoryData = useMemo(() => studentData, [studentData]);
   return (
-    <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
-      <form onSubmit={handleFormSubmit} className="w-full md:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+    <div className="max-w-screen-xl mx-auto text-center p-1">
+      <form onSubmit={handleFormSubmit} className="w-full lg:w-full">
     <label htmlFor="default-search" className="mb-2 text-sm font-medium "></label>
-    <div className="relative lg:mx-auto mr-4 ml-4">
+    <div className="relative lg:mx-auto w-full">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -122,7 +123,7 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
         <input
           type="search"
           id="default-search"
-          className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-black"
+          className="block w-80 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-black"
           placeholder={`Buscar por DNI ${searchType === 'documentNumber' ? 'DNI' : ''}`}
           required
           //onClick={openTableModal}
@@ -135,7 +136,7 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
 
   {loading && <p>Cargando...</p>}
   {memoryData && (
-    <Modal open={memoryData.length > 0} onClose={closeTableModal}>
+    <ModalTable open={memoryData.length > 0} onClose={closeTableModal}>
    <div className="overflow-x-auto bg-white p-2 mt-4">
     <table className="min-w-full text-sm whitespace-nowrap shadow-2xl">
 
@@ -214,7 +215,7 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
     </tbody>
   </table>
 </div>
-</Modal>
+</ModalTable>
 )}
   <Modal open={modalOpen} onClose={closeErrorModal}>
       <div className="border-2 p-2 rounded-lg">
