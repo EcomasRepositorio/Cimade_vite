@@ -2,8 +2,12 @@ import React from 'react'
 
 const Presentation = () => {
   return (
+<<<<<<< HEAD
     
     <div className=''>
+=======
+    <div class='backgroundPrese'>
+>>>>>>> 777689514b493e14a3365ec4a428b7c104596f28
       <div className="my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 container mx-auto">
       <div className="border-0">
         <div>
@@ -24,7 +28,11 @@ const Presentation = () => {
         <img
           src="/image/robot.png"
           alt="billing"
+<<<<<<< HEAD
           className="w-full h-full relative z-5 animate-fade-in-delayed"
+=======
+          className="w-full h-full relative z-5 animate-fade-in-delayed "
+>>>>>>> 777689514b493e14a3365ec4a428b7c104596f28
         />
         <div className='absolute z-0 w-40 h-35 top-0 pink__gradient'/>
         <div className='absolute z-1 w-80 h-85 bottom-40 rounded-full white__gradient'/>
