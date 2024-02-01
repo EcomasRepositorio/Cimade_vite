@@ -2,7 +2,9 @@ import React from 'react'
 
 const Presentation = () => {
   return (
-    <div className="my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 container mx-auto">
+    
+    <div className=''>
+      <div className="my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 container mx-auto">
       <div className="border-0">
         <div>
           <h1 className='flex-1 font-semibold font-montserrat text-4xl sm:text-6xl lg:text-9xl text-[#002e79] sm:leading-76 md:leading-100 leading-75 text-center sm:text-left'>
@@ -22,12 +24,13 @@ const Presentation = () => {
         <img
           src="/image/robot.png"
           alt="billing"
-          className="w-full h-full relative z-5 animate-fade-in-delayed animate-bounce"
+          className="w-full h-full relative z-5 animate-fade-in-delayed"
         />
         <div className='absolute z-0 w-40 h-35 top-0 pink__gradient'/>
         <div className='absolute z-1 w-80 h-85 bottom-40 rounded-full white__gradient'/>
         <div className='absolute z-0 w-50 h-50 right-20 blue__gradient' />
       </div>
+    </div>
     </div>
   )
 }
