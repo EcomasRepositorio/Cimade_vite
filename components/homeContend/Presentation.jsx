@@ -2,7 +2,7 @@ import React from 'react'
 
 const Presentation = () => {
   return (
-    <div class='backgroundPrese'>
+    <div className='bg-white'>
       <div className="my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 container mx-auto">
       <div className="border-0">
         <div>

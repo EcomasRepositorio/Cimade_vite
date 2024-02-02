@@ -54,14 +54,14 @@ const Banners = () => {
       <header>
    
     
-</header>
+      </header>
     <div class="carousel">
         <div class="list">
 
 
 
         <div class="item">
-                <img src="image/traversoTree.png"/>
+                <img src="image/bannerTree.png"/>
                 <div class="introduce">
                     <div class="title">ES</div>
                     <div class="topic">ES</div>
@@ -70,39 +70,6 @@ const Banners = () => {
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, laborum cumque dignissimos quidem atque et eligendi aperiam voluptates beatae maxime.
                     </div>
                     <button class="seeMore">SEE MORE &#8599</button>
-                </div>
-                <div class="detail">
-                    <div class="title">Aerphone GHTK</div>
-                    <div class="des">
-                  
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.
-                    </div>
-                    <div class="specifications">
-                        <div>
-                            <p>Used Time</p>
-                            <p>6 hours</p>
-                        </div>
-                        <div>
-                            <p>Charging port</p>
-                            <p>Type-C</p>
-                        </div>
-                        <div>
-                            <p>Compatible</p>
-                            <p>Android</p>
-                        </div>
-                        <div>
-                            <p>Bluetooth</p>
-                            <p>5.3</p>
-                        </div>
-                        <div>
-                            <p>Controlled</p>
-                            <p>Touch</p>
-                        </div>
-                    </div>
-                    <div class="checkout">
-                        <button>ADD TO CART</button>
-                        <button>CHECKOUT</button>
-                    </div>
                 </div>
             </div>
 
@@ -113,7 +80,7 @@ const Banners = () => {
 
 
             <div class="item">
-                <img src="image/traversoTwo.png"/>
+                <img src="image/bannerTwo.png"/>
                 <div class="introduce">
                     <div class="title">CIMADE</div>
                     <div class="topic">AVICII </div>
@@ -123,44 +90,12 @@ const Banners = () => {
                     </div>
                     <button class="seeMore">SEE MOREss &#8599</button>
                 </div>
-                <div class="detail">
-                    <div class="title">Aerphone GHTK</div>
-                    <div class="des">
-                  
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.
-                    </div>
-                    <div class="specifications">
-                        <div>
-                            <p>Used Time</p>
-                            <p>6 hours</p>
-                        </div>
-                        <div>
-                            <p>Charging port</p>
-                            <p>Type-C</p>
-                        </div>
-                        <div>
-                            <p>Compatible</p>
-                            <p>Android</p>
-                        </div>
-                        <div>
-                            <p>Bluetooth</p>
-                            <p>5.3</p>
-                        </div>
-                        <div>
-                            <p>Controlled</p>
-                            <p>Touch</p>
-                        </div>
-                    </div>
-                    <div class="checkout">
-                        <button>ADD TO CART</button>
-                        <button>CHECKOUT</button>
-                    </div>
-                </div>
+                
             </div>
            
 
             <div class="item">
-                <img src="image/traversoOne.png"/>
+                <img src="image/bannerOne.png"/>
                 <div class="introduce">
                     <div class="title">ES</div>
                     <div class="topic">ES</div>
@@ -170,39 +105,7 @@ const Banners = () => {
                     </div>
                     <button class="seeMore">SEE MORE &#8599</button>
                 </div>
-                <div class="detail">
-                    <div class="title">Aerphone GHTK</div>
-                    <div class="des">
-                  
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, reiciendis suscipit nobis nulla animi, modi explicabo quod corrupti impedit illo, accusantium in eaque nam quia adipisci aut distinctio porro eligendi. Reprehenderit nostrum consequuntur ea! Accusamus architecto dolores modi ducimus facilis quas voluptatibus! Tempora ratione accusantium magnam nulla tenetur autem beatae.
-                    </div>
-                    <div class="specifications">
-                        <div>
-                            <p>Used Time</p>
-                            <p>6 hours</p>
-                        </div>
-                        <div>
-                            <p>Charging port</p>
-                            <p>Type-C</p>
-                        </div>
-                        <div>
-                            <p>Compatible</p>
-                            <p>Android</p>
-                        </div>
-                        <div>
-                            <p>Bluetooth</p>
-                            <p>5.3</p>
-                        </div>
-                        <div>
-                            <p>Controlled</p>
-                            <p>Touch</p>
-                        </div>
-                    </div>
-                    <div class="checkout">
-                        <button>ADD TO CART</button>
-                        <button>CHECKOUT</button>
-                    </div>
-                </div>
+                
             </div>
 
             
