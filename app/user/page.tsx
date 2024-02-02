@@ -11,6 +11,8 @@ import { UserData } from '@/interface/interface';
 import UserRegister from '@/components/user/userRegister';
 import UserUpdate from '@/components/user/userUpdate';
 import UserDelete from '@/components/user/userDelete';
+import { FiLogOut } from 'react-icons/fi';
+import { logout } from '@/components/utils/auth.server';
 
 const User = () => {
   const [userData, setUserData] = useState<UserData[]>();
@@ -92,18 +94,27 @@ const User = () => {
     onSubmit();
   };
 
+   //Logout
+   const handleLogout = async () => {
+    await logout();
+  };
+
   return (
       <div>
         <h1 className="uppercase text-center text-2xl font-bold text-gray-700 p-5">Registro de usuarios</h1>
         <div className='flex justify-end'>
         <button
           type="button"
-          className="text-[#006eb0] uppercase hover:text-white border-2 border-[#006eb0] hover:bg-[#006eb0] focus:ring-4 focus:outline-none font-semibold rounded-lg text-xs px-3 py-2 text-center me-4 mb- dark:hover:text-white dark:focus:ring-[#BFE9FB] inline-flex items-center"
+          className="text-[#006eb0] uppercase hover:text-white border-2 border-[#006eb0] hover:bg-[#006eb0] focus:ring-4 focus:outline-none font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 dark:hover:text-white dark:focus:ring-[#BFE9FB] inline-flex items-center"
           onClick={handleOpenCreateForm}
           >
             <FaRegAddressBook className='mr-1 text-lg' />
             Registrar
         </button>
+        <button type="button" onClick={handleLogout}
+  className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-xs px-2 py-2 text-center mb-1 me-4 dark:hover:text-white dark:focus:ring-red-200">
+    <FiLogOut className='text-lg' />
+  </button>
         </div>
         {modalOpen && (
         <UserRegister onCreateSuccess={handleRegisterSuccess} onCloseModal={handleCloseCreateForm} />

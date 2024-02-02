@@ -14,13 +14,13 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
   const [studentData, setStudentData] = useState<Student[]>();
   const [closeTable, setCloseTable] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [isNameIncomplete, setIsNameIncomplete] = useState(false);
 
   const toggleIsActive = () => {
     setIsActive(!isActive);
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value, 'onChange ejecutado');
     setQueryValue(event.target.value);
     setCloseTable(false);
     setSearchType(queryValue);
@@ -41,12 +41,23 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
     }
     try {
       const value = queryValue.trim();
+      if (value.split(' ').length <= 2 ) {
+        setIsNameIncomplete(true);
+        setLoading(false);
+        return;
+      }
       const res = await axios
       .get(`${URL()}/student/name/${value.trim()}/type/${searchType}`,
       );
-      console.log(res)
-        setStudentData(res.data);
-        onSearchName(res.data);
+      const filteredData = res.data.filter((student: Student) => {
+        const normalizedInput = value.trim().toLowerCase();
+        const normalizedName = student.name.trim().toLowerCase();
+        const isMatch = normalizedName === normalizedInput;
+        return isMatch;
+      });
+      console.log(filteredData);
+        setStudentData(filteredData);
+        onSearchName(filteredData);
         setCloseTable(true);
     } catch(error) {
         console.error("Error: Nombre invalido", error);
@@ -82,6 +93,14 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
         </div>
     </form>
     {loading && <p>Cargando...</p>}
+    {isNameIncomplete && (
+        <Modal open={isNameIncomplete} onClose={() => setIsNameIncomplete(false)}>
+          <div className="border-2 p-2 rounded-lg">
+            <h2 className="text-md font-bold text-red-600 mb-4">Nombre incompleto</h2>
+            <h3 className="text-sm font-semibold text-gray-600">Por favor, ingrese un nombre completo.</h3>
+          </div>
+        </Modal>
+      )}
     {closeTable && studentData && (
     <div className="relative overflow-x-auto shadow-xl sm:rounded-xl mt-8">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 font-semibold">

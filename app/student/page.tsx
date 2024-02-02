@@ -12,10 +12,13 @@ import { RiFileExcel2Line } from "react-icons/ri";
 import { FaRegAddressBook } from "react-icons/fa6";
 import { FiUserPlus } from "react-icons/fi";
 import { FiLogOut } from "react-icons/fi";
+import { GrDocumentVerified } from "react-icons/gr";
 import StudentDelete from '@/components/student/StudentDelete';
 import CreateStudentForm from '@/components/student/StudentAdd';
 import CreateStudentExcel from '@/components/student/StudentsAll';
 import SearchStudent from '@/components/student/SearchStudent';
+import { logout } from '@/components/utils/auth.server';
+import DuplicatedCode from '@/components/student/SearchCode';
 
 const Student = () => {
   const [isActive, setIsActive] = useState(false);
@@ -29,6 +32,7 @@ const Student = () => {
   const [createStudentExcel, setCreateStudentExcel] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false)
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isDuplicatedCodesModalOpen, setIsDuplicatedCodesModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [offset, setOffset] = useState(0);
@@ -145,11 +149,24 @@ const Student = () => {
   const openErrorModal = () => {  // Agregado
     setErrorModalOpen(true);
   };
+
+  //DuplicatedCode
+  const handleOpenDuplicatedCode = () => {
+    setIsDuplicatedCodesModalOpen(true);
+  };
+  const handleCloseDuplicatedCode = () => {
+    setIsDuplicatedCodesModalOpen(false);
+  };
+
+  //Logout
+  const handleLogout = async () => {
+    await logout();
+  };
   /* const closeErrorModal = () => {  // Agregado
     setErrorModalOpen(false);
   }; */
   //Pagination
-  const itemsPerPage = 5
+  const itemsPerPage = 50
   const handlePageChange = (newPage: number) => {
     setLimit(itemsPerPage);
     setOffset((newPage - 1 ) * itemsPerPage);
@@ -204,15 +221,33 @@ const Student = () => {
       </>
     );
   };
+
   return (
     <section className="p-2">
   <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
     <h1>ADMINISTRAR ESTUDIANTES</h1>
   </div>
   <div className="flex flex-col sm:flex-row border-2 rounded-xl lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
-  <div className="flex justify-center">
+  <div className="flex flex-col items-center md:flex-row justify-center">
+  <div className="flex-grow mb-2 md:mb-0 md:mr-2">
     <SearchStudent onSearchDNI={(query: string, queryValue: string) => handleSearchStudent(query, queryValue)} />
   </div>
+  <button
+    type="button"
+    className="text-[#006eb0] uppercase hover:text-white border-2 border-[#006eb0] hover:bg-[#006eb0] focus:ring-4 focus:outline-none font-semibold rounded-lg text-xs px-3 py-3 text-center md:w-auto dark:hover:text-white dark:focus:ring-[#BFE9FB] inline-flex items-center"
+    onClick={handleOpenDuplicatedCode}
+  >
+    <GrDocumentVerified className='mr-1 text-lg' />
+    Verificar
+  </button>
+  {studentData !== undefined && (
+    <DuplicatedCode
+        studentData={studentData}
+        isOpen={isDuplicatedCodesModalOpen}
+        onClose={handleCloseDuplicatedCode}
+      />
+  )}
+</div>
 
   <div className="flex justify-center mt-2 lg:mt-2 mb-1">
   <button
@@ -242,7 +277,8 @@ const Student = () => {
     <FiUserPlus  className='text-lg' />
   </button>
 
-  <button type="button" className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-xs px-2 py-2 text-center mb-1 dark:hover:text-white dark:focus:ring-red-200">
+  <button type="button" onClick={handleLogout}
+  className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-xs px-2 py-2 text-center mb-1 dark:hover:text-white dark:focus:ring-red-200">
     <FiLogOut className='text-lg' />
   </button>
   </div>
@@ -327,16 +363,16 @@ const Student = () => {
     </tbody>
   </table>
 
-  <nav className="mt-5 flex items-center justify-between text-sm" aria-label="Page navigation example">
+  <nav className="mt-5 flex items-center flex-col sm:flex-row justify-between text-sm" aria-label="Page navigation example">
     <p>
-      Showing <strong>{startIndex + 1}-{endIndex}</strong> of <strong>{memoryData.length}</strong>
+      Página <strong>{startIndex + 1}-{endIndex}</strong> de <strong>{memoryData.length}</strong>
     </p>
     <ul className="list-style-none flex">
       <li>
         <button
           className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
           onClick={() => handlePageChange(Math.max(1, currentPage - 1))}>
-            Previous
+            Anterior
         </button>
       </li>
       {renderPageButtons()}
@@ -352,7 +388,7 @@ const Student = () => {
       <li>
         <button className=" block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
           onClick={() => handlePageChange(Math.min(pageCount, currentPage + 1))}>
-            Next
+            Siguiente
         </button>
       </li>
     </ul>

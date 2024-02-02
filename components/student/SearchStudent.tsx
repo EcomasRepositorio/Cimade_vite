@@ -8,6 +8,7 @@ import { FaRegEdit } from 'react-icons/fa';
 import StudentForm from './StudentForm';
 import StudentDelete from './StudentDelete';
 import ModalTable from '../share/modalTable';
+import SearchDNI from '@/components/certificate/SearchDNI';
 
 
 const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
@@ -17,7 +18,7 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
   const [loading, setLoading] = useState(false);
   const [searchType, setSearchType] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [dataLoading, setDataLoading] = useState(false);
+  const [closeModalTable, setCloseModalTable] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [studentData, setStudentData] = useState<StudentData[]>();
   const [modalTable, setModalTable] = useState(false);
@@ -27,13 +28,13 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
     setIsActive(!isActive);
   };
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  /* const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value, 'onChange ejecutado');
     console.log('Nuevo valor de queryValue:', event.target.value);
     setQueryValue(event.target.value);
     //setCloseTable(false);
     setSearchType(queryValue);
-    };
+    }; */
     const token = useRouteData("parameter");
   const validToken = typeof token === "string" ? token: '';
   
@@ -50,13 +51,14 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
         );
         console.log(res)
         setStudentData(res.data);
+        setCloseModalTable(false);
         //setCloseTable(true);
       } catch(error) {
         console.error("Error: DNI invalido", error);
         openErrorModal();
       } finally {
-        setLoading(false);
-        closeTableModal();
+        //setLoading(false);
+        setCloseModalTable(true)
     }
   };
 
@@ -67,11 +69,12 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
     setModalOpen(false);
   };
 
-  const openTableModal = () => {
+  /* const openTableModal = () => {
     searchDNI();
-  };
+  }; */
   const closeTableModal = () => {
     setQueryValue('');
+    setCloseModalTable(false);
   };
 
   //UpdateStudent
@@ -84,14 +87,8 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
     setIsModalOpen(false);
   };
   const handleUpdateSuccess = async (updateUserId: number) => {
-    try {
-      const url = `${URL()}/students`;
-      const response = await axios.get(url, tokenConfig(validToken));
-      setStudentData(response.data);
+      //setStudentData(response.data);
       //setDataLoading(true);
-    } catch (error) {
-      console.error('Error al obtener la lista de usuarios después de actualizar uno existente:', error);
-    }
   }
 
    //DeleteStudent
@@ -131,9 +128,7 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
         <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
     </div>
   </form>
-
-  {loading && <p>Cargando...</p>}
-  {memoryData && (
+  {memoryData !== undefined && (
     <ModalTable open={memoryData.length > 0} onClose={closeTableModal}>
    <div className="overflow-x-auto bg-white p-2 mt-4">
     <table className="min-w-full text-sm whitespace-nowrap shadow-2xl">

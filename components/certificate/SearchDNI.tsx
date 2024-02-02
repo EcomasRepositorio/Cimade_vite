@@ -20,10 +20,11 @@ const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value, 'onChange ejecutado');
+    /* console.log(event.target.value, 'onChange ejecutado');
+    const valuee = event.target.value; */
     setQueryValue(event.target.value);
     setCloseTable(false);
-    setSearchType(queryValue);
+    //setSearchType(valuee.trim() ? queryValue : null);
     };
   const openErrorModal = () => {
     setModalOpen(true);
@@ -104,7 +105,7 @@ const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
         </thead>
         <tbody>
           {studentData?.map((student: Student, index:number) =>(
-            <tr className="bg-white border-b text-center hover:bg-gray-100">
+            <tr key={index} className="bg-white border-b text-center hover:bg-gray-100">
                 <th
                 scope="row"
                 className="px-6 py-4 font-medium whitespace-nowrap w-12">
