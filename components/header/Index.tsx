@@ -13,7 +13,7 @@ const Header = () => {
   }
   return (
   <>
-    <div id="/" className="bg-[#006eb0] border-gray-200">
+    <div id="/" className="bg-[#002e79] border-gray-200">
     <div className="flex lg:justify-between justify-center mx-auto max-w-screen-2xl p-2 ">
       <div className="hidden lg:flex">
       <Link href="#" className="text-lg text-gray-50 hover:underline font-semibold"></Link>
