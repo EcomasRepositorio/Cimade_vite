@@ -13,6 +13,7 @@ import UserUpdate from '@/components/user/userUpdate';
 import UserDelete from '@/components/user/userDelete';
 import { FiLogOut } from 'react-icons/fi';
 import { logout } from '@/components/utils/auth.server';
+import { useNavigate } from 'react-router-dom';
 
 const User = () => {
   const [userData, setUserData] = useState<UserData[]>();
@@ -95,8 +96,10 @@ const User = () => {
   };
 
    //Logout
+   const navigate = useNavigate();
    const handleLogout = async () => {
     await logout();
+    navigate('/login');
   };
 
   return (
