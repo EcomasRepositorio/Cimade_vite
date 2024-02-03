@@ -34,14 +34,14 @@ const Student = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isDuplicatedCodesModalOpen, setIsDuplicatedCodesModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(20);
   const [offset, setOffset] = useState(0);
 
   const toggleIsActive = () => {
     setIsActive(!isActive);
   };
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //setQueryValue(event.target.value);
+    setQueryValue(event.target.value);
   };
   const token = useRouteData("parameter");
   const validToken = typeof token === "string" ? token: '';
@@ -165,22 +165,26 @@ const Student = () => {
   /* const closeErrorModal = () => {  // Agregado
     setErrorModalOpen(false);
   }; */
+  useEffect(() => {
+    onSubmit();
+  }, [currentPage, limit, offset]);
+
+  const memoryData = useMemo(() => studentData, [studentData]);
   //Pagination
   const itemsPerPage = 50
   const handlePageChange = (newPage: number) => {
-    setLimit(itemsPerPage);
+    setLimit(20);
+    setOffset(10);
     setOffset((newPage - 1 ) * itemsPerPage);
     setCurrentPage(newPage);
-  };
+  }
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  useEffect(() => {
-    onSubmit();
-  }, [currentPage]);
 
-  const memoryData = useMemo(() => studentData, [studentData]);
   const visibleData = useMemo(() => (memoryData ? memoryData.slice(startIndex, endIndex) : []), [memoryData, startIndex, endIndex]);
+  //const pageCount = Math.ceil((memoryData?.length || 0) / itemsPerPage) || 1;
+
   const pageCount = Math.ceil((memoryData?.length || 0) / 5) || 1;
 
   const renderPageButtons = () => {
@@ -388,7 +392,7 @@ const Student = () => {
       <li>
         <button className=" block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
           onClick={() => handlePageChange(Math.min(pageCount, currentPage + 1))}>
-            Siguiente
+           Siguiente
         </button>
       </li>
     </ul>

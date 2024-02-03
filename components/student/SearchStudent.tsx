@@ -69,10 +69,8 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
     setModalOpen(false);
   };
 
-  /* const openTableModal = () => {
-    searchDNI();
-  }; */
   const closeTableModal = () => {
+    setModalTable(false);
     setQueryValue('');
     setCloseModalTable(false);
   };
