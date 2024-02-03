@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './StyleBan.css';
-
 
 const Banners = () => {
   useEffect(() => {
@@ -46,8 +45,17 @@ const Banners = () => {
         carousel.classList.remove('showDetail');
       };
     }
-  }, []);
+    
 
+    const intervalId = setInterval(() => {
+      showSlider('next'); // Cambiado para que llame a showSlider con 'next'
+    }, 10000);
+
+    // Limpieza del intervalo al desmontar el componente para evitar fugas de memoria
+    return () => clearInterval(intervalId);
+  
+
+  }, []);
   return (
     <>
       <div class="bannerBack">
@@ -112,7 +120,7 @@ const Banners = () => {
         <div class="arrows">
             <button id="prev">{"<"}</button>
             <button id="next">{">"}</button>
-            <button id="back">See All  &#8599</button>
+           
         </div>
     </div>
       </div>
