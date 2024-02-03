@@ -3,6 +3,7 @@ import { URL } from '@/components/utils/format/tokenConfig';
 import axios from 'axios'
 import { SearchCodeProps, StudentCode } from '../../interface/interface';
 import Modal from '../share/Modal';
+import Image from 'next/image';
 
 const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
 
@@ -58,11 +59,11 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
     }
   };
   const tableRows = [
-    { label: 'Organizado por:', value: studentData?.institute },
-    { label: 'Otorgado a:', value: studentData?.name },
-    { label: 'Nombre del evento:', value: studentData?.activityAcademy },
-    { label: 'Creditos/Horas:', value: studentData?.hour },
-    { label: 'Fecha de emisión:', value: studentData?.date },
+    { imgSrc:'/image/organizadopor.svg', label: 'Organizado por:', value: studentData?.institute },
+    { imgSrc:'/image/otorgado.svg', label: 'Otorgado a:', value: studentData?.name },
+    { imgSrc:'/image/nom_evento.svg', label: 'Nombre del evento:', value: studentData?.activityAcademy },
+    { imgSrc:'/image/creditos_horas.svg', label: 'Creditos/Horas:', value: studentData?.hour },
+    { imgSrc:'/image/fecha_emision.svg', label: 'Fecha de emisión:', value: studentData?.date },
   ];
   return (
   <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
@@ -93,37 +94,28 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
     </div>
   </form>
   {loading && <p>Cargando...</p>}
-  {studentData && (
-   <Modal open={open} onClose={() => setOpen(false)}>
-   <table className="max-w-md text-sm text-left rtl:text-right text-gray-600 font-semibold">
-     <thead className="text-xm text-center text-gray-600 uppercase">
-       {tableRows.length > 0 && (
-         <tr>
-           <th scope="col" className="px-6 py-3">
-             LOGO
-           </th>
-         </tr>
-       )}
-     </thead>
-     <tbody>
-      {tableRows.map((row, index) => (
-        <React.Fragment key={index}>
-          <tr key={index} className="bg-slate-700 text-gray-300 text-center">
-           <th scope="row" className="p-1.5 rounded-lg font-medium whitespace-nowrap w-3/4">
-             <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{row.label}</span>
-           </th>
-          </tr>
-          <tr key={index + 'value'} className="max-w-md bg-white text-center hover:bg-gray-300">
-          <td className="max-w-sm px-6 py-4">
-           <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{row.value}</span>
-          </td>
-          </tr>
-        </React.Fragment>
-       ))}
-     </tbody>
-   </table>
- </Modal>
-  )}
+      {studentData && (
+        <Modal open={open} onClose={() => setOpen(false)}>
+          <div className='flex justify-center mb-4'>
+            <img src={'/image/logo_cip_tacna.png'}className="lg:w-32 lg:h-32 w-28 h-28 object-contain "/>
+            <img src={'/image/logo_cimade.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
+            <img src={'/image/logo_unp.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
+          </div>
+          <div className="max-w-md mx-auto p-6 bg-white rounded-md">
+            {tableRows.map((row, index) => (
+              <div key={index} className="mb-4">
+               <div className="flex items-center text-gray-100 text-sm p-1 lg:ml-5 ml-0 lg:w-80 w-full rounded-lg bg-slate-600 font-semibold">
+                {row.imgSrc && <img src={row.imgSrc} alt={row.label} className="flex lg:w-5 lg:h-5 w-5 h-5 object-contain ml-1" />}
+                <div className='flex-1 text-center'>
+                {row.label}
+                </div>
+              </div>
+                <div className="text-gray-600 mt-3 mb-5 text-sm font-semibold">{row.value}</div>
+              </div>
+            ))}
+          </div>
+        </Modal>
+      )}
   <Modal open={modalOpen} onClose={closeErrorModal}>
       <div className="border-2 p-2 rounded-lg">
         <h2 className="text-md font-bold text-red-600 mb-4">Código incorrecto</h2>

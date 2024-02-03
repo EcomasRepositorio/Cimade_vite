@@ -33,6 +33,11 @@ export interface StudentCode {
   date: string;
 };
 
+export interface StudentCodeModal extends Student {
+  institute: string;
+  hour: string;
+};
+
 export interface StudentData {
   id: number;
   name: string;

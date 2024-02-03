@@ -96,10 +96,9 @@ const User = () => {
   };
 
    //Logout
-   const navigate = useNavigate();
+   //const navigate = useNavigate();
    const handleLogout = async () => {
     await logout();
-    navigate('/login');
   };
 
   return (

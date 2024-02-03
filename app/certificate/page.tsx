@@ -19,12 +19,17 @@ const Certificate: React.FC = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12 p-2">
+    <section className='p-2'>
+    <div className="max-w-screen-xl mx-auto mb-8 border mt-10 rounded-3xl shadow-2xl text-center lg:mb-12 p-2">
       <div className="mb-4 lg:mt-0 justify-center text-5xl font-extrabold tracking-tight text-gray-500">
-        LOGO
+      <div className='flex justify-center mb-4 lg:gap-10 mt-12'>
+            <img src={'/image/logo_cip_tacna.png'}className="lg:w-44 lg:h-44 w-32 h-32 object-contain "/>
+            <img src={'/image/logo_cimade.png'} className="lg:w-44 lg:h-44 w-32 h-32 object-contain"/>
+            <img src={'/image/logo_unp.png'} className="lg:w-44 lg:h-44 w-32 h-32 object-contain"/>
+          </div>
       </div>
         <div className="">
-          <h2 className="mb-4 mt-36 lg:mt-36 text-5xl font-extrabold tracking-tight text-gray-500">
+          <h2 className="mb-4 mt-36 lg:mt-20 text-5xl font-extrabold tracking-tight text-gray-500">
             Certificados
           </h2>
           <p className="font-light text-gray-500 sm:text-xl">
@@ -63,6 +68,7 @@ const Certificate: React.FC = () => {
       )}
         </div>
     </div>
+    </section>
   )
 }
 
