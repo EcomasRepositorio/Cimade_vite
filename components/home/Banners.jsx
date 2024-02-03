@@ -1,84 +1,83 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import './StyleBan.css';
 
 const Banners = () => {
-  useEffect(() => {
-    const nextButton = document.getElementById('next');
-    const prevButton = document.getElementById('prev');
-    const backButton = document.getElementById('back');
+  const nextButtonRef = useRef(null);
+  const prevButtonRef = useRef(null);
+  const backButtonRef = useRef(null);
+  const unAcceppClick = useRef(null);
 
-    const showSlider = (type) => {
-      const carousel = document.querySelector('.carousel');
-      const listHTML = document.querySelector('.carousel .list');
+  const showSlider = useCallback((type) => {
+    const carousel = document.querySelector('.carousel');
+    const listHTML = document.querySelector('.carousel .list');
 
-      carousel.classList.remove('next', 'prev');
-      let items = document.querySelectorAll('.carousel .list .item');
+    carousel.classList.remove('next', 'prev');
+    let items = document.querySelectorAll('.carousel .list .item');
 
-      if (type === 'next') {
-        listHTML.appendChild(items[0]);
-        carousel.classList.add('next');
-      } else {
-        listHTML.prepend(items[items.length - 1]);
-        carousel.classList.add('prev');
-      }
-
-      clearTimeout(unAcceppClick);
-      unAcceppClick = setTimeout(() => {
-        nextButton.style.pointerEvents = 'auto';
-        prevButton.style.pointerEvents = 'auto';
-      }, 2000);
-    };
-
-    let unAcceppClick;
-
-    if (nextButton && prevButton && backButton) {
-      nextButton.onclick = function () {
-        showSlider('next');
-      };
-
-      prevButton.onclick = function () {
-        showSlider('prev');
-      };
-
-      backButton.onclick = function () {
-        const carousel = document.querySelector('.carousel');
-        carousel.classList.remove('showDetail');
-      };
+    if (type === 'next') {
+      listHTML.appendChild(items[0]);
+      carousel.classList.add('next');
+    } else {
+      listHTML.prepend(items[items.length - 1]);
+      carousel.classList.add('prev');
     }
-    
+
+    clearTimeout(unAcceppClick.current);
+    unAcceppClick.current = setTimeout(() => {
+      nextButtonRef.current && (nextButtonRef.current.style.pointerEvents = 'auto');
+      prevButtonRef.current && (prevButtonRef.current.style.pointerEvents = 'auto');
+    }, 2000);
+  }, []);
+
+  const handleNextClick = useCallback(() => {
+    showSlider('next');
+  }, [showSlider]);
+
+  const handlePrevClick = useCallback(() => {
+    showSlider('prev');
+  }, [showSlider]);
+
+  const handleBackClick = useCallback(() => {
+    const carousel = document.querySelector('.carousel');
+    carousel.classList.remove('showDetail');
+  }, []);
+
+  useEffect(() => {
+    if (nextButtonRef.current && prevButtonRef.current && backButtonRef.current) {
+      nextButtonRef.current.addEventListener('click', handleNextClick);
+      prevButtonRef.current.addEventListener('click', handlePrevClick);
+      backButtonRef.current.addEventListener('click', handleBackClick);
+    }
 
     const intervalId = setInterval(() => {
-      showSlider('next'); // Cambiado para que llame a showSlider con 'next'
+      showSlider('next');
     }, 10000);
 
     // Limpieza del intervalo al desmontar el componente para evitar fugas de memoria
-    return () => clearInterval(intervalId);
-  
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(unAcceppClick.current);
+    };
+  }, [handleNextClick, handlePrevClick, handleBackClick, showSlider]);
 
-  }, []);
   return (
     <>
-      <div class="bannerBack">
-      <header>
-   
-    
-      </header>
-    <div class="carousel">
-        <div class="list">
-
-
-
-        <div class="item">
+      <div className="bannerBack">
+        <header></header>
+        <div className="carousel">
+          <div className="list">
+            {/* ... */}
+            <div className="item">
                 <img src="image/bannerTree.png"/>
-                <div class="introduce">
-                    <div class="hidden md:block title mb-4"> Enviamos tus certificados directamente a tu ciudad, brindándote comodidad y accesibilidad. </div>
-                    <div class="md:hidden title mb-4"> Enviamos tus certificados directamente a tu ciudad! </div>
+                <div className="introduce">
+                    <div className="hidden md:block title mb-4"> Enviamos tus certificados directamente a tu ciudad, brindándote comodidad y accesibilidad. </div>
+                    <div className="md:hidden title mb-4"> Enviamos tus certificados directamente a tu ciudad! </div>
 
-                    <div class="des">
+                    <div className="des">
                     
                     
                     </div>
-                    <button class="seeMore">CONOCE MAS</button>
+                    <button className="seeMore">CONOCE MAS</button>
                 </div>
             </div>
 
@@ -88,41 +87,41 @@ const Banners = () => {
 
 
 
-            <div class="item">
+            <div className="item">
                 <img src="image/bannerTwo.png"/>
-                <div class="introduce">
-                    <div class="title mb-4">Descubre Diplomados y Cursos virtuales de excelencia.</div>
+                <div className="introduce">
+                    <div className="title mb-4">Descubre Diplomados y Cursos virtuales de excelencia.</div>
                     
-                    <div class="des">
+                    <div className="des">
                    
                     </div>
-                    <button class="seeMore">CONOCE MAS</button>
+                    <button className="seeMore">CONOCE MAS</button>
                 </div>
                 
             </div>
            
 
-            <div class="item">
+            <div className="item">
                 <img src="image/bannerOne.png"/>
-                <div class="introduce">
-                    <div class="title mb-4">Inicia un programa 100% online y certifícate.</div>
+                <div className="introduce">
+                    <div className="title mb-4">Inicia un programa 100% online y certifícate.</div>
                 
-                    <div class="des">
+                    <div className="des">
                    
                     </div>
-                    <button class="seeMore">Inscribete Ahora</button>
+                    <button className="seeMore">Inscribete Ahora</button>
                 </div>
                 
             </div>
+          </div>
+          <div className="arrows">
+            <button id='prev' ref={prevButtonRef}>{"<"}</button>
+            <button id='next' ref={nextButtonRef}>{">"}</button>
+      
+          </div>
+          
 
-            
         </div>
-        <div class="arrows">
-            <button id="prev">{"<"}</button>
-            <button id="next">{">"}</button>
-           
-        </div>
-    </div>
       </div>
     </>
   );

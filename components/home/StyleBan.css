@@ -54,9 +54,9 @@ header nav a{
 /* carousel */
 .carousel{
     position: relative;
-    height: 745px;
+    height: 730px;
     overflow: hidden;
-    margin-top: -60px;
+    margin-top: -5px;
 }
 .carousel .list{
     position: absolute;
@@ -85,7 +85,7 @@ header nav a{
     width: 35%;
     position:absolute;
     right: 0;
-    top: 46%;
+    top: 58%;
     transform: translateY(-50%);
     transition: right 1.5s;
 }
@@ -354,10 +354,11 @@ header nav a{
 }
 .arrows{
     position: absolute;
-    bottom: 70px;
-    width: 1140px;
-    max-width: 90%;
+    bottom: 45%;
+    width: 2040px;
+    max-width: 160%;
     display:flex;
+    border-color: #f200c2 ;
     justify-content: space-between;
     left: 50%;
     transform: translateX(-50%);
@@ -544,6 +545,53 @@ header nav a{
     }
 
     
+      
+      
+      svg {
+        padding: 5px;
+      }
+      
+      .arrows {
+        cursor: pointer;
+        position: absolute;
+        top: 60%;
+        margin-top: -45px;
+        margin-left: -35px;
+        width: 70px;
+        height: 90px;
+      }
+      
+      .left {
+        left: 42%;
+      }
+      
+      .right {
+        left: 58%;
+      }
+      
+      .left:hover polyline,
+      .left:focus polyline {
+        stroke-width: 3;
+      }
+      
+      .left:active polyline {
+        stroke-width: 6;
+        transition: all 100ms ease-in-out;
+      }
+      
+      .right:hover polyline,
+      .right:focus polyline {
+        stroke-width: 3;
+      }
+      
+      .right:active polyline {
+        stroke-width: 6;
+        transition: all 100ms ease-in-out;
+      }
+      
+      polyline {
+        transition: all 250ms ease-in-out;
+      }
 }
 
   
