@@ -2,6 +2,7 @@ import React from 'react';
 import Social from "./Social";
 import './Styles.css'; 
 
+
 export const Footer = () => {
   return (
     <footer className="px-4 py-20 text-white" style={{ background: 'linear-gradient(0deg, #006eb0, #002e79)' }}>
@@ -15,7 +16,7 @@ export const Footer = () => {
                 <img src="/icons/iconsFooter/footer_whatsapp.svg" alt="Phone Icon" className="w-6 h-6 mr-2" />
                 <button className="text">900 102 090</button>
               </a>
-
+              
               <a href="mailto:capacitaciones@cimade.edu.pe" className="flex mb-3 text-lg font-medium transition md:mb-2">
               <img src="/icons/iconsFooter/footer_correo.svg" alt="Correo Icono" className="w-6 h-6 mr-2" />
                 <button className="text">capacitaciones@cimade.edu.pe</button>
@@ -63,6 +64,7 @@ export const Footer = () => {
         </div>
         <p className="text-sm font-medium text-left text-white md:text-center">© Copyright 2024 Cimade Emp. All Rights Reserved.</p>
       </div>
+    
     </footer>
   );
 }

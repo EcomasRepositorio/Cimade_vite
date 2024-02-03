@@ -63,13 +63,14 @@ const Banners = () => {
         <div class="item">
                 <img src="image/bannerTree.png"/>
                 <div class="introduce">
-                    <div class="title">¡Expande tu conocimiento con nuestros diplomados y cursos de excelencia! </div>
-                    <div class="topic">___________</div>
+                    <div class="hidden md:block title mb-4"> Enviamos tus certificados directamente a tu ciudad, brindándote comodidad y accesibilidad. </div>
+                    <div class="md:hidden title mb-4"> Enviamos tus certificados directamente a tu ciudad! </div>
+
                     <div class="des">
-                  
-                    Enviamos tus certificados directamente a tu ciudad, brindándote comodidad y accesibilidad. ¡Inscríbete hoy y lleva tu carrera al siguiente nivel con nosotros!"
+                    
+                    
                     </div>
-                    <button class="bottonBanner">CONOCE MAS</button>
+                    <button class="seeMore">CONOCE MAS</button>
                 </div>
             </div>
 
@@ -82,13 +83,12 @@ const Banners = () => {
             <div class="item">
                 <img src="image/bannerTwo.png"/>
                 <div class="introduce">
-                    <div class="title">Descubre Diplomados y Cursos virtuales de excelencia.</div>
-                    <div class="topic">______________ </div>
+                    <div class="title mb-4">Descubre Diplomados y Cursos virtuales de excelencia.</div>
+                    
                     <div class="des">
-                  
-                    Conéctate desde cualquier lugar del planeta y sumérgete en experiencias de aprendizaje interactivas. Desarrolla habilidades de vanguardia con expertos de la industria. ¡Tu camino hacia el éxito comienza aquí! 
+                   
                     </div>
-                    <button class="bottonBanner">CONOCE MAS</button>
+                    <button class="seeMore">CONOCE MAS</button>
                 </div>
                 
             </div>
@@ -97,13 +97,12 @@ const Banners = () => {
             <div class="item">
                 <img src="image/bannerOne.png"/>
                 <div class="introduce">
-                    <div class="title">Inicia un programa 100% online y certifícate.</div>
-                    <div class="topic">____________</div>
+                    <div class="title mb-4">Inicia un programa 100% online y certifícate.</div>
+                
                     <div class="des">
-                    Descubre nuestras capacitaciones en línea líderes en la industria. Accede a contenido de vanguardia desde la comodidad de tu hogar. Participa en nuestras clases interactivas y obtén certificados digitales al instante.
-                       
+                   
                     </div>
-                    <button class="bottonBanner">Inscribete Ahora</button>
+                    <button class="seeMore">Inscribete Ahora</button>
                 </div>
                 
             </div>
