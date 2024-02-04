@@ -18,7 +18,7 @@ import CreateStudentForm from '@/components/student/StudentAdd';
 import CreateStudentExcel from '@/components/student/StudentsAll';
 import SearchStudent from '@/components/student/SearchStudent';
 import { logout } from '@/components/utils/auth.server';
-import DuplicatedCode from '@/components/student/SearchCode';
+import DuplicatedCode from '@/components/student/VerifyCode';
 import { Link } from 'react-router-dom';
 import ProtectedRoute from '@/components/utils/format/ruote';
 import User from '@/app/user/page'
@@ -36,6 +36,7 @@ const Student = () => {
   const [errorModalOpen, setErrorModalOpen] = useState(false)
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isDuplicatedCodesModalOpen, setIsDuplicatedCodesModalOpen] = useState(false);
+  const [numerations, setNumerations] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [offset, setOffset] = useState(0);
@@ -234,7 +235,7 @@ const Student = () => {
   <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
     <h1>ADMINISTRAR ESTUDIANTES</h1>
   </div>
-  <div className="flex flex-col sm:flex-row border-2 rounded-xl lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
+  <div className="flex flex-col sm:flex-row border-2 shadow-xl rounded-xl lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
   <div className="flex flex-col items-center md:flex-row justify-center">
   <div className="flex-grow mb-2 md:mb-0 md:mr-2">
     <SearchStudent onSearchDNI={(query: string, queryValue: string) => handleSearchStudent(query, queryValue)} />
@@ -317,7 +318,7 @@ const Student = () => {
       {visibleData.map((student, index) => (
       <tr key={index} className="text-center text-gray-500 border-b font-semibold hover:bg-gray-100">
         <th scope="row" className="px-6 py-4">
-        <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.id}</span>
+          <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{visibleData.length - index}</span>
         </th>
         <td className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.documentNumber}</span>

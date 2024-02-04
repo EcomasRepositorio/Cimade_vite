@@ -16,7 +16,6 @@ const DuplicatedCode: React.FC<DuplicatedCodesDetectorProps> = ({ studentData, i
   const [duplicatedStudents, setDuplicatedStudents] = useState<StudentData[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
-  //const [studentCode, setStudentCode] = useState<StudentData[]>([]);
   const [isTableModalOpen, setIsTableModalOpen] = useState(false);
   const [duplicates, setDuplicates] = useState<StudentData[]>([]);
 
@@ -41,11 +40,11 @@ const DuplicatedCode: React.FC<DuplicatedCodesDetectorProps> = ({ studentData, i
     );
     setDuplicates(duplicates);
     setIsModalOpen(duplicates.length > 0);
-    //setIsTableModalOpen(true);
   };
 
   const handleTableModalClose = () => {
     setIsTableModalOpen(false);
+    setIsModalOpen(false);
     onClose();
   };
 
@@ -59,8 +58,6 @@ const DuplicatedCode: React.FC<DuplicatedCodesDetectorProps> = ({ studentData, i
     setIsModalOpen(false);
   };
   const handleUpdateSuccess = async (updateUserId: number) => {
-      //setStudentData(response.data);
-      //setDataLoading(true);
   }
 
   //deleteStudent
@@ -72,13 +69,7 @@ const DuplicatedCode: React.FC<DuplicatedCodesDetectorProps> = ({ studentData, i
 
   return (
  <div>
-  {isTableModalOpen ? (
-        <Modal open={isTableModalOpen} onClose={handleTableModalClose}>
-          <div className="p-4">
-            <p>No hay códigos duplicados</p>
-          </div>
-        </Modal>
-      ) : (
+  {isModalOpen && (
   <ModalTable open={isModalOpen} onClose={handleTableModalClose}>
    <div className="overflow-x-auto bg-white p-2 mt-4">
     <table className="min-w-full text-sm whitespace-nowrap shadow-2xl">
@@ -102,7 +93,7 @@ const DuplicatedCode: React.FC<DuplicatedCodesDetectorProps> = ({ studentData, i
       {duplicates.map((student, index) => (
       <tr key={index} className="text-center text-gray-500 border-b font-semibold hover:bg-gray-100">
         <th scope="row" className="px-6 py-4">
-        <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.id}</span>
+          <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{duplicates.length - index}</span>
         </th>
         <td className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.documentNumber}</span>
@@ -159,7 +150,7 @@ const DuplicatedCode: React.FC<DuplicatedCodesDetectorProps> = ({ studentData, i
   </table>
 </div>
 </ModalTable>
- )}
+)}
   </div>
   );
 };

@@ -4,6 +4,10 @@ import axios from 'axios'
 import { SearchDNIProps, Student } from '@/interface/interface';
 import Modal from '../share/Modal';
 
+interface StudentCode extends Student {
+  hour: string;
+  institute: string;
+};
 
 const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
 
@@ -14,6 +18,20 @@ const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
   const [studentData, setStudentData] = useState<Student[]>();
   const [closeTable, setCloseTable] = useState(false);
   const [ modalOpen, setModalOpen] = useState(false);
+  const [selectedStudentData, setSelectedStudentData] = useState<StudentCode | null>(null);
+  const [openModals, setOpenModals] = useState<boolean[]>(Array(selectedStudentData ? 1 : 0).fill(false));
+
+  const openStudentModal = (selectedStudent: StudentCode, index: number) => {
+    setSelectedStudentData(selectedStudent);
+    const updatedOpenModals = [...openModals];
+    updatedOpenModals[index] = true;
+    setOpenModals(updatedOpenModals);
+  };
+  const closeStudentModal = (index: number) => {
+    const updatedOpenModals = [...openModals];
+    updatedOpenModals[index] = false;
+    setOpenModals(updatedOpenModals);
+  };
 
   const toggleIsActive = () => {
     setIsActive(!isActive);
@@ -57,6 +75,14 @@ const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
         setLoading(false);
     }
   };
+  const tableRows = [
+    { imgSrc:'/image/organizadopor.svg', label: 'Organizado por:', value: selectedStudentData?.institute },
+    { imgSrc:'/image/otorgado.svg', label: 'Otorgado a:', value: selectedStudentData?.name },
+    { imgSrc:'/image/nom_evento.svg', label: 'Nombre del evento:', value: selectedStudentData?.activityAcademy },
+    { imgSrc:'/image/creditos_horas.svg', label: 'Creditos/Horas:', value: selectedStudentData?.hour },
+    { imgSrc:'/image/fecha_emision.svg', label: 'Fecha de emisión:', value: selectedStudentData?.date },
+  ];
+
   return (
     <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
       <form onSubmit={searchDNI} className="w-full md:w-2/3 lg:w-full xl:w-2/3 mx-auto">
@@ -121,8 +147,31 @@ const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
                 <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.date}</span>
                 </td>
                 <td className="px-6 py-4">
-                  <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</a>
+                  <button type='button' onClick={() => openStudentModal(student as StudentCode, index)}
+                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver</button>
                 </td>
+                {selectedStudentData && (
+                  <Modal open={openModals[index]} onClose={() => closeStudentModal(index)}>
+                    <div className='flex justify-center mb-4'>
+                      <img src={'/image/logo_cip_tacna.png'}className="lg:w-32 lg:h-32 w-28 h-28 object-contain "/>
+                      <img src={'/image/logo_cimade.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
+                      <img src={'/image/logo_unp.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
+                    </div>
+                    <div className="max-w-md mx-auto p-6 bg-white rounded-md">
+                      {tableRows.map((row, index) => (
+                        <div key={index} className="mb-4">
+                        <div className="flex items-center text-gray-100 text-sm p-1 lg:ml-5 ml-0 lg:w-80 w-full rounded-lg bg-slate-600 font-semibold">
+                          {row.imgSrc && <img src={row.imgSrc} alt={row.label} className="flex lg:w-5 lg:h-5 w-5 h-5 object-contain ml-1" />}
+                          <div className='flex-1 text-center'>
+                          {row.label}
+                          </div>
+                        </div>
+                          <div className="text-gray-600 mt-3 mb-5 text-sm font-semibold">{row.value}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </Modal>
+                )}
             </tr>
             ))}
         </tbody>

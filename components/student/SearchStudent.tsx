@@ -72,7 +72,7 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
   const closeTableModal = () => {
     setModalTable(false);
     setQueryValue('');
-    setCloseModalTable(false);
+    setStudentData([]);
   };
 
   //UpdateStudent
@@ -85,8 +85,6 @@ const SearchName:React.FC<SearchStudentDNIProps> = ({ onSearchDNI }) => {
     setIsModalOpen(false);
   };
   const handleUpdateSuccess = async (updateUserId: number) => {
-      //setStudentData(response.data);
-      //setDataLoading(true);
   }
 
    //DeleteStudent

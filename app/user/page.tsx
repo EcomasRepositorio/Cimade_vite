@@ -153,7 +153,7 @@ const User = () => {
                 {userData.map((user, index) => (
                   <tr key={index} className="bg-white text-gray-400 font-semibold border-b hover:bg-gray-200">
                     <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
-                      {user.id}
+                      {index + 1}
                     </th>
                     <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                       {user.email}

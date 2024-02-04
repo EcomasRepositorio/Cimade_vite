@@ -1,9 +1,13 @@
 import React, { useState, FormEvent} from 'react'
 import { URL } from '@/components/utils/format/tokenConfig';
 import axios from 'axios'
-import { SearchNameProps, Student, StudentCode, StudentCodeModal } from '@/interface/interface';
+import { SearchNameProps, Student } from '@/interface/interface';
 import Modal from '../share/Modal';
 
+interface StudentCode extends Student {
+  hour: string;
+  institute: string;
+}
 
 const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
 
@@ -15,8 +19,20 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
   const [closeTable, setCloseTable] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [isNameIncomplete, setIsNameIncomplete] = useState(false);
-  const [codeData, setCodeData] = useState<StudentCode>();
-  const [open, setOpen] = useState<boolean>(false);
+  const [selectedStudentData, setSelectedStudentData] = useState<StudentCode | null>(null);
+  const [openModals, setOpenModals] = useState<boolean[]>(Array(selectedStudentData ? 1 : 0).fill(false));
+
+  const openStudentModal = (selectedStudent: StudentCode, index: number) => {
+    setSelectedStudentData(selectedStudent);
+    const updatedOpenModals = [...openModals];
+    updatedOpenModals[index] = true;
+    setOpenModals(updatedOpenModals);
+  };
+  const closeStudentModal = (index: number) => {
+    const updatedOpenModals = [...openModals];
+    updatedOpenModals[index] = false;
+    setOpenModals(updatedOpenModals);
+  };
 
   const toggleIsActive = () => {
     setIsActive(!isActive);
@@ -52,7 +68,6 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
       .get(`${URL()}/student/name/${value.trim()}/type/${searchType}`,
       );
       if (res.data.length > 0) {
-        setCodeData(res.data[0]);
       } else {
         setIsNameIncomplete(true);
         setLoading(false);
@@ -65,7 +80,6 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
         return isMatch;
       });
       console.log(filteredData);
-        //setCodeData(res.data);
         console.log(res.data);
         setStudentData(filteredData);
         onSearchName(filteredData);
@@ -78,11 +92,11 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
     }
   };
   const tableRows = [
-    { imgSrc:'/image/organizadopor.svg', label: 'Organizado por:', value: codeData?.institute },
-    { imgSrc:'/image/otorgado.svg', label: 'Otorgado a:', value: codeData?.name },
-    { imgSrc:'/image/nom_evento.svg', label: 'Nombre del evento:', value: codeData?.activityAcademy },
-    { imgSrc:'/image/creditos_horas.svg', label: 'Creditos/Horas:', value: codeData?.hour },
-    { imgSrc:'/image/fecha_emision.svg', label: 'Fecha de emisión:', value: codeData?.date },
+    { imgSrc:'/image/organizadopor.svg', label: 'Organizado por:', value: selectedStudentData?.institute },
+    { imgSrc:'/image/otorgado.svg', label: 'Otorgado a:', value: selectedStudentData?.name },
+    { imgSrc:'/image/nom_evento.svg', label: 'Nombre del evento:', value: selectedStudentData?.activityAcademy },
+    { imgSrc:'/image/creditos_horas.svg', label: 'Creditos/Horas:', value: selectedStudentData?.hour },
+    { imgSrc:'/image/fecha_emision.svg', label: 'Fecha de emisión:', value: selectedStudentData?.date },
   ];
 
   return (
@@ -149,13 +163,13 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
                 <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.date}</span>
                 </td>
                 <td className="px-6 py-4">
-                  <button type='button' onClick={() => setOpen(true)}
+                  <button type='button' onClick={() => openStudentModal(student as StudentCode, index)}
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                     Ver
                   </button>
                 </td>
-                {codeData && (
-                  <Modal open={open} onClose={() => setOpen(false)}>
+                {selectedStudentData && (
+                  <Modal open={openModals[index]} onClose={() => closeStudentModal(index)}>
                     <div className='flex justify-center mb-4'>
                       <img src={'/image/logo_cip_tacna.png'}className="lg:w-32 lg:h-32 w-28 h-28 object-contain "/>
                       <img src={'/image/logo_cimade.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>

@@ -71,7 +71,7 @@ const Login: React.FC = () => {
 
   return (
   <section className="flex justify-center gradient-form h-full bg-neutral-600">
-    <div className="container h-full p-10">
+    <div className="container h-full p-10 mb-28 mt-20">
       <div
         className="g-6 flex h-full flex-wrap items-center justify-center text-white">
         <div className="w-full">
@@ -137,16 +137,6 @@ const Login: React.FC = () => {
                         value="login"
                         onClick={() => onSubmit()}>
                         Iniciar sesión
-                      </button>
-                    </div>
-
-                    <div className="flex items-center justify-center pb-6">
-                      <button
-                        type="button"
-                        className="inline-block rounded-lg border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-                        data-te-ripple-init
-                        data-te-ripple-color="light">
-                        Register
                       </button>
                     </div>
                   </form>
