@@ -31,25 +31,33 @@ const Banners = () => {
   useEffect(() => {
     const handleNextClick = () => showSlider('next');
     const handlePrevClick = () => showSlider('prev');
-    const handleBackClick = () => {
-      const carousel = document.querySelector('.carousel');
-      carousel.classList.remove('showDetail');
-    };
-
-    nextButtonRef.current.addEventListener('click', handleNextClick);
-    prevButtonRef.current.addEventListener('click', handlePrevClick);
- 
-
+  
+    const nextButton = nextButtonRef.current;
+    const prevButton = prevButtonRef.current;
+  
+    if (nextButton) {
+      nextButton.addEventListener('click', handleNextClick);
+    }
+  
+    if (prevButton) {
+      prevButton.addEventListener('click', handlePrevClick);
+    }
+  
     const intervalId = setInterval(() => {
       showSlider('next');
     }, 10000);
-
+  
     return () => {
       clearInterval(intervalId);
       clearTimeout(unAcceptClick.current);
-      nextButtonRef.current.removeEventListener('click', handleNextClick);
-      prevButtonRef.current.removeEventListener('click', handlePrevClick);
   
+      if (nextButton) {
+        nextButton.removeEventListener('click', handleNextClick);
+      }
+  
+      if (prevButton) {
+        prevButton.removeEventListener('click', handlePrevClick);
+      }
     };
   }, [showSlider]);
 

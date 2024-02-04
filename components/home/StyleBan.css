@@ -132,10 +132,10 @@ header nav a{
     letter-spacing: 1px;
     text-decoration: none;
     color: #fdfdfd;
-    background:#0e3e8b;
+    background:transparent;
     cursor: pointer;
     transition: ease-out 0.5s;
-    border: 2px solid #da10c6;
+    border: 2px solid #ff00d4;
     border-radius: 10px;
     box-shadow: inset 0 0 0 0 #f5f5f5;
   
@@ -145,7 +145,7 @@ header nav a{
     align-items: center;
   
     /* Asegura que el botón tenga un margen automático en lugar de un margen fijo */
-    margin-left: -30%;
+    margin-left: -35%;
     margin-right: auto;
     margin-top: 10%;
     /* Hace el botón responsive ajustando el ancho máximo */
@@ -433,12 +433,21 @@ header nav a{
     }
     .carousel .list .item .introduce .title{
         font-family:sans-serif;
+        margin-top: -40%;
         color: #eee;
         font-size: 3em;
         font-weight: 200;
         line-height: 1em;
         margin-left: -24%;
         
+    }
+    .carousel .list .item img{
+        width: 35%;
+        position:absolute;
+        right: 0;
+        top: 40%;
+        transform: translateY(-50%);
+        transition: right 1.5s;
     }
     .carousel .list .item .introduce .seeMore{
         display: inline-block;
@@ -448,10 +457,10 @@ header nav a{
         letter-spacing: 1px;
         text-decoration: none;
         color: #f9f9f9;
-        background:#f00bab;
+        background:transparent;
         cursor: pointer;
         transition: ease-out 0.5s;
-        border: 2px solid #ffffff;
+        border: 2px solid #ff00d4;
         border-radius: 10px;
         box-shadow: inset 0 0 0 0 #002e79;
       
@@ -472,12 +481,12 @@ header nav a{
 @media screen and (max-width: 767px){
                                 /* IMPORTANTEEEE PARA MOBILE */
     .carousel{
-        height: 600px;
+        height: 420px;
     }
     .carousel .list .item{
         width: 100%;
         font-size: 10px;
-        top: -20%;
+        margin-top:-40%;
     }
     .carousel .list .item .introduce .title{
         font-family:sans-serif;
@@ -486,8 +495,57 @@ header nav a{
         font-weight: 200;
         line-height: 1em;
         margin-left: -25%;
+      
         
     }
+       
+      
+    svg {
+        padding: 5px;
+      }
+      
+      .arrows {
+        cursor: pointer;
+        position: absolute;
+        top: 60%;
+        margin-top: -45px;
+        margin-left: -15px;
+        width: 70px;
+        height: 90px;
+      }
+      
+      .left {
+        left: 42%;
+      }
+      
+      .right {
+        left: 58%;
+      }
+      
+      .left:hover polyline,
+      .left:focus polyline {
+        stroke-width: 3;
+      }
+      
+      .left:active polyline {
+        stroke-width: 6;
+        transition: all 100ms ease-in-out;
+      }
+      
+      .right:hover polyline,
+      .right:focus polyline {
+        stroke-width: 3;
+      }
+      
+      .right:active polyline {
+        stroke-width: 6;
+        transition: all 100ms ease-in-out;
+      }
+      
+      polyline {
+        transition: all 250ms ease-in-out;
+      }
+
     .carousel .list .item .introduce .seeMore{
         display: inline-block;
         padding: 10px 25px;
@@ -496,7 +554,7 @@ header nav a{
         letter-spacing: 1px;
         text-decoration: none;
         color: #f9f9f9;
-        background:#002e79;
+        background:transparent;
         cursor: pointer;
         transition: ease-out 0.5s;
         border: 2px solid #f200c2;
@@ -511,7 +569,7 @@ header nav a{
         /* Asegura que el botón tenga un margen automático en lugar de un margen fijo */
         margin-left: -5%;
         margin-right: auto;
-        margin-top: -45%;
+        margin-top: -55%;
         /* Hace el botón responsive ajustando el ancho máximo */
         max-width: 100%;
         box-sizing: border-box; /* Asegura que el ancho incluya el padding y el borde */
@@ -554,11 +612,11 @@ header nav a{
       .arrows {
         cursor: pointer;
         position: absolute;
-        top: 60%;
+        top: 95%;
         margin-top: -45px;
-        margin-left: -35px;
-        width: 70px;
-        height: 90px;
+        margin-left: -65px;
+        width: 120px;
+        height: 60px;
       }
       
       .left {
