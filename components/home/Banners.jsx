@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import './StyleBan.css';
 
 const Banners = () => {
   const nextButtonRef = useRef(null);
   const prevButtonRef = useRef(null);
-  const backButtonRef = useRef(null);
-  const unAcceppClick = useRef(null);
+  const unAcceptClick = useRef(null);
 
   const showSlider = useCallback((type) => {
     const carousel = document.querySelector('.carousel');
@@ -22,43 +21,37 @@ const Banners = () => {
       carousel.classList.add('prev');
     }
 
-    clearTimeout(unAcceppClick.current);
-    unAcceppClick.current = setTimeout(() => {
+    clearTimeout(unAcceptClick.current);
+    unAcceptClick.current = setTimeout(() => {
       nextButtonRef.current && (nextButtonRef.current.style.pointerEvents = 'auto');
       prevButtonRef.current && (prevButtonRef.current.style.pointerEvents = 'auto');
     }, 2000);
   }, []);
 
-  const handleNextClick = useCallback(() => {
-    showSlider('next');
-  }, [showSlider]);
-
-  const handlePrevClick = useCallback(() => {
-    showSlider('prev');
-  }, [showSlider]);
-
-  const handleBackClick = useCallback(() => {
-    const carousel = document.querySelector('.carousel');
-    carousel.classList.remove('showDetail');
-  }, []);
-
   useEffect(() => {
-    if (nextButtonRef.current && prevButtonRef.current && backButtonRef.current) {
-      nextButtonRef.current.addEventListener('click', handleNextClick);
-      prevButtonRef.current.addEventListener('click', handlePrevClick);
-      backButtonRef.current.addEventListener('click', handleBackClick);
-    }
+    const handleNextClick = () => showSlider('next');
+    const handlePrevClick = () => showSlider('prev');
+    const handleBackClick = () => {
+      const carousel = document.querySelector('.carousel');
+      carousel.classList.remove('showDetail');
+    };
+
+    nextButtonRef.current.addEventListener('click', handleNextClick);
+    prevButtonRef.current.addEventListener('click', handlePrevClick);
+ 
 
     const intervalId = setInterval(() => {
       showSlider('next');
     }, 10000);
 
-    // Limpieza del intervalo al desmontar el componente para evitar fugas de memoria
     return () => {
       clearInterval(intervalId);
-      clearTimeout(unAcceppClick.current);
+      clearTimeout(unAcceptClick.current);
+      nextButtonRef.current.removeEventListener('click', handleNextClick);
+      prevButtonRef.current.removeEventListener('click', handlePrevClick);
+  
     };
-  }, [handleNextClick, handlePrevClick, handleBackClick, showSlider]);
+  }, [showSlider]);
 
   return (
     <>
