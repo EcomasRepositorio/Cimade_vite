@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import SearchCode from '@/components/certificate/SearchCode';
 import SearchDNI from '@/components/certificate/SearchDNI';
 import SearchName from '@/components/certificate/SearchName';
+import { BsQrCodeScan } from "react-icons/bs";
+import { BsPersonVcard, BsPersonSquare } from "react-icons/bs";
+import './Styles.css'
 
 const Certificate: React.FC = () => {
 
@@ -29,33 +32,33 @@ const Certificate: React.FC = () => {
           </div>
       </div>
         <div className="">
-          <h2 className="mb-4 mt-36 lg:mt-20 text-5xl font-extrabold tracking-tight text-gray-500">
+          <h2 className="mb-4 mt-20 text-4xl font-extrabold text-gray-500">
             Certificados
           </h2>
-          <p className="font-light text-gray-500 sm:text-xl">
+          <p className="font-semibold text-gray-500 sm:text-xl">
             En este módulo podrá realizar la búsqueda de certificados de los diferentes eventos ofrecidos por CIMADE.
           </p>
-          <p className="mb-6 mt-6 lg:mt-10 text-xl tracking-tight text-gray-900">
+          <p className="mb-6 mt-6 lg:mt-10 text-xl tracking-tight font-semibold text-gray-500">
             Buscar por:
           </p>
-          <div className='lg:flex flex-wrap justify-center items-center p-4 text-center lg:gap-16'>
+          <div className='lg:flex flex-wrap justify-center items-center text-center lg:ml-56 lg:mr-56'>
             <button
             onClick={() => handleButton('documentNumber')}
-            className={`mb-6 text-white bg-indigo-600 hover:bg-indigo-700 font-semibold rounded-lg text-md px-5 py-2.5 text-center
-              ${searchType === 'documentNumber' && 'bg-indigo-700'}`}>
-              Buscar por DNI
+            className={`buttonGlobal lg:mb-20 mb-4 font-bold rounded-lg text-md px-7 py-3 text-center inline-block
+              ${searchType === 'documentNumber' && ''}`}>
+              <BsPersonVcard className='text-xl inline-block align-text-top mr-1' />Buscar por DNI
             </button>
             <button
             onClick={() => handleButton('name')}
-            className={`mb-6 ml-6 mr-6 text-white bg-indigo-600 hover:bg-indigo-700 font-semibold rounded-lg text-md px-5 py-2.5 text-center
-              ${searchType === 'name' && 'bg-indigo-700'}`}>
-              Buscar por nombre
+            className={`buttonGlobal lg:mb-20 mb-4 ml-6 mr-6 font-bold rounded-lg text-md px-3 py-3 text-center
+              ${searchType === 'name' && ''}`}>
+              <BsPersonSquare className='text-lg inline-block align-text-top mr-1' />Buscar por nombre
             </button>
             <button
             onClick={() => handleButton('code')}
-            className={`mb-6 text-white bg-indigo-600 hover:bg-indigo-700 font-semibold rounded-lg text-md px-5 py-2.5 text-center
-            ${searchType === 'code' && 'bg-indigo-700'}`}>
-              Buscar por código
+            className={`buttonGlobal lg:mb-20 mb-5 font-bold rounded-lg text-md px-4 py-3 text-center inline-block
+            ${searchType === 'code' && ''}`}>
+              <BsQrCodeScan className='text-lg inline-block align-text-top mr-1' /> Buscar por código
             </button>
           </div>
 

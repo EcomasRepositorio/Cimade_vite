@@ -66,17 +66,17 @@ const Login: React.FC = () => {
     }
   };
   const buttonStyle = {
-      background: "linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)",
+      background: "linear-gradient(to right, #006eb0, #b44593)",
     };
 
   return (
   <section className="flex justify-center gradient-form h-full bg-neutral-600">
-    <div className="container h-full p-10 mb-28 mt-20">
+    <div className="container h-full p-10 mb-2 lg:mb-24 lg:mt-16 mt-0">
       <div
         className="g-6 flex h-full flex-wrap items-center justify-center text-white">
         <div className="w-full">
           <div
-            className="block rounded-3xl bg-neutral-800 shadow-lg">
+            className="block rounded-3xl bg-neutral-300 shadow-lg">
             <div className="g-0 lg:flex lg:flex-wrap">
 
               <div className="px-4 md:px-0 lg:w-6/12">
@@ -85,13 +85,11 @@ const Login: React.FC = () => {
                   <div className="text-center">
                     <img
                       className="mx-auto w-48"
-                      src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                      src="/image/logo_cimade.png"
                       alt="logo" />
                     <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
-                      CIMADE
                     </h4>
                   </div>
-
                   <form>
                     <p className="flex justify-center mb-8 font-semibold text-xl">Iniciar sesión</p>
                       {resErrors?.message && (
@@ -126,7 +124,6 @@ const Login: React.FC = () => {
                         >
                       </label>
                     </div>
-
                     <div className="mb-12 pb-1 pt-1 text-center">
                       <button
                         className="mb-3 inline-block w-36 rounded-lg px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"

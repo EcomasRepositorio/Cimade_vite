@@ -102,8 +102,11 @@ const User = () => {
   };
 
   return (
-      <section id="/user">
-        <h1 className="uppercase text-center text-2xl font-bold text-gray-700 p-5">Registro de usuarios</h1>
+      <section id="user">
+        <div className='flex justify-center mt-8'>
+        <a className="uppercase border rounded-2xl shadow-2xl text-center text-xl font-bold text-gray-500 p-4">
+          Registro de usuarios</a>
+        </div>
         <div className='flex justify-end'>
         <button
           type="button"
@@ -114,9 +117,9 @@ const User = () => {
             Registrar
         </button>
         <button type="button" onClick={handleLogout}
-  className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-xs px-2 py-2 text-center mb-1 me-4 dark:hover:text-white dark:focus:ring-red-200">
-    <FiLogOut className='text-lg' />
-  </button>
+        className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-xs px-2 py-2 text-center mb-1 me-4 dark:hover:text-white dark:focus:ring-red-200">
+          <FiLogOut className='text-lg' />
+        </button>
         </div>
         {modalOpen && (
         <UserRegister onCreateSuccess={handleRegisterSuccess} onCloseModal={handleCloseCreateForm} />

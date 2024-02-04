@@ -24,6 +24,7 @@ import User from '@/app/user/page'
 import { AuthProvider } from '@/components/utils/format/authContext';
 import { useRouter } from 'next/router';
 import ProtectedRouteContent from '@/components/utils/format/ruote';
+import Link from 'next/link';
 
 const Student = () => {
   const [isActive, setIsActive] = useState(false);
@@ -132,13 +133,12 @@ const Student = () => {
   //SearchStudents
   const handleSearchStudent = async (query: string, queryValue: string) => {
     try {
-      setLoading(true);
       console.log('Valor de query:', query);
       setQueryValue(queryValue);
       if (queryValue === 'documentNumber') {
-      const url = `${URL()}/student/dni/${(queryValue)}/type/${query}`; // Reemplaza 'someType' con el tipo adecuado
-      console.log('Hola url: ',url)
-      const response = await axios.get(url);
+        const url = `${URL()}/student/dni/${(queryValue)}/type/${query}`; // Reemplaza 'someType' con el tipo adecuado
+        console.log('Hola url: ',url)
+        const response = await axios.get(url);
       setStudentData(response.data);
       setIsSearchActive(true)
       } else {
@@ -233,13 +233,11 @@ const Student = () => {
   };
 
   return (
-  <AuthProvider>
-  <ProtectedRouteContent allowedRoles={['ADMIN', 'USER']}>
     <section className="p-2">
-  <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
-    <h1>ADMINISTRAR ESTUDIANTES</h1>
+  <div className="text-center text-gray-500 p-6 text-2xl font-semibold">
+    <a className='border shadow-2xl p-4 rounded-xl'>ADMINISTRAR ESTUDIANTES</a>
   </div>
-  <div className="flex flex-col sm:flex-row border-2 shadow-xl rounded-xl lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
+  <div className="flex flex-col sm:flex-row border-2 mt-6 mb-6 shadow-xl rounded-xl lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
   <div className="flex flex-col items-center md:flex-row justify-center">
   <div className="flex-grow mb-2 md:mb-0 md:mr-2">
     <SearchStudent onSearchDNI={(query: string, queryValue: string) => handleSearchStudent(query, queryValue)} />
@@ -297,7 +295,8 @@ const Student = () => {
   </div>
 
 </div>
-{loading && <p>Cargando...</p>}
+{loading && <a href='https://tenor.com/es/view/bar-penguin-waiting-loading-pudgy-gif-7185161825979534095'>
+  Cargando...</a>}
 {dataLoading && memoryData && (
 <div className="overflow-x-auto bg-white p-2 mt-4">
   <table className="min-w-full text-sm whitespace-nowrap shadow-2xl">
@@ -331,8 +330,10 @@ const Student = () => {
         <td className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.code}</span>
         </td>
-        <td className="px-6 py-4">
-        <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.activityAcademy}</span>
+        <td className="px- py-">
+        <span style={{ whiteSpace: 'normal', display: 'block', maxWidth: '1200px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          {student.activityAcademy}
+        </span>
         </td>
         <td className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.participation}</span>
@@ -389,15 +390,6 @@ const Student = () => {
         </button>
       </li>
       {renderPageButtons()}
-      {/* {Array.from({ length: Math.ceil(memoryData.length / itemsPerPage) }, (_, index) => (
-      <li>
-        <button
-        className="block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
-          onClick={() => handlePageChange(index + 1)}>
-            {index + 1}
-        </button>
-      </li>
-       ))} */}
       <li>
         <button className=" block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:hover:text-white"
           onClick={() => handlePageChange(Math.min(pageCount, currentPage + 1))}>
@@ -409,8 +401,6 @@ const Student = () => {
 </div>
 )}
 </section>
-</ProtectedRouteContent>
-</AuthProvider>
   )
 };
 export default Student;

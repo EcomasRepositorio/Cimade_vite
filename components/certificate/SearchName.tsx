@@ -112,7 +112,7 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
           <input
             type="search"
             id="default-search"
-            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-black"
+            className="block w-full font-semibold p-4 ps-10 text-sm text-gray-900 border-2 border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:placeholder-gray-400 dark:text-black"
             placeholder={`Buscar por nombre ${searchType === 'name' ? 'nombre' : ''}`}
             required
             onClick={toggleIsActive}
@@ -120,7 +120,7 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
             value={queryValue}
             />
           <button type="submit"
-            className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
+            className="buttonGlobal absolute end-1.5 bottom-3 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-1.5">
             Buscar
           </button>
         </div>
@@ -151,7 +151,7 @@ const SearchName:React.FC<SearchNameProps> = ({ onSearchName }) => {
               <tr key={index} className="bg-white border-b text-center hover:bg-gray-100">
                 <th scope="row"
                 className="px-6 py-4 font-medium whitespace-nowrap w-12">
-                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.id}</span>
+                <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{index + 1}</span>
                 </th>
                 <td className="px-6 py-4">
                 <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.name}</span>
