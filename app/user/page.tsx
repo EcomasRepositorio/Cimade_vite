@@ -102,7 +102,7 @@ const User = () => {
   };
 
   return (
-      <div>
+      <section id="/user">
         <h1 className="uppercase text-center text-2xl font-bold text-gray-700 p-5">Registro de usuarios</h1>
         <div className='flex justify-end'>
         <button
@@ -204,7 +204,7 @@ const User = () => {
             </table>
           </div>
         )}
-      </div>
+      </section>
   )
 }
 

@@ -1,31 +1,32 @@
-import React from 'react';
-import { Route, Navigate, PathRouteProps, useNavigate } from 'react-router-dom';
-import { useAuth } from './authContext';
+// components/utils/format/route.tsx
 
-interface ProtectedRouteProps extends PathRouteProps {
+import React, { useEffect } from 'react';
+import { Route } from 'react-router-dom';
+import { useAuth } from './authContext';
+import { useRouter } from 'next/router';
+// Asegúrate de importar desde 'react-router-dom'
+
+interface ProtectedRouteProps {
   allowedRoles?: string[];
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles, ...rest }) => {
-  const navigate = useNavigate();
-  const authContext = useAuth();
-
-  if (!authContext) {
-    return <Navigate to="/login" />;
-  }
-
+const ProtectedRouteContent: React.FC<ProtectedRouteProps> = ({ allowedRoles, ...rest }) => {
   const { decodedToken } = useAuth();
-  const isAuthenticated = decodedToken !== null;
+  const router = useRouter();
 
-  if (isAuthenticated) {
-    if (allowedRoles && allowedRoles.length > 0 && !allowedRoles.includes(decodedToken?.role || '')) {
-      return <Navigate to="/denied" />;
-    }
+  useEffect(() => {
+    const handleRouteRedirect = () => {
+      if (!decodedToken) {
+        router.push('/login');
+      } else if (allowedRoles && allowedRoles.length > 0 && !allowedRoles.includes(decodedToken?.role || '')) {
+        router.push('/denied');
+      }
+    };
 
-    return <Route {...rest} />;
-  }
+    handleRouteRedirect();
+  }, [decodedToken, allowedRoles, router]);
 
-  return <Navigate to="/login" />;
+  return <Route {...rest} />;
 };
 
-export default ProtectedRoute;
+export default ProtectedRouteContent;

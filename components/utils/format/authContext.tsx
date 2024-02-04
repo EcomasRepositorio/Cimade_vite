@@ -8,12 +8,11 @@ interface AuthContextProps {
 }
 
 interface AuthProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 interface DecodedToken {
   role: string;
-  // Agrega otras propiedades según tus necesidades
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -21,22 +20,16 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [decodedToken, setDecodedToken] = useState<DecodedToken | null>(null);
 
-  // Aquí puedes agregar lógica para verificar y decodificar el token almacenado en localStorage
-
   useEffect(() => {
-    // Ejemplo de cómo podrías decodificar el token (asegúrate de agregar tu propia lógica aquí)
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
-      // Decodificar y establecer el token
       const decodedToken = decodeToken(storedToken);
       setDecodedToken(decodedToken);
     }
   }, []);
 
-  // Función para decodificar el token (puedes usar tu propia lógica aquí)
   const decodeToken = (token: string): DecodedToken | null => {
     try {
-      // Ejemplo simple de decodificación (puedes usar bibliotecas como jwt-decode)
       const decoded: DecodedToken = JSON.parse(atob(token.split('.')[1]));
       return decoded;
     } catch (error) {

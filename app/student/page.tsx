@@ -19,9 +19,11 @@ import CreateStudentExcel from '@/components/student/StudentsAll';
 import SearchStudent from '@/components/student/SearchStudent';
 import { logout } from '@/components/utils/auth.server';
 import DuplicatedCode from '@/components/student/VerifyCode';
-import { Link } from 'react-router-dom';
 import ProtectedRoute from '@/components/utils/format/ruote';
 import User from '@/app/user/page'
+import { AuthProvider } from '@/components/utils/format/authContext';
+import { useRouter } from 'next/router';
+import ProtectedRouteContent from '@/components/utils/format/ruote';
 
 const Student = () => {
   const [isActive, setIsActive] = useState(false);
@@ -231,6 +233,8 @@ const Student = () => {
   };
 
   return (
+  <AuthProvider>
+  <ProtectedRouteContent allowedRoles={['ADMIN', 'USER']}>
     <section className="p-2">
   <div className="text-center text-gray-600 p-6 text-3xl font-semibold">
     <h1>ADMINISTRAR ESTUDIANTES</h1>
@@ -281,12 +285,10 @@ const Student = () => {
       onCloseModal={handleCloseCreateExcel}
       />
   )}
+    {/* <ProtectedRoute path='/user' allowedRoles={['ADMIN']} element={<User/>} /> */}
       <button type="button" className="text-yellow-500 hover:text-white border-2 border-yellow-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-xs px-2 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-yellow-200">
         <FiUserPlus  className='text-lg' />
       </button>
-  {/* <Link to='/user'>
-    <ProtectedRoute path='/user' allowedRoles={['ADMIN']} element={<User/>} />
-  </Link> */}
 
   <button type="button" onClick={handleLogout}
   className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-xs px-2 py-2 text-center mb-1 dark:hover:text-white dark:focus:ring-red-200">
@@ -407,6 +409,8 @@ const Student = () => {
 </div>
 )}
 </section>
+</ProtectedRouteContent>
+</AuthProvider>
   )
 };
 export default Student;
