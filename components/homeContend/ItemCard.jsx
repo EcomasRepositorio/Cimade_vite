@@ -7,7 +7,7 @@ export const ItemCard = ({ number, description, animated, animation, icon }) => 
     let interval;
     if (animated) {
       interval = setInterval(() => {
-        setCount((prevCount) => (prevCount < parseInt(number, 10) ? prevCount + 100 : parseInt(number, 10)));
+        setCount((prevCount) => (prevCount < parseInt(number, 10) ? prevCount + 85 : parseInt(number, 10)));
       }, 25);
     }
     return () => clearInterval(interval);

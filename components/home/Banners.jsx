@@ -63,9 +63,9 @@ const Banners = () => {
 
   return (
     <>
-      <div className="bannerBack">
+      <div className="bannerBack" >
         <header></header>
-        <div className="carousel">
+        <div className="carousel "> 
           <div className="list">
             {/* ... */}
             <div className="item">
@@ -89,7 +89,7 @@ const Banners = () => {
 
 
             <div className="item">
-                <img src="image/bannerTwo.png"/>
+                <img src="image/supra2.png"/>
                 <div className="introduce">
                     <div className="title mb-4">Descubre Diplomados y Cursos virtuales de excelencia.</div>
                     

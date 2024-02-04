@@ -11,10 +11,10 @@ const Graduates = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 place-items-center">
         <div className="max-w-md bg-white rounded-md overflow-hidden shadow-md">
           {/* ... Contenido de la primera tarjeta ... */}
-          <img src="/image/test.png" alt="Instalación de Mikrotik" className="w-full h-48 object-cover" />
+          <img src="/image/test.png" alt="Lorem Hipsus" className="w-full h-48 object-cover" />
           <div className="p-4">
-          <h2 className="text-xl font-semibold mb-2">Instalación de Mikrotik</h2>
-          <p className="text-gray-600">Nuestra instalación de Mikrotik ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
+          <h2 className="text-xl font-semibold mb-2">Lorem Hipsus</h2>
+          <p className="text-gray-600">Nuestra Lorem Hipsus ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
           <a
             href="https://api.whatsapp.com/send?phone=51900102090"
             target="_blank"
@@ -28,10 +28,10 @@ const Graduates = () => {
   
         <div className="max-w-md bg-white rounded-md overflow-hidden shadow-md">
           {/* ... Contenido de la segunda tarjeta ... */}
-          <img src="/image/test.png" alt="Instalación de Mikrotik" className="w-full h-48 object-cover" />
+          <img src="/image/test.png" alt="Lorem Hipsus" className="w-full h-48 object-cover" />
           <div className="p-4">
-          <h2 className="text-xl font-semibold mb-2">Instalación de Mikrotik</h2>
-          <p className="text-gray-600">Nuestra instalación de Mikrotik ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
+          <h2 className="text-xl font-semibold mb-2">Lorem Hipsus</h2>
+          <p className="text-gray-600">Nuestra Lorem Hipsus ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
           <a
             href="https://api.whatsapp.com/send?phone=51900102090"
             target="_blank"
@@ -45,10 +45,10 @@ const Graduates = () => {
   
         <div className="max-w-md bg-white rounded-md overflow-hidden shadow-md">
           {/* ... Contenido de la tercera tarjeta ... */}
-          <img src="/image/test.png" alt="Instalación de Mikrotik" className="w-full h-48 object-cover" />
+          <img src="/image/test.png" alt="Lorem Hipsus" className="w-full h-48 object-cover" />
           <div className="p-4">
-          <h2 className="text-xl font-semibold mb-2">Instalación de Mikrotik</h2>
-          <p className="text-gray-600">Nuestra instalación de Mikrotik ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
+          <h2 className="text-xl font-semibold mb-2">Lorem Hipsus</h2>
+          <p className="text-gray-600">Nuestra Lorem Hipsus ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
           <a
             href="https://api.whatsapp.com/send?phone=51900102090"
             target="_blank"
@@ -69,10 +69,10 @@ const Graduates = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 place-items-center mb-16">
         <div className="max-w-md bg-white rounded-md overflow-hidden shadow-md">
           {/* ... Contenido de la cuarta tarjeta ... */}
-          <img src="/image/test.png" alt="Instalación de Mikrotik" className="w-full h-48 object-cover" />
+          <img src="/image/test.png" alt="Lorem Hipsus" className="w-full h-48 object-cover" />
           <div className="p-4">
-          <h2 className="text-xl font-semibold mb-2">Instalación de Mikrotik</h2>
-          <p className="text-gray-600">Nuestra instalación de Mikrotik ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
+          <h2 className="text-xl font-semibold mb-2">Lorem Hipsus</h2>
+          <p className="text-gray-600">Nuestra Lorem Hipsus ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
           <a
             href="https://api.whatsapp.com/send?phone=51900102090"
             target="_blank"
@@ -86,10 +86,10 @@ const Graduates = () => {
   
         <div className="max-w-md bg-white rounded-md overflow-hidden shadow-md">
           {/* ... Contenido de la quinta tarjeta ... */}
-          <img src="/image/test.png" alt="Instalación de Mikrotik" className="w-full h-48 object-cover" />
+          <img src="/image/test.png" alt="Lorem Hipsus" className="w-full h-48 object-cover" />
           <div className="p-4">
-          <h2 className="text-xl font-semibold mb-2">Instalación de Mikrotik</h2>
-          <p className="text-gray-600">Nuestra instalación de Mikrotik ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
+          <h2 className="text-xl font-semibold mb-2">Lorem Hipsus</h2>
+          <p className="text-gray-600">Nuestra Lorem Hipsus ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de red.</p>
           <a
             href="https://api.whatsapp.com/send?phone=51900102090"
             target="_blank"
@@ -103,10 +103,10 @@ const Graduates = () => {
   
         <div className="max-w-md bg-white rounded-md overflow-hidden shadow-md">
           {/* ... Contenido de la sexta tarjeta ... */}
-          <img src="/image/test.png" alt="Instalación de Mikrotik" className="w-full h-48 object-cover" />
+          <img src="/image/test.png" alt="Lorem Hipsus" className="w-full h-48 object-cover" />
           <div className="p-4">
-          <h2 className="text-xl font-semibold mb-2">Instalación de Mikrotik</h2>
-          <p className="text-gray-600">Nuestra instalación de Mikrotik ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de reddddd.</p>
+          <h2 className="text-xl font-semibold mb-2">Lorem Hipsus</h2>
+          <p className="text-gray-600">Nuestra Lorem Hipsus ofrece soluciones eficientes y confiables para optimizar tu red. Obtén una configuración experta y personalizada que maximizará el rendimiento y la seguridad de tu infraestructura de reddddd.</p>
           <a
             href="https://api.whatsapp.com/send?phone=51900102090"
             target="_blank"
