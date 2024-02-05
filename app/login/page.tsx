@@ -66,17 +66,17 @@ const Login: React.FC = () => {
     }
   };
   const buttonStyle = {
-      background: "linear-gradient(to right, #006eb0, #b44593)",
+      background: "linear-gradient(to right, #002e79, #006eb0)",
     };
 
   return (
-  <section className="flex justify-center gradient-form h-full bg-neutral-600">
+  <section className="flex justify-center gradient-form h-full bg-neutral-200">
     <div className="container h-full p-10 mb-2 lg:mb-24 lg:mt-16 mt-0">
       <div
-        className="g-6 flex h-full flex-wrap items-center justify-center text-white">
+        className="g-6 flex h-full flex-wrap items-center justify-center text-gray-700">
         <div className="w-full">
           <div
-            className="block rounded-3xl bg-neutral-300 shadow-lg">
+            className="block rounded-3xl bg-neutral-100 shadow-lg">
             <div className="g-0 lg:flex lg:flex-wrap">
 
               <div className="px-4 md:px-0 lg:w-6/12">
@@ -91,7 +91,7 @@ const Login: React.FC = () => {
                     </h4>
                   </div>
                   <form>
-                    <p className="flex justify-center mb-8 font-semibold text-xl">Iniciar sesión</p>
+                    <p className="flex justify-center text-gray-600 mb-8 font-semibold text-xl">Iniciar sesión</p>
                       {resErrors?.message && (
                         <span className="text-error text-sm">{resErrors.message}</span>
                       )}
@@ -147,12 +147,10 @@ const Login: React.FC = () => {
                   <h4 className="mb-6 text-xl font-semibold">
                     We are more than just a company
                   </h4>
-                  <p className="text-sm">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex
-                    ea commodo consequat.
+                  <p className="text-lg font-semibold">
+                    Cimade Con una sólida trayectoria de 4 años, nuestra institución se destaca por su compromiso en la formación y desarrollo de profesionales.
+                    Ofrecemos cursos y diplomados de alta calidad que impulsan el crecimiento y la capacitación en áreas clave. Nuestra dedicación a la excelencia
+                    educativa y la adaptabilidad a las demandas del mercado nos permiten marcar una diferencia significativa en la formación de profesionales.
                   </p>
                 </div>
               </div>

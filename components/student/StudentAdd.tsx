@@ -117,16 +117,16 @@ const CreateStudentForm: React.FC<CreateStudentFormProps> = ({ onCloseModal, onC
         </div>
     <div className='flex justify-between col-span-2 whitespace-pre-wrap'>
         <div className="mb-4">
-          <label className="text-xs font-bold">Hora: </label>
+          <label className="text-xs font-bold">Hora/Creditos: </label>
           <input {...register('hour', {required: true})}
-          className={`border rounded-lg p-1 lg:w-32 w-28 ${errors?.hour ? 'border-red-500' : ''}`} />
+          className={`border rounded-lg p-1 lg:w-36 w-36 ${errors?.hour ? 'border-red-500' : ''}`} />
           {errors?.hour && (
             <span className="text-xs font-mono block text-red-400">{errors.hour.message}</span>
           )}
         </div>
         <div className="mb-4 lg:ml-3">
           <label className="text-xs font-bold ">Fecha: </label>
-          <input {...register('date', {required: true})} className="border rounded-lg p-1 lg:w-32 w-24" />
+          <input {...register('date', {required: true})} className="border rounded-lg p-1 lg:w-44 w-36" />
         </div>
     </div>
         <div className="mb-4 text-xs col-span-full md:col-span-2">

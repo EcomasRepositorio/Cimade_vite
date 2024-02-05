@@ -73,7 +73,6 @@ const DuplicatedCode: React.FC<DuplicatedCodesDetectorProps> = ({ studentData, i
   <ModalTable open={isModalOpen} onClose={handleTableModalClose}>
    <div className="overflow-x-auto bg-white p-2 mt-4">
     <table className="min-w-full text-sm whitespace-nowrap shadow-2xl">
-
     <thead className="uppercase text-center tracking-wider bg-neutral-300">
       <tr className="text-gray-700 ">
         <th scope="col" className="px-6 py-4">#</th>

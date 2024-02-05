@@ -103,7 +103,7 @@ const User = () => {
 
   return (
       <section id="user">
-        <div className='flex justify-center mt-8'>
+        <div className='flex justify-center mt-8 mb-8'>
         <a className="uppercase border rounded-2xl shadow-2xl text-center text-xl font-bold text-gray-500 p-4">
           Registro de usuarios</a>
         </div>
