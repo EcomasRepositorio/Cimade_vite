@@ -19,7 +19,7 @@ const ContactForm = () => {
   
 
   return (
-    <div className='' style={{ backgroundImage: 'url("/image/morado2.jpg")', backgroundPosition: 'center top', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+    <div className='' style={{ backgroundImage: 'url("/image/morado3.png")', backgroundPosition: 'center top', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
       <div className=''>
         <div className="container my-24 px-6 mx-auto  ">
           <section className="text-gray-800">

@@ -3,7 +3,8 @@ body{
     margin: 0;
     font-family: Poppins;
     height: 100vh; /* Establece la altura al 100% del viewport height    dos cuatro cinco */
-    background:url('/image/morado2.jpg');
+    background:url('/image/morado5.png') center center;
+    background-size: cover;
     
 }
 :root{
