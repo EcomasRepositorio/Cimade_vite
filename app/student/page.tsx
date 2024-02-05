@@ -19,11 +19,6 @@ import CreateStudentExcel from '@/components/student/StudentsAll';
 import SearchStudent from '@/components/student/SearchStudent';
 import { logout } from '@/components/utils/auth.server';
 import DuplicatedCode from '@/components/student/VerifyCode';
-import ProtectedRoute from '@/components/utils/format/ruote';
-import User from '@/app/user/page'
-import { AuthProvider } from '@/components/utils/format/authContext';
-import { useRouter } from 'next/router';
-import ProtectedRouteContent from '@/components/utils/format/ruote';
 import Link from 'next/link';
 
 const Student = () => {
@@ -39,7 +34,6 @@ const Student = () => {
   const [errorModalOpen, setErrorModalOpen] = useState(false)
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isDuplicatedCodesModalOpen, setIsDuplicatedCodesModalOpen] = useState(false);
-  const [numerations, setNumerations] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [offset, setOffset] = useState(0);
@@ -177,7 +171,7 @@ const Student = () => {
 
   const memoryData = useMemo(() => studentData, [studentData]);
   //Pagination
-  const itemsPerPage = 50
+  const itemsPerPage = 10
   const handlePageChange = (newPage: number) => {
     setLimit(20);
     setOffset(10);
@@ -234,7 +228,7 @@ const Student = () => {
 
   return (
     <section className="p-2">
-  <div className="text-center text-gray-500 p-6 text-2xl font-semibold">
+  <div className="text-center text-gray-500 lg:p-6 p-0 mt-8 mb-10 text-2xl font-semibold">
     <a className='border shadow-2xl p-4 rounded-xl'>ADMINISTRAR ESTUDIANTES</a>
   </div>
   <div className="flex flex-col sm:flex-row border-2 mt-6 mb-6 shadow-xl rounded-xl lg:ml-10 lg:mr-10 justify-between p-2 bg-white">
@@ -275,7 +269,8 @@ const Student = () => {
     type="button"
     className="text-green-600 uppercase hover:text-white border-2 border-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1  dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-200 inline-flex items-center"
     onClick={handleCreateStudentExcel}>
-      <RiFileExcel2Line className='mr-1 text-lg' /> Importar
+      <RiFileExcel2Line className='mr-1 text-lg' />
+      Importar
   </button>
     {createStudentExcel && (
       <CreateStudentExcel
@@ -284,9 +279,9 @@ const Student = () => {
       />
   )}
     {/* <ProtectedRoute path='/user' allowedRoles={['ADMIN']} element={<User/>} /> */}
-      <button type="button" className="text-yellow-500 hover:text-white border-2 border-yellow-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-xs px-2 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-yellow-200">
+      <Link href='/user' className="text-yellow-500 hover:text-white border-2 border-yellow-400 hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-xs px-2 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-yellow-200">
         <FiUserPlus  className='text-lg' />
-      </button>
+      </Link>
 
   <button type="button" onClick={handleLogout}
   className="text-red-500 hover:text-white border-2 border-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-xs px-2 py-2 text-center mb-1 dark:hover:text-white dark:focus:ring-red-200">
@@ -319,7 +314,7 @@ const Student = () => {
       {visibleData.map((student, index) => (
       <tr key={index} className="text-center text-gray-500 border-b font-semibold hover:bg-gray-100">
         <th scope="row" className="px-6 py-4">
-          <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{visibleData.length - index}</span>
+          <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{memoryData.length - (startIndex + index)}</span>
         </th>
         <td className="px-6 py-4">
         <span style={{ whiteSpace: 'nowrap', display: 'block' }}>{student.documentNumber}</span>
