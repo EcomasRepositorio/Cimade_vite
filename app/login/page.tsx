@@ -34,8 +34,6 @@ const Login: React.FC = () => {
   };
 
   const saveToken = (token: string) => {
-    // Aquí puedes guardar el token en el estado local, en una cookie, o en otro lugar seguro.
-    // Por ejemplo, utilizando localStorage:
     localStorage.setItem('token', token);
   };
 
@@ -45,7 +43,6 @@ const Login: React.FC = () => {
         console.log(response);
       if (response.data.token) {
         const token = response.data.token;
-        // Guarda el token
         saveToken(token);
         window.location.href = 'student';
       }
@@ -68,15 +65,14 @@ const Login: React.FC = () => {
   const buttonStyle = {
       background: "linear-gradient(to right, #002e79, #006eb0)",
     };
-
   return (
-  <section className="flex justify-center gradient-form h-full bg-neutral-200">
+  <section className="flex justify-center gradient-form h-full bg-neutral-100">
     <div className="container h-full p-10 mb-2 lg:mb-24 lg:mt-16 mt-0">
       <div
-        className="g-6 flex h-full flex-wrap items-center justify-center text-gray-700">
+        className="g-6 flex h-full flex-wrap items-center justify-center text-gray-600">
         <div className="w-full">
           <div
-            className="block rounded-3xl bg-neutral-100 shadow-lg">
+            className="block rounded-3xl bg-neutral-200 shadow-lg">
             <div className="g-0 lg:flex lg:flex-wrap">
 
               <div className="px-4 md:px-0 lg:w-6/12">
@@ -148,9 +144,14 @@ const Login: React.FC = () => {
                     We are more than just a company
                   </h4>
                   <p className="text-lg font-semibold">
+
                     Cimade Con una sólida trayectoria de 4 años, nuestra institución se destaca por su compromiso en la formación y desarrollo de profesionales.
                     Ofrecemos cursos y diplomados de alta calidad que impulsan el crecimiento y la capacitación en áreas clave. Nuestra dedicación a la excelencia
                     educativa y la adaptabilidad a las demandas del mercado nos permiten marcar una diferencia significativa en la formación de profesionales.
+
+                  Cimade con una sólida trayectoria de 4 años, nuestra institución se destaca por su compromiso en la formación y desarrollo de profesionales.
+                  Ofrecemos cursos y diplomados de alta calidad que impulsan el crecimiento y la capacitación en áreas clave. Nuestra dedicación a la excelencia
+                  educativa y la adaptabilidad a las demandas del mercado nos permiten marcar una diferencia significativa en la formación de profesionales.
                   </p>
                 </div>
               </div>
