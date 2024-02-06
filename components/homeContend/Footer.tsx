@@ -14,12 +14,12 @@ export const Footer = () => {
               <p className="mb-3 text-x1 font-bold tracking-wider text-gray-50 uppercase">Contáctanos</p>
               <a href="https://api.whatsapp.com/send?phone=51900102090" className="flex mb-3 text-lg font-medium transition md:mb-2">
                 <img src="/icons/iconsFooter/footer_whatsapp.svg" alt="Phone Icon" className="w-6 h-6 mr-2" />
-                <button className="text">900 102 090</button>
+                <button className=" a text">900 102 090</button>
               </a>
               
               <a href="mailto:capacitaciones@cimade.edu.pe" className="flex mb-3 text-lg font-medium transition md:mb-2">
               <img src="/icons/iconsFooter/footer_correo.svg" alt="Correo Icono" className="w-6 h-6 mr-2" />
-                <button className="text">capacitaciones@cimade.edu.pe</button>
+                <button className="a text">capacitaciones@cimade.edu.pe</button>
               </a>
 
               <a href="" className="flex mb-3 text-lg font-medium transition md:mb-2">
@@ -35,23 +35,23 @@ export const Footer = () => {
             <p className="text-center mb-3 text-xl font-bold tracking-wider text-gray-50 uppercase">Nuestra Empresa</p>
             <div className="flex flex-col items-center">
               <a href="#">
-                <button className="text mb-3">Inicio</button>
+                <button className="a text mb-3">Inicio</button>
               </a>
 
               <a href="#">
-                <button className="text mb-3">Diplomados</button>
+                <button className="a text mb-3">Diplomados</button>
               </a>
 
               <a href="#">
-                <button className="text mb-3">Certificados</button>
+                <button className="a text mb-3">Certificados</button>
               </a>
 
               <a href="#">
-                <button className="text mb-3">Nosotros</button>
+                <button className="a text mb-3">Nosotros</button>
               </a>
 
               <a href="#">
-                <button className="text">Blog</button>
+                <button className=" a text">Blog</button>
               </a>
             </div>
           </nav>

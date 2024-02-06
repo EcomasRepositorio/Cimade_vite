@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import "./StyleBan.css";
 
+
 const Banners = () => {
   const nextButtonRef = useRef(null);
   const prevButtonRef = useRef(null);
@@ -112,7 +113,7 @@ const Banners = () => {
             </div>
           </div>
           <div className="arrows">
-            <button id="prev" ref={prevButtonRef}>
+            <button  id="prev" ref={prevButtonRef}>
               {"<"}
             </button>
             <button id="next" ref={nextButtonRef}>

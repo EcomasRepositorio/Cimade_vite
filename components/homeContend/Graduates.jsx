@@ -1,4 +1,6 @@
 import React from "react";
+import './Styles.css'; 
+
 
 const Graduates = () => {
   return (
@@ -39,15 +41,12 @@ const Graduates = () => {
                       />
                     </div>
                     <div
-                      style={{ backgroundColor: "Gray", width: "70%" }}
-                      className="p-3 rounded-xl opacity-60 absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-3 group-hover:scale-110 group-hover:opacity-100"
+                      style={{ backgroundColor: "transparent", width: "70%" }}
+                      className="p-3 rounded-xl opacity-100 absolute bottom-0 z-20 m-0 pb-4 ps-4 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-3 group-hover:scale-110 group-hover:opacity-100"
                     >
-                      <h1 className="text-lg font-bold text-white">
-                        Juliet Smith
-                      </h1>
-                      <h2 className="text-m font-light text-gray-200">
-                        Team Leader
-                      </h2>
+                      <button className="bottonContact border border-fuchsia-500 rounded-xl shadow-md shadow-purple-500 text-lg font-bold text-white">
+                        Ingenieria Civil
+                      </button>
                     </div>
                   </div>
                   <p className="pl-5 text-gray-400 hover:text-gray-500">
