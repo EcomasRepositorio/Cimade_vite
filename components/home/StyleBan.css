@@ -3,7 +3,7 @@ body{
     margin: 0;
     font-family: Poppins;
     height: 100vh; /* Establece la altura al 100% del viewport height    dos cuatro cinco */
-    background:url('/image/morado5.png') center center;
+    background:url('/image/background.png') center center;
     background-size: cover;
     
 }
@@ -434,27 +434,29 @@ header nav a{
     }
     .carousel .list .item .introduce .title{
         font-family:sans-serif;
-        margin-top: -40%;
+        margin-top: 10%;
         color: #eee;
         font-size: 3em;
         font-weight: 200;
         line-height: 1em;
-        margin-left: -24%;
+        margin-left: -30%;
+
         
     }
     .carousel .list .item img{
-        width: 35%;
+        width: 65%;
         position:absolute;
-        right: 0;
-        top: 40%;
+        margin-right: -10%;
+        top: 65%;
         transform: translateY(-50%);
         transition: right 1.5s;
+        
     }
     .carousel .list .item .introduce .seeMore{
         display: inline-block;
         padding: 10px 25px;
         text-align: center;
-        font-size: 14px;
+        font-size: 20px;
         letter-spacing: 1px;
         text-decoration: none;
         color: #f9f9f9;
@@ -471,23 +473,71 @@ header nav a{
         align-items: center;
       
         /* Asegura que el botón tenga un margen automático en lugar de un margen fijo */
-        margin-left: 1%;
+        margin-left: -9%;
         margin-right: auto;
         margin-top: 7%;
         /* Hace el botón responsive ajustando el ancho máximo */
         max-width: 100%;
         box-sizing: border-box; /* Asegura que el ancho incluya el padding y el borde */
+
+        
     }
+
+    svg {
+        padding: 5px;
+      }
+      
+      .arrows {
+        cursor: pointer;
+        position: absolute;
+        top: 60%;
+        margin-top:150px;
+        margin-left: -155px;
+        width: 140px;
+        height: 90px;
+      }
+      
+      .left {
+        left: 42%;
+      }
+      
+      .right {
+        left: 58%;
+      }
+      
+      .left:hover polyline,
+      .left:focus polyline {
+        stroke-width: 3;
+      }
+      
+      .left:active polyline {
+        stroke-width: 6;
+        transition: all 100ms ease-in-out;
+      }
+      
+      .right:hover polyline,
+      .right:focus polyline {
+        stroke-width: 3;
+      }
+      
+      .right:active polyline {
+        stroke-width: 6;
+        transition: all 100ms ease-in-out;
+      }
+      
+      polyline {
+        transition: all 250ms ease-in-out;
+      }
 }
 @media screen and (max-width: 767px){
                                 /* IMPORTANTEEEE PARA MOBILE */
     .carousel{
-        height: 420px;
+        height: 450px;
     }
     .carousel .list .item{
         width: 100%;
         font-size: 10px;
-        margin-top:-40%;
+        margin-top:-35%;
     }
     .carousel .list .item .introduce .title{
         font-family:sans-serif;
@@ -495,7 +545,7 @@ header nav a{
         font-size: 3em;
         font-weight: 200;
         line-height: 1em;
-        margin-left: -25%;
+        margin-left: -35%;
       
         
     }
@@ -570,7 +620,7 @@ header nav a{
         /* Asegura que el botón tenga un margen automático en lugar de un margen fijo */
         margin-left: -5%;
         margin-right: auto;
-        margin-top: -55%;
+        margin-top: -65%;
         /* Hace el botón responsive ajustando el ancho máximo */
         max-width: 100%;
         box-sizing: border-box; /* Asegura que el ancho incluya el padding y el borde */
@@ -583,9 +633,9 @@ header nav a{
     }
     
     .carousel .list .item img{
-        width: 40%;
+        width: 50%;
         margin-right: -5%;
-        top: 45%;
+        top: 53%;
         
     }
     .carousel.showDetail .list .item:nth-child(2) .detail{
