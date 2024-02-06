@@ -82,7 +82,7 @@ const CreateStudentExcel: React.FC<CreateStudentFormProps> = ({ onCloseModal, on
           <Modal open={modalOpen} onClose={closeModal}>
             <div className='font-bold border p-3 rounded-xl text-[#006eb0]'>
               {insertionSuccess ? (
-                <p>Insersión exitosa.</p>
+                <p className='flex justify-center'>Insersión exitosa.</p>
               ) : (
                 <div>
                   <p>Error: Códigos duplicados</p>

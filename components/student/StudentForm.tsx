@@ -92,7 +92,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
     };
     } catch (error) {
       console.error('Error al actualizar estudiante:', error);
-      setErrorMessage('Error al actualizar estudiante. Por favor inténtelo de nuevo');
+      setErrorMessage('Error al actualizar estudiante. Por favor inténtelo de');
       setErrorModalOpen(true);
     } finally {
       setIsLoading(false);
