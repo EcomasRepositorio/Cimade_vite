@@ -1,13 +1,16 @@
-export const useRouteData = (routeId: string) => {
+export const getTokenFromLocalStorage = (): string | null => {
 
-  if (typeof window != 'undefined') {
-    const pathArray = window.location.pathname.split('/'); // Divide la URL por las barras
-    const idIndex = pathArray.indexOf(routeId); // Busca la posición del routeId en la URL
+  if (typeof window !== 'undefined') {
 
-    if (idIndex !== -1 && idIndex + 1 < pathArray.length) {
-      // Si el routeId está presente y hay al menos un segmento después, devuelve ese segmento
-      return pathArray[idIndex + 1];
-    }
+    const token = localStorage.getItem('token');
+    return token;
   }
-  return undefined; // Si no se encuentra el routeId o no hay un segmento después, devuelve undefined
+  return null;
+};
+
+export const useRouteData = (routeId: string): string | null => {
+
+  const token = getTokenFromLocalStorage();
+
+  return token;
 };

@@ -35,6 +35,7 @@ const Login: React.FC = () => {
 
   const saveToken = (token: string) => {
     localStorage.setItem('token', token);
+    console.log(token);
   };
 
   const onSubmit = async () => {
@@ -43,6 +44,7 @@ const Login: React.FC = () => {
         console.log(response);
       if (response.data.token) {
         const token = response.data.token;
+        console.log(token)
         saveToken(token);
         window.location.href = 'student';
       }

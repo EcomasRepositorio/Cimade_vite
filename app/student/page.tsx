@@ -33,8 +33,7 @@ const Student = () => {
   const [createStudentExcel, setCreateStudentExcel] = useState(false);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const [isDuplicatedCodesModalOpen, setIsDuplicatedCodesModalOpen] =
-    useState(false);
+  const [isDuplicatedCodesModalOpen, setIsDuplicatedCodesModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(20);
   const [offset, setOffset] = useState(0);
@@ -46,7 +45,9 @@ const Student = () => {
     setQueryValue(event.target.value);
   };
   const token = useRouteData("parameter");
+  console.log(token);
   const validToken = typeof token === "string" ? token : "";
+  console.log(validToken)
 
   const onSubmit = async () => {
     try {
@@ -65,7 +66,10 @@ const Student = () => {
       }
     }
   };
-
+ /*  useEffect(() => {
+    onSubmit();
+  }, [token]);
+ */
   //CreateStudents
   const handleCreateSuccess = async (createStudentId: number) => {
     try {
