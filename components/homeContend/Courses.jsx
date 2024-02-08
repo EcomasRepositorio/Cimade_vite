@@ -9,7 +9,9 @@ const Courses = () => {
         style={{
           backgroundImage: "linear-gradient(to right, #002e79, #006eb0)",
         }}
+        
       >
+        <hr />
         <div className="text-center font-semibold font-poppins">
           <p style={{ color: "white", padding: "40px", fontSize: "50px" }}>
             Nuestros Cursos{" "}

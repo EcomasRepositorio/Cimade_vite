@@ -11,8 +11,15 @@ module.exports = {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'],
       },
+      colors: {
+        'primaryrosa': '#ff00d4', // Cambia esto al color rosado que prefieras
+        'primaryblue' : '#002e79',
+        'primaryceleste' : '#006eb0'
+      },
       textColor: {
-        'primary': '#ff00d4', // Cambia esto al color rosado que prefieras
+        'textrosa': '#ff00d4', // Cambia esto al color rosado que prefieras
+        'textblue' : '#002e79',
+        'textceleste' : '#006eb0'
       },
       animation: {
         'fade-in-left': 'fade-in-left 0.5s ease-in-out',

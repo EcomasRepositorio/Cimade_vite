@@ -3,7 +3,9 @@ import Counter from './Counter'
 
 const CounterMain = () => {
   return (
-    <div className="pb-20" style={{ backgroundImage: 'url("/image/counter4.jpg")' }}>
+    <div className="pb-20" style={{
+      backgroundImage: "linear-gradient(to right, #002e79, #006eb0)" }}>
+        <hr />
         <div className="mx-auto bg-gradient-to-l from-opacity-0 to-opacity-0 h-96 w-3/4 rounded-xl bg-cover bg-center" >
           <div className="mx-auto container w-full flex flex-col justify-center items-center">
             <div className="flex justify-center items-center flex-col">
@@ -26,8 +28,9 @@ const CounterMain = () => {
         {/* TARJETAS DE CONTEO */}
        
         <Counter/>
-        
+      
       </div>
+      
   )
 }
 
