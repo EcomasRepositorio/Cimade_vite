@@ -14,7 +14,7 @@ export const ItemCard = ({ number, description, animated, animation, icon }) => 
   }, [animated, number]);
 
   return (
-    <div className={`flex justify-center flex-col items-center w-36 h-36 md:w-44 md:h-48 lg:w-56 lg:h-56 bg-white shadow-md rounded-2xl ${animated ? `animate-${animation}` : ''}`}>
+    <div className={`flex justify-center flex-col items-center w-36 h-36 md:w-44 md:h-48 lg:w-56 lg:h-56 bg-white border-primaryrosa border  shadow-md rounded-2xl ${animated ? `animate-${animation}` : ''}`}>
       {icon && <img src={icon} alt="Icono" className="w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 mb-4" />}
       <h3 className="lg:text-5xl md:text-4xl text-2xl font-extrabold leading-10 text-center text-gray-800">
         {count + "+"}

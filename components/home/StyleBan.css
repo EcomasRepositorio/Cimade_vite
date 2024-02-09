@@ -3,7 +3,7 @@ body{
     margin: 0;
     font-family: Poppins;
     height: 100vh; /* Establece la altura al 100% del viewport height    dos cuatro cinco */
-    background:url('/image/background.png') center center;
+    background:url('/image/bannertest.png') center center;
     background-size: cover;
     
 }

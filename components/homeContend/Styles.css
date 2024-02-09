@@ -126,11 +126,11 @@ button {  font-size: 18px;
   font-size: 18px;
   letter-spacing: 1px;
   text-decoration: none;
-  color: #d334b9;
+  color: white;
   background: transparent;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 2px solid #002e79;
+  border: 2px solid #ff00d4;
   border-radius: 10px;
   box-shadow: inset 0 0 0 0 #002e79;
 
