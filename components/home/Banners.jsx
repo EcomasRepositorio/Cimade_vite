@@ -66,7 +66,7 @@ const Banners = () => {
 
   return (
     <>
-      <div className="bannerBack">
+      <div className="body">
         <header></header>
         <div className="carousel ">
           <div className="list">

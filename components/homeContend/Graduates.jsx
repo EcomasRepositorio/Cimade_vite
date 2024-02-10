@@ -16,6 +16,7 @@ const Graduates = () => {
           </div>
        
         <div className="mx-auto w-full lg:mx-0"></div>
+        
         <ul
           role="list"
           className="justify-items-center mx-auto  mt-1 grid max-w-2xl grid-cols-1 gap-x-0 gap-y-0 sm:grid-cols-2 lg:mx-15 lg:max-w-7xl lg:grid-cols-3 "

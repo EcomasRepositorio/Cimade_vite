@@ -12,10 +12,10 @@ const Presentation = () => {
 
       <div className="mt-4 text-neutral-500 text-center">
      
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl animate__animated animate__backInLeft">
+        <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl animate__animated animate__backInLeft">
          <p className='text-primaryblue lg:text-2xl'>Somos una empresa que brinda un servicio de </p>
          <p className='text-primaryrosa lg:text-2xl'>especializacion para empresas, personas y especialistas.</p> 
-        </p>
+        </div>
       </div>
     </div>
     <div className="flex-1 flex items-center my-15 relative animate-fade-in-delayed">

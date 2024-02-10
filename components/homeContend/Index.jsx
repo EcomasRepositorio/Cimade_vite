@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../homeContend/Footer';
+import Footer from './Footer';
 import Presentation from "./Presentation";
 import Graduates from "./Graduates";
 import CounterMain from "./CounterMain";
@@ -22,7 +22,7 @@ const HomeContend = () => {
     <CounterMain/>
     <Courses/>
     <ContactForm/>
-   
+    
   </>
   
   
