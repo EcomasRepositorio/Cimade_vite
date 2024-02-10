@@ -45,9 +45,7 @@ const Student = () => {
     setQueryValue(event.target.value);
   };
   const token = useRouteData("parameter");
-  console.log(token);
   const validToken = typeof token === "string" ? token : "";
-  console.log(validToken)
 
   const onSubmit = async () => {
     try {

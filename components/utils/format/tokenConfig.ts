@@ -1,5 +1,5 @@
 export const tokenConfig = (value: string ) => {
-  console.log('token: ', value)
+  //console.log('token: ', value)
     return {
       headers: { Authorization: `Bearer ${value}` },
     };
