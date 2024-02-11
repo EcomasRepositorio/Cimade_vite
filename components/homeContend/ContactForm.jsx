@@ -19,12 +19,12 @@ const ContactForm = () => {
   
 
   return (
-    <div className=' flex items-center justify-center' style={{ background: 'white', backgroundPosition: 'center top', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', minHeight: '30vh' }}>
+    <div className=' flex items-center justify-center ' style={{ background: 'white', backgroundPosition: 'center top', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', minHeight: '30vh' }}>
    
-        <div className="container my-24 px-6 mx-auto  ">
+        <div className="container my-24 px-6 mx-auto ">
           <section className=" text-gray-800">
             <div className=" container text-gray-800 px-4 md:px-20 ">
-            <div className=" rounded-lg shadow-lg py-2 md:py-8 px-2 md:px-20 mt-4  backdrop-filter  " style={{ background: 'linear-gradient(0deg, #006eb0, #002e79)',maxWidth: '100%' }}>
+            <div className=" rounded-3xl shadow-lg py-2 md:py-8 px-2 md:px-20 mt-4  backdrop-filter  " style={{ background: 'linear-gradient(0deg, #006eb0, #002e79)',maxWidth: '100%' }}>
            
               <h2 className="text-5xl text-center font-black leading-10 pb-5"style={{ color: 'white' }}>
 
