@@ -121,11 +121,11 @@ const About = () => {
                 <div className="justify-items-center mx-auto  mt-1 grid max-w-2xl grid-cols-1 gap-x-0 gap-y-0 sm:grid-cols-2 lg:mx-15 lg:max-w-7xl lg:grid-cols-3">
                   <div className="cardss mb-8 ">
                     <div className="logo"></div>
-                    <div className="title">COMPROMISO</div>
+                    <div className="titlee">COMPROMISO</div>
                     <div className="icons-container"></div>
                     <div className="box box3">
                       <div className="content">
-                        <span className="box-title">
+                        <span className="box-titlee">
                           {" "}
                           Siempre nos vemos comprometidos en ayudar a los
                           participantes, tanto los que se inscriben en los
@@ -138,11 +138,11 @@ const About = () => {
 
                   <div className="cardss mb-8 ">
                     <div className="logo"></div>
-                    <div className="title">RESPONSABILIDAD</div>
+                    <div className="titlee">RESPONSABILIDAD</div>
                     <div className="icons-container"></div>
                     <div className="box box3">
                       <div className="content">
-                        <span className="box-title">
+                        <span className="box-titlee">
                           Los miembros de esta empresa siempre se ponen tareas
                           al inicio de la jornada laboral, tarea la cual se debe
                           de cumplir al final de la jornada, hecho que siempre
@@ -155,11 +155,11 @@ const About = () => {
 
                   <div className="cardss mb-8 ">
                     <div className="logo"></div>
-                    <div className="title">PUNTUALIDAD</div>
+                    <div className="titlee">PUNTUALIDAD</div>
                     <div className="icons-container"></div>
                     <div className="box box3">
                       <div className="content">
-                        <span className="box-title">
+                        <span className="box-titlee">
                           Antes de llegar a la hora, debemos llegar antes para
                           poder limpiar nuestras oficinas y dar una mejor imagen
                           de estas a los participantes que quieran recoger sus

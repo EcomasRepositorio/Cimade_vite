@@ -12,15 +12,21 @@ const Banners = () => {
     const listHTML = document.querySelector(".carousel .list");
 
     carousel.classList.remove("next", "prev");
-    let items = document.querySelectorAll(".carousel .list .item");
+    let items = document.querySelectorAll(".carousel .list .itemz");
+
+
+
 
     if (type === "next") {
-      listHTML.appendChild(items[0]);
+      listHTML.append(items[0]);
       carousel.classList.add("next");
     } else {
       listHTML.prepend(items[items.length - 1]);
       carousel.classList.add("prev");
     }
+
+
+
 
     clearTimeout(unAcceptClick.current);
     unAcceptClick.current = setTimeout(() => {
@@ -66,12 +72,12 @@ const Banners = () => {
 
   return (
     <>
-      <div className="body ">
+      <div className="body">
         <header></header>
         <div className="carousel ">
           <div className="list">
             {/* ... */}
-            <div className="item">
+            <div className="itemz">
               <img src="image/bannerTree.png" />
               <div className="introduce">
                 <div className="hidden md:block title mb-4">
@@ -88,7 +94,7 @@ const Banners = () => {
               </div>
             </div>
 
-            <div className="item">
+            <div className="itemz">
               <img src="image/supra2.png" />
               <div className="introduce">
                 <div className="title mb-4">
@@ -100,7 +106,7 @@ const Banners = () => {
               </div>
             </div>
 
-            <div className="item">
+            <div className="itemz">
               <img src="image/bannerOne.png" />
               <div className="introduce">
                 <div className="title mb-4">

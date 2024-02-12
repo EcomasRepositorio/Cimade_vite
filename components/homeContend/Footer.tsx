@@ -12,10 +12,15 @@ export const Footer = () => {
             <img className="w-auto h-12 mx-auto mb-8" src="/icons/logo.svg" alt="Tu logo" />
             <nav className="mb-8 ml-8">
               <p className="mb-3 text-x1 font-bold tracking-wider text-gray-50 uppercase">Contáctanos</p>
-              <a href="https://api.whatsapp.com/send?phone=51900102090" className="flex mb-3 text-lg font-medium transition md:mb-2">
+              <a href="https://api.whatsapp.com/send?phone=51900102090" target='_blank' className="flex mb-3 text-lg font-medium transition md:mb-2">
                 <img src="/icons/iconsFooter/footer_whatsapp.svg" alt="Phone Icon" className="w-6 h-6 mr-2" />
                 <button className=" a text">900 102 090</button>
               </a>
+
+
+
+
+              
               
               <a href="mailto:capacitaciones@cimade.edu.pe" className="flex mb-3 text-lg font-medium transition md:mb-2">
               <img src="/icons/iconsFooter/footer_correo.svg" alt="Correo Icono" className="w-6 h-6 mr-2" />
