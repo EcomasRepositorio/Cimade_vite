@@ -8,7 +8,7 @@ const Whatsapp = () => {
       <Link href='https://api.whatsapp.com/send?phone=51900102090' target='_blank'>
         <img
           className={styles.boton}
-          src='icono.png'
+          src='icons/icono.png'
           alt=''/>
       </Link>
     </div>

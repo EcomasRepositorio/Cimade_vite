@@ -1,23 +1,13 @@
 "use client";
-import React from 'react';
-import Slider from './Slider';
-import Image from 'next/image';
+import Banners from "./Banners";
 
-const slides: { src: string; width: number; height: number }[] = [
-  { src: "/image/imagen02.png", width: 2500, height: 2000 },
-  { src: "/image/imagen03.png", width: 2500, height: 2000 },
-  { src: "/image/imagen04.png", width: 2500, height: 2000 },
-  { src: "/image/TAMAÑO-DE-PRUEBA.png", width: 2500, height: 2000 },
-];
+ // Corregido: El nombre del componente debe comenzar con mayúscula
+import React from 'react';
 
 const Home: React.FC = () => {
   return (
     <div>
-      <Slider autoSlide={true} autoSlideInterval={5000}>
-        {slides.map((s, index) => (
-          <Image key={index} src={s} alt={`Slide ${index}`} />
-        ))}
-      </Slider>
+   <Banners/>
     </div>
   );
 };
