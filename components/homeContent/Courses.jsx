@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+import { BiArrowFromLeft } from "react-icons/bi";
 
 const Courses = () => {
   return (
@@ -10,13 +12,13 @@ const Courses = () => {
           backgroundImage: "linear-gradient(to right, #002e79, #006eb0)",
         }}
       >
-        <div className="text-center font-semibold font-poppins mb-">
+        <div className="text-center font-semibold font-poppins">
           <p className="font-extrabold text-white text-[60px] mt-10">
-            Nuestros Cursos{" "}
+            Nuestros Cursos
           </p>
         </div>
 
-        <section className="bg-gray-2 dark:bg-dark pt-20 pb-10 lg:pt-[80px] lg:pb-20">
+        <section className="bg-gray-2 dark:bg-dark pt-20 pb-10 lg:pt-[80px]">
           <div className="container mx-auto">
             <div className="flex flex-wrap -mx-4">
               <div className="w-full px-4 md:w-1/2 xl:w-1/3 transform hover:-translate-y-1 transition duration-600">
@@ -32,7 +34,7 @@ const Courses = () => {
                         href="javascript:void(0)"
                         className="text-dark dark:text-textblue hover:text-primaryceleste mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
                       >
-                        50+ Best creative website themes & templates
+                        Topografía, Diseño Geométrico, Señalización y Seguridad Vial
                       </a>
                     </h3>
                     <p className="text-base leading-relaxed text-body-color dark:text-dark-6 mb-7">
@@ -62,7 +64,7 @@ const Courses = () => {
                         href="javascript:void(0)"
                         className="text-dark dark:text-textblue hover:text-primaryceleste mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
                       >
-                        50+ Best creative website themes & templates
+                        Sistemas de Riego Tecnificado por Goteo
                       </a>
                     </h3>
                     <p className="text-base leading-relaxed text-body-color dark:text-dark-6 mb-7">
@@ -92,7 +94,7 @@ const Courses = () => {
                         href="javascript:void(0)"
                         className="text-dark dark:text-textblue hover:text-primaryceleste mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
                       >
-                        50+ Best creative website themes & templates
+                        Elaboración de Matriz IPERC - Mapa de Riesgos
                       </a>
                     </h3>
                     <p className="text-base leading-relaxed text-body-color dark:text-dark-6 mb-7">
@@ -122,7 +124,7 @@ const Courses = () => {
                         href="javascript:void(0)"
                         className="text-dark dark:text-textblue hover:text-primaryceleste mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
                       >
-                        50+ Best creative website themes & templates
+                        Calidad e Inocuidad Alimentaria
                       </a>
                     </h3>
                     <p className="text-base leading-relaxed text-body-color dark:text-dark-6 mb-7">
@@ -152,7 +154,7 @@ const Courses = () => {
                         href="javascript:void(0)"
                         className="text-dark dark:text-textblue hover:text-primaryceleste mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
                       >
-                        50+ Best creative website themes & templates
+                        Valorización de Residuos Sólidos
                       </a>
                     </h3>
                     <p className="text-base leading-relaxed text-body-color dark:text-dark-6 mb-7">
@@ -182,7 +184,7 @@ const Courses = () => {
                         href="javascript:void(0)"
                         className="text-dark dark:text-textblue hover:text-primaryceleste mb-4 block text-xl font-semibold sm:text-[22px] md:text-xl lg:text-[22px] xl:text-xl 2xl:text-[22px]"
                       >
-                        50+ Best creative website themes & templates
+                        Monitoreo de Agentes Ocupacionales
                       </a>
                     </h3>
                     <p className="text-base leading-relaxed text-body-color dark:text-dark-6 mb-7">
@@ -200,6 +202,12 @@ const Courses = () => {
               </div>
             </div>
           </div>
+          <Link href="/graduate" className="text-gray-100 font-mono text-2xl">
+          <div className="flex justify-between items-center border rounded-3xl lg:ml-40 lg:mr-40 p-3">
+            <div className="inline-block">Ver mas cursos...</div>
+              <BiArrowFromLeft className="text-5xl"/>
+            </div>
+          </Link>
         </section>
       </div>
     </div>

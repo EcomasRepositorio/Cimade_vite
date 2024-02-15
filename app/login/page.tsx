@@ -80,7 +80,7 @@ const Login: React.FC = () => {
                   <div className="text-center">
                     <img
                       className="mx-auto w-48"
-                      src="/image/logo_cimade.png"
+                      src="/certificate/logo_cimade.png"
                       alt="logo" />
                     <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
                     </h4>

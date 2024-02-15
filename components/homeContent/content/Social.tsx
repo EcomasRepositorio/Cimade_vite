@@ -15,7 +15,7 @@ const SocialLinks = () => {
     <img src="/footer/icono_tiktok.svg" alt="Tiktok" style={{ color: 'white' }} />
   </a>
   <a href='https://api.whatsapp.com/send?phone=51900102090' className="social-link4 mr-2" target='_blank'>
-    <img src="/footer/Icono_Whatsapp.svg" alt="WhatsApp" style={{ color: 'white' }} />
+    <img src="/footer/icono_whatsapp.svg" alt="WhatsApp" style={{ color: 'white' }} />
   </a>
 </div>
   );
