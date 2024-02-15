@@ -10,7 +10,7 @@ const Presentation = () => {
       </div>
       <div className="mt-4 text-neutral-500 text-center">
         <div className="text-base font-semibold sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl animate__animated animate__backInLeft">
-         <p className='text-primaryblue lg:text-2xl'>Sssssomos una empresa que brinda un servicio de </p>
+         <p className='text-primaryblue lg:text-2xl'>Somos una empresa que brinda un servicio de </p>
          <p className='text-primaryrosa lg:text-2xl'>especializacion para empresas, personas y especialistas.</p>
         </div>
       </div>
