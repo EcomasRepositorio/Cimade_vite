@@ -8,12 +8,19 @@ import { lista4 } from "@/components/utils/courses";
 import { lista5 } from "@/components/utils/courses";
 
 const Page = () => {
-  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const [isAccordionOpen1, setIsAccordionOpen1] = useState(false);
+  const [isAccordionOpen2, setIsAccordionOpen2] = useState(false);
 
   useEffect(() => {}, []);
 
-  const toggleAccordion = () => {
-    setIsAccordionOpen(!isAccordionOpen);
+  const toggleAccordion1 = () => {
+    setIsAccordionOpen1(!isAccordionOpen1);
+    setIsAccordionOpen2(false); // Cierra el otro elemento si está abierto
+  };
+
+  const toggleAccordion2 = () => {
+    setIsAccordionOpen2(!isAccordionOpen2);
+    setIsAccordionOpen1(false); // Cierra el otro elemento si está abierto
   };
 
   return (
@@ -22,6 +29,7 @@ const Page = () => {
         <div className="text text-center text-4xl md:text-5xl lg:text-4xl xl:text-7xl mb-4 font-bold font-poppins text-black">
           DIPLOMADOS - INGENIERIA CIVIL
         </div>
+
         <div className="py-12 md:px-20 sm:px-14 px-6 flex flex-col sm:flex-row justify-center">
           <div className="sm:w-96 mb-4 sm:mb-0">
             <img
@@ -30,6 +38,7 @@ const Page = () => {
               alt="icon"
             />
           </div>
+
           <div className="sm:w-1/2 md:px-20 sm:px-5">
             <div className="text-black font-bold font-poppins lg:text-5xl text-5xl my-2">
               ASISTENTE TÉCNICO EN OBRAS
@@ -67,14 +76,14 @@ const Page = () => {
                 Mas información
               </Link>
               <button
-                onClick={toggleAccordion}
+                onClick={toggleAccordion1}
                 className="border bg-primaryceleste flex items-center justify-center mb-4 text-white font-bold rounded-full h-16 w-full"
               >
                 Cursos
                 <img className=" ml-8" src="/icons/flecha.png" alt="op" />
               </button>
             </div>
-            {isAccordionOpen && (
+            {isAccordionOpen1 && (
               <div className="bg-slate-200 rounded-lg">
                 <div className="text-textblue text-left py-4 font-sans font-semibold ml-8">
                   <ul>
@@ -96,6 +105,7 @@ const Page = () => {
               alt="icon"
             />
           </div>
+
           <div className="sm:w-1/2 md:px-20 sm:px-5">
             <div className="text-black font-bold font-poppins lg:text-5xl text-5xl my-2">
               ASISTENTE TÉCNICO EN OBRAS
@@ -133,14 +143,14 @@ const Page = () => {
                 Mas información
               </Link>
               <button
-                onClick={toggleAccordion}
+                onClick={toggleAccordion2}
                 className="border bg-primaryceleste flex items-center justify-center mb-4 text-white font-bold rounded-full h-16 w-full"
               >
                 Cursos
                 <img className=" ml-8" src="/icons/flecha.png" alt="op" />
               </button>
             </div>
-            {isAccordionOpen && (
+            {isAccordionOpen2 && (
               <div className="bg-slate-200 rounded-lg">
                 <div className="text-textblue text-left py-4 font-sans font-semibold ml-8">
                   <ul>
