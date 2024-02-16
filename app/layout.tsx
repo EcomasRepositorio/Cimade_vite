@@ -20,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
+      <link rel="icon" href="icons/icono_small.png" />
         <Header />
         {children}
         <Footer />
