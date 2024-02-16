@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { BsWhatsapp } from "react-icons/bs";
+import { IoPersonAddOutline } from "react-icons/io5";
 
 const Header = () => {
 
@@ -22,7 +23,7 @@ const Header = () => {
         <div className="flex space-x-6 rtl:space-x-reverse">
             <Link href="/certificate" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
             <Link href="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=0959465f-37c3-4032-803b-bbfc499af7a3"
-              className="text-lg text-gray-50 hover:underline font-semibold">
+              className="text-lg text-gray-50 hover:underline font-semibold" target='_blank'>
               Aula virtual
             </Link>
         </div>
@@ -69,8 +70,8 @@ const Header = () => {
 
                     <BsWhatsapp className='inline-block align-middle mr-1'/>
                     +51 900102090</Link>
-                  <Link href="/login" className="uppercase text-xs p-1.5 font-semibold px-6 text-blue-600 hover:text-white border-2 border-[#006eb0] rounded-lg hover:bg-pink-500">
-                    Login
+                  <Link href="/login" className="text-blue-600">
+                  <IoPersonAddOutline  className='text-2xl hover:text-pink-500'/>
                   </Link>
                 </div>
         </div>
@@ -83,7 +84,7 @@ const Header = () => {
     'lg:hidden absolute top-[100px] right-0 left-[-1000px] flex justify-center items-center w-full h-screen bg-[#002e79] text-white text-center ease-in duration-300'
   }>
       <div className="w-full mt-[-310px]">
-        <ul className="uppercase font-mono font-bold text-xl">
+        <ul className="uppercase font-mono font-bold text-xl mt-20">
           <li onClick={handleMenu} className='py-5'>
             <Link href={'/'}></Link>
           </li>
@@ -91,7 +92,7 @@ const Header = () => {
             <Link href='/'>Inicio</Link>
           </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
-            <Link href='/'>Diplomados</Link>
+            <Link href='/graduate'>Diplomados</Link>
           </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
             <Link href='/certificate'>Certificados</Link>
@@ -103,17 +104,15 @@ const Header = () => {
             <Link href='/'>Blog</Link>
           </li>
         </ul>
-        <div className="flex flex-col justify-center items-center mt-16">
-          <Link href="/login" onClick={handleMenu}>
-            <button className="bg-white text-[#006eb0] rounded-full uppercase font-bold py-3 w-[250px] mb-5">
-              LOGIN
-            </button>
+        <div className="flex flex-col justify-center items-center mt-6">
+          <Link href="/login" onClick={handleMenu}
+              className="text-white ">
+              <IoPersonAddOutline  className='text-4xl hover:text-pink-500 mb-6'/>
           </Link>
-          <Link href='https://api.whatsapp.com/send?phone=51900102090' target='_blank'>
-            <button className="bg-white text-green-500 rounded-full uppercase font-bold py-3 w-[250px] mb-5">
-            <BsWhatsapp className='inline-block mr-1'/>
+          <Link href='https://api.whatsapp.com/send?phone=51900102090' target='_blank'
+            className="text-green-500 border border-gray-100 rounded-2xl px-8 py-2 uppercase font-bold">
+            <BsWhatsapp className='text-2xl inline-block mr-2'/>
               +51 900102090
-            </button>
           </Link>
         </div>
       </div>

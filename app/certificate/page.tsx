@@ -5,6 +5,7 @@ import SearchDNI from '@/components/certificate/SearchDNI';
 import SearchName from '@/components/certificate/SearchName';
 import { BsQrCodeScan } from "react-icons/bs";
 import { BsPersonVcard, BsPersonSquare } from "react-icons/bs";
+import Whatsapp from '@/components/whatsapp/Index'
 import './Styles.css'
 
 const Certificate: React.FC = () => {
@@ -71,6 +72,7 @@ const Certificate: React.FC = () => {
       )}
         </div>
     </div>
+    <Whatsapp />
     </section>
   )
 }

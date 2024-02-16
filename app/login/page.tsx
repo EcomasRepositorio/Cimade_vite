@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import axios from 'axios';
+import Whatsapp from '@/components/whatsapp/Index'
 
 type ResErrors = {
   message: string;
@@ -159,6 +160,7 @@ const Login: React.FC = () => {
         </div>
       </div>
     </div>
+    <Whatsapp />
   </section>
   )
 }

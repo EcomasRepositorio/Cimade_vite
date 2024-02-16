@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import "./StyleAbout.css";
+import Whatsapp from '@/components/whatsapp/Index'
 
 const About = () => {
   return (
@@ -175,6 +176,7 @@ const About = () => {
           </section>
         </div>
       </div>
+      <Whatsapp />
     </div>
   );
 };

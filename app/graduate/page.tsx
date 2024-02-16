@@ -1,4 +1,5 @@
 import React from "react";
+import Whatsapp from '@/components/whatsapp/Index'
 // En tu archivo CSS o Sass
 
 const page = () => {
@@ -38,6 +39,7 @@ const page = () => {
           </div>
         </main>
       </div>
+      <Whatsapp />
     </div>
   );
 };
