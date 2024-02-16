@@ -29,10 +29,10 @@ const page = () => {
               <p>192 horas académicas</p>
             </div>
             <div className="flex justify-left mb-2">
-              <button className="border bg-primaryblue flex items-center justify-center sm:inline-block hidden mb-4 text-white font-bold rounded-full h-16 w-36 ml-8">
+              <button className="border bg-primaryblue items-center justify-center sm:inline-block hidden mb-4 text-white font-bold rounded-full h-16 w-36 ml-8">
                 Mas información
               </button>
-              <button className="border bg-primaryblue flex items-center justify-center sm:inline-block hidden mb-4 text-white font-bold rounded-full h-16 w-36 ml- ">
+              <button className="border bg-primaryblue items-center justify-center sm:inline-block hidden mb-4 text-white font-bold rounded-full h-16 w-36 ml- ">
                 Cursos
               </button>
             </div>
