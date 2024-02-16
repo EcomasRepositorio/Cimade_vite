@@ -6,6 +6,9 @@ import { lista2 } from "@/components/utils/courses";
 import { lista3 } from "@/components/utils/courses";
 import { lista4 } from "@/components/utils/courses";
 import { lista5 } from "@/components/utils/courses";
+import { IoCalendarNumberSharp } from "react-icons/io5";
+import '@fontsource/montserrat'; 
+
 
 const Page = () => {
   const [isAccordionOpen1, setIsAccordionOpen1] = useState(false);
@@ -26,7 +29,15 @@ const Page = () => {
   return (
     <div id="/graduate">
       <div className=" p-5 flex flex-col ">
-        <div className="text text-center text-4xl md:text-5xl lg:text-4xl xl:text-7xl mb-4 font-bold font-poppins text-black">
+        <div
+          className="text text-center text-4xl md:text-5xl lg:text-4xl xl:text-7xl mb-4 font-bold font-poppins text-black"
+          style={{
+            background: `linear-gradient(to right, #002e79, #006eb0)`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
           DIPLOMADOS - INGENIERIA CIVIL
         </div>
 
@@ -40,36 +51,44 @@ const Page = () => {
           </div>
 
           <div className="sm:w-1/2 md:px-20 sm:px-5">
-            <div className="text-black font-bold font-poppins lg:text-5xl text-5xl my-2">
+            <div
+              className="text-black font-bold font-poppins lg:text-5xl text-5xl my-2 mb-6"
+              style={{
+                background: `linear-gradient(to right, #002e79, #006eb0)`,
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
               ASISTENTE TÉCNICO EN OBRAS
             </div>
-            <div className="text-gray-700 mb-2 md:mb-6 font-mono text-2xl">
-              <div className="flex items-center">
-                <img src="/icons/calendar.png" alt="" className="mr-2" />
-                <p className="font-semibold">Inicio 17 de febrero</p>
+            <div className="text-gray-700 mb-2 md:mb-6 font-montserrat text-2xl">
+              <div className="flex items-center mb-2">
+                <IoCalendarNumberSharp className="text-4xl text-primaryceleste " />
+                <p className="font-semibold ml-1">Inicio 17 de febrero</p>
               </div>
 
-              <div className="flex items-center">
+              <div className="flex items-center mb-2">
                 <img src="/icons/check.png" alt="" className="mr-2" />
                 <p className="font-semibold">Modalidad online</p>
               </div>
 
-              <div className="flex items-center">
+              <div className="flex items-center mb-2">
                 <img src="/icons/check.png" alt="" className="mr-2" />
                 <p className="font-semibold">4 meses</p>
               </div>
 
-              <div className="flex items-center">
+              <div className="flex items-center mb-2">
                 <img src="/icons/check.png" alt="" className="mr-2" />
                 <p className="font-semibold">192 horas académicas</p>
               </div>
             </div>
 
-            <div></div>
+
 
             <div className="flex flex-col items-center">
               <Link
-                className="border bg-primaryceleste flex items-center justify-center mb-4 text-white font-bold rounded-full h-16 w-full "
+                className="border bg-primaryrosa flex items-center justify-center mb-4 text-white font-bold rounded-full h-16 w-full "
                 href="https://api.whatsapp.com/send?phone=51900102090"
                 target="_blank"
               >
@@ -111,9 +130,9 @@ const Page = () => {
               ASISTENTE TÉCNICO EN OBRAS
             </div>
             <div className="text-gray-700 mb-2 md:mb-6 font-mono text-2xl">
-              <div className="flex items-center">
-                <img src="/icons/calendar.png" alt="" className="mr-2" />
-                <p className="font-semibold">Inicio 17 de febrero</p>
+              <div className="flex items-center mb-4">
+                <img src="/icons/calendar.png" alt="" className="mr-2 " />
+                <p className="font-semibold  ">Inicio 17 de febrero</p>
               </div>
 
               <div className="flex items-center">
@@ -128,11 +147,10 @@ const Page = () => {
 
               <div className="flex items-center">
                 <img src="/icons/check.png" alt="" className="mr-2" />
-                <p className="font-semibold">192 horas académicas</p>
+                <p className="font-semibold">190 horas académicas</p>
               </div>
             </div>
 
-            <div></div>
 
             <div className="flex flex-col items-center">
               <Link
@@ -163,7 +181,6 @@ const Page = () => {
             )}
           </div>
         </div>
-
       </div>
     </div>
   );
