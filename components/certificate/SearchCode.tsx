@@ -59,11 +59,11 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
     }
   };
   const tableRows = [
-    { imgSrc:'/image/organizadopor.svg', label: 'Organizado por:', value: studentData?.institute },
-    { imgSrc:'/image/otorgado.svg', label: 'Otorgado a:', value: studentData?.name },
-    { imgSrc:'/image/nom_evento.svg', label: 'Nombre del evento:', value: studentData?.activityAcademy },
-    { imgSrc:'/image/creditos_horas.svg', label: 'Creditos/Horas:', value: studentData?.hour },
-    { imgSrc:'/image/fecha_emision.svg', label: 'Fecha de emisión:', value: studentData?.date },
+    { imgSrc:'/icons/organizadopor.svg', label: 'Organizado por:', value: studentData?.institute },
+    { imgSrc:'/icons/otorgado.svg', label: 'Otorgado a:', value: studentData?.name },
+    { imgSrc:'/icons/nom_evento.svg', label: 'Nombre del evento:', value: studentData?.activityAcademy },
+    { imgSrc:'/icons/creditos_horas.svg', label: 'Creditos/Horas:', value: studentData?.hour },
+    { imgSrc:'/icons/fecha_emision.svg', label: 'Fecha de emisión:', value: studentData?.date },
   ];
   return (
   <div className="max-w-screen-xl mx-auto mb-8 text-center lg:mb-12">
@@ -97,9 +97,9 @@ const SearchName:React.FC<SearchCodeProps> = ({ onSearchCode }) => {
       {studentData && (
         <Modal open={open} onClose={() => setOpen(false)}>
           <div className='flex justify-center mb-4'>
-            <img src={'/image/logo_unp.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
-            <img src={'/image/logo_cimade.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
-            <img src={'/image/logo_cip_tacna.png'}className="lg:w-32 lg:h-32 w-28 h-28 object-contain "/>
+            <img src={'/certificate/logo_unp.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
+            <img src={'/certificate/logo_cimade.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
+            <img src={'/certificate/logo_cip_tacna.png'}className="lg:w-32 lg:h-32 w-28 h-28 object-contain "/>
           </div>
           <div className="max-w-md mx-auto p-6 bg-white rounded-md">
             {tableRows.map((row, index) => (

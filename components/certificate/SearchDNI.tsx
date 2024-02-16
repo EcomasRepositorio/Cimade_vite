@@ -77,11 +77,11 @@ const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
     }
   };
   const tableRows = [
-    { imgSrc:'/image/organizadopor.svg', label: 'Organizado por:', value: selectedStudentData?.institute },
-    { imgSrc:'/image/otorgado.svg', label: 'Otorgado a:', value: selectedStudentData?.name },
-    { imgSrc:'/image/nom_evento.svg', label: 'Nombre del evento:', value: selectedStudentData?.activityAcademy },
-    { imgSrc:'/image/creditos_horas.svg', label: 'Creditos/Horas:', value: selectedStudentData?.hour },
-    { imgSrc:'/image/fecha_emision.svg', label: 'Fecha de emisión:', value: selectedStudentData?.date },
+    { imgSrc:'/icons/organizadopor.svg', label: 'Organizado por:', value: selectedStudentData?.institute },
+    { imgSrc:'/icons/otorgado.svg', label: 'Otorgado a:', value: selectedStudentData?.name },
+    { imgSrc:'/icons/nom_evento.svg', label: 'Nombre del evento:', value: selectedStudentData?.activityAcademy },
+    { imgSrc:'/icons/creditos_horas.svg', label: 'Creditos/Horas:', value: selectedStudentData?.hour },
+    { imgSrc:'/icons/fecha_emision.svg', label: 'Fecha de emisión:', value: selectedStudentData?.date },
   ];
 
   return (
@@ -154,9 +154,9 @@ const SearchName:React.FC<SearchDNIProps> = ({ onSearchDNI }) => {
                 {selectedStudentData && (
                   <Modal open={openModals[index]} onClose={() => closeStudentModal(index)}>
                     <div className='flex justify-center mb-4'>
-                      <img src={'/image/logo_unp.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
-                      <img src={'/image/logo_cimade.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
-                      <img src={'/image/logo_cip_tacna.png'}className="lg:w-32 lg:h-32 w-28 h-28 object-contain "/>
+                      <img src={'/certificate/logo_unp.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
+                      <img src={'/certificate/logo_cimade.png'} className="lg:w-32 lg:h-32 w-28 h-28 object-contain"/>
+                      <img src={'/certificate/logo_cip_tacna.png'}className="lg:w-32 lg:h-32 w-28 h-28 object-contain "/>
                     </div>
                     <div className="max-w-md mx-auto p-6 bg-white rounded-md">
                       {tableRows.map((row, index) => (
