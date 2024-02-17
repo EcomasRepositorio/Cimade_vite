@@ -27,7 +27,7 @@ const CounterMain = () => {
 
         {/* TARJETAS DE CONTEO */}
        
-        <Counter/>
+        <Counter/>  
       
       </div>
       
