@@ -42,7 +42,7 @@ const GraduateAmbiental = () => {
           <div className="sm:w-96 mb-4 sm:mb-0">
             <img
               className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
-              src="/image/ing_small.jpg"
+              src="/image/residuos_solidos.png"
               alt="icon"
             />
           </div>
@@ -122,7 +122,7 @@ const GraduateAmbiental = () => {
           <div className="sm:w-96 mb-4 sm:mb-0">
             <img
               className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
-              src="/image/ing_small.jpg"
+              src="/image/monitoreo_ambiental.png"
               alt="icon"
             />
           </div>
@@ -199,7 +199,7 @@ const GraduateAmbiental = () => {
           <div className="sm:w-96 mb-4 sm:mb-0">
             <img
               className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
-              src="/image/ing_small.jpg"
+              src="/image/impacto_ambiental.png"
               alt="icon"
             />
           </div>
@@ -279,7 +279,7 @@ const GraduateAmbiental = () => {
           <div className="sm:w-96 mb-4 sm:mb-0">
             <img
               className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
-              src="/image/ing_small.jpg"
+              src="/image/gestion_municipal.png"
               alt="icon"
             />
           </div>
