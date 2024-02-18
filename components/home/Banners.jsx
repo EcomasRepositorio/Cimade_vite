@@ -84,7 +84,7 @@ const Banners = () => {
                 </div>
 
                 <div className="des"></div>
-                <button className="seeMore">CONOCE MAS</button>
+                <button href='/graduate' className="seeMore">CONOCE MAS</button>
               </div>
             </div>
 
@@ -96,7 +96,7 @@ const Banners = () => {
                 </div>
 
                 <div className="des"></div>
-                <button className="seeMore">CONOCE MAS</button>
+                <button href='/graduate' className="seeMore">CONOCE MAS</button>
               </div>
             </div>
 

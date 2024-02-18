@@ -24,7 +24,7 @@ export const Footer = () => {
                 <button className="a text">capacitaciones@cimade.edu.pe</button>
               </a>
 
-              <a href="" className="flex mb-3 text-lg font-medium transition md:mb-2">
+              <a className="flex mb-3 text-lg font-medium transition md:mb-2">
                 <img src="/footer/footer_reloj.svg" alt="Phone Icon" className="w-6 h-6 mr-2" />
                 HORARIO: 9:00 AM – 6:00 PM
               </a>
@@ -36,19 +36,19 @@ export const Footer = () => {
           <nav className="mb-4 ml-8">
             <p className="text-center mb-3 text-xl font-bold tracking-wider text-gray-50 uppercase">Nuestra Empresa</p>
             <div className="flex flex-col items-center">
-              <a href="#">
+              <a href="/">
                 <button className="a text mb-3 buttonFooter">Inicio</button>
               </a>
 
-              <a href="#">
+              <a href="/graduate">
                 <button className="a text mb-3 buttonFooter">Diplomados</button>
               </a>
 
-              <a href="#">
+              <a href="/certificate">
                 <button className="a text mb-3">Certificados</button>
               </a>
 
-              <a href="#">
+              <a href="/about">
                 <button className="a text mb-3">Nosotros</button>
               </a>
 

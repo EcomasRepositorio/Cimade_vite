@@ -140,8 +140,8 @@ const Login: React.FC = () => {
                 className="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-3xl lg:rounded-bl-none"
                 style={buttonStyle}>
                 <div className="px-4 py-6 text-white md:mx-6 md:p-12">
-                  <h4 className="mb-6 text-xl font-semibold">
-                    We are more than just a company
+                  <h4 className="flex justify-center mb-6 text-xl font-semibold">
+                    CIMADE
                   </h4>
                   <p className="text-lg font-semibold">
 
