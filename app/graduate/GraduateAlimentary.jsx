@@ -29,7 +29,7 @@ const GraduateAlimentary = () => {
 
           <div className="sm:w-1/2 md:px-20 sm:px-5">
             <div
-              className="text-black font-bold font-poppins lg:text-5xl text-5xl my-2 mb-6"
+              className="text-black font-bold font-poppins lg:text-4xl text-4xl my-2 mb-6"
               style={{
                 background: `linear-gradient(to right, #002e79, #006eb0)`,
                 WebkitBackgroundClip: "text",
@@ -65,26 +65,27 @@ const GraduateAlimentary = () => {
 
             <div className="flex flex-col items-start">
               <Link
-                className="border bg-primaryrosa flex items-center justify-center mb-4 text-white font-bold rounded-full h-16 w-6/12  "
+                className="border bg-primaryrosa flex items-center justify-center h mb-4 text-white font-bold rounded-xl h-16 lg:w-6/12 w-full hover:bg-primaryceleste "
                 href="https://api.whatsapp.com/send?phone=51900102090"
                 target="_blank"
               >
-                Mas información
+               <h1 className="transition-transform transform hover:scale-110">Mas información</h1>
               </Link>
               <button
                 onClick={toggleAccordion1}
-                className="border bg-primaryceleste flex items-center justify-center mb-4 text-white font-bold rounded-full h-16 w-6/12"
+                className="p-3 border bg-primaryceleste flex items-center justify-between mb-4 text-white font-bold rounded-xl h-16 lg:w-6/12 w-full "
               >
-                Lista de Módulo
-                <img className=" ml-8" src="/icons/modulo.webp" alt="op" />
+               <h1 className="transition-transform transform hover:scale-110">Lista de Módulo</h1>
+                
+                <img className=" ml-8 transition-transform transform hover:scale-125 " src="/icons/modulo.webp" alt="op" />
               </button>
             </div>
             {isAccordionOpen1 && (
-              <div className="bg-slate-200 rounded-lg">
-                <div className="text-textblue text-left py-4 font-sans font-semibold ml-8">
-                  <ul>
+              <div className="bg-white rounded-lg">
+                <div className="text-textblue text-left lg:text-xl text-sm py-4 font-sans font-semibold ml-4 ">
+                  <ul >
                     {lista13.map((item, index) => (
-                      <li key={index}>{item}</li>
+                      <li className="lg:p-2 p-2 mb-3 border rounded-md bg-slate-50 border-primaryceleste mr-4" key={index}>{item}</li>
                     ))}
                   </ul>
                 </div>
@@ -92,6 +93,8 @@ const GraduateAlimentary = () => {
             )}
           </div>
         </div>
+        
+
     </div>
   )
 }

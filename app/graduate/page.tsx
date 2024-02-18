@@ -15,7 +15,7 @@ const Page = () => {
     <div id="/graduate">
       <div className=" p-5 flex flex-col ">
         <div
-          className="text text-center text-4xl md:text-5xl lg:text-4xl xl:text-7xl mb-4 font-bold font-poppins text-black"
+          className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
           style={{
             background: `linear-gradient(to right, #002e79, #006eb0)`,
             WebkitBackgroundClip: "text",
@@ -23,7 +23,7 @@ const Page = () => {
             color: "transparent",
           }}
         >
-          DIPLOMADOS - INGENIERIA CIVIL
+          DIPLOMADOS EN INGENIERIA CIVIL
         </div>
 
         <GraduateCivil/>
@@ -33,7 +33,7 @@ const Page = () => {
 
       <div className=" p-5 flex flex-col ">
         <div
-          className="text text-center text-4xl md:text-5xl lg:text-4xl xl:text-7xl mb-4 font-bold font-poppins text-black"
+           className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
           style={{
             background: `linear-gradient(to right, #002e79, #006eb0)`,
             WebkitBackgroundClip: "text",
@@ -41,7 +41,7 @@ const Page = () => {
             color: "transparent",
           }}
         >
-          DIPLOMADOS - INGENIERIA AMBIENTAL
+          DIPLOMADOS EN INGENIERIA AMBIENTAL
         </div>
 
         <GraduateAmbiental/>
@@ -51,7 +51,7 @@ const Page = () => {
 
       <div className=" p-5 flex flex-col ">
         <div
-          className="text text-center text-4xl md:text-5xl lg:text-4xl xl:text-7xl mb-4 font-bold font-poppins text-black"
+          className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
           style={{
             background: `linear-gradient(to right, #002e79, #006eb0)`,
             WebkitBackgroundClip: "text",
@@ -59,7 +59,7 @@ const Page = () => {
             color: "transparent",
           }}
         >
-          DIPLOMADOS - INGENIERÍA AGRÓNOMA
+          DIPLOMADOS EN INGENIERÍA AGRÓNOMA
         </div>
 
         <GraduateAgronomy/>
@@ -69,7 +69,7 @@ const Page = () => {
 
       <div className=" p-5 flex flex-col ">
         <div
-          className="text text-center text-4xl md:text-5xl lg:text-4xl xl:text-7xl mb-4 font-bold font-poppins text-black"
+          className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
           style={{
             background: `linear-gradient(to right, #002e79, #006eb0)`,
             WebkitBackgroundClip: "text",
@@ -77,7 +77,7 @@ const Page = () => {
             color: "transparent",
           }}
         >
-          DIPLOMADOS EN GENERAL
+          DIPLOMADO PARA PROFESIONALES EN GENERAL 
         </div>
 
         <GraduateGenerally/>
@@ -87,7 +87,7 @@ const Page = () => {
       
       <div className=" p-5 flex flex-col ">
         <div
-          className="text text-center text-4xl md:text-5xl lg:text-4xl xl:text-7xl mb-4 font-bold font-poppins text-black"
+          className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
           style={{
             background: `linear-gradient(to right, #002e79, #006eb0)`,
             WebkitBackgroundClip: "text",
@@ -95,7 +95,7 @@ const Page = () => {
             color: "transparent",
           }}
         >
-          DIPLOMADO - INGENIERÍA ALIMENTARIA 
+          DIPLOMADO EN INGENIERÍA ALIMENTARIA 
         </div>
 
         <GraduateAlimentary/>
@@ -105,7 +105,7 @@ const Page = () => {
 
       <div className=" p-5 flex flex-col ">
         <div
-          className="text text-center text-4xl md:text-5xl lg:text-4xl xl:text-7xl mb-4 font-bold font-poppins text-black"
+          className="flex text-center text-3xl  lg:text-5xl xl:text-5xl lg:w-3/4 mb-4 font-bold font-poppins lg:ml-72 "
           style={{
             background: `linear-gradient(to right, #002e79, #006eb0)`,
             WebkitBackgroundClip: "text",
@@ -113,7 +113,7 @@ const Page = () => {
             color: "transparent",
           }}
         >
-          DIPLOMADO - PSICOLOGÍA, MEDICINA Y EFECTIVOS DE LAS FUERZAS ARMADAS
+          DIPLOMADO DIRIGIDOS PARA PSICOLOGÍA, MEDICINA, TECNOLOGÍA MÉDICA, ABOGADOS, EFECTIVOS DE LAS FUERZAS ARMADAS Y LA POLICÍA NACIONAL DEL PERÚ
         </div>
 
        <GraduateEtc/>
