@@ -21,7 +21,7 @@ const GraduateAlimentary = () => {
        <div className="py-12 md:px-20 sm:px-14 px-6 flex flex-col sm:flex-row justify-center">
           <div className="sm:w-96 mb-4 sm:mb-0">
             <img
-              className="bg-cover w-full h-64 sm:h-auto rounded-3xl"
+              className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
               src="/image/ing_small.jpg"
               alt="icon"
             />
@@ -37,17 +37,17 @@ const GraduateAlimentary = () => {
                 color: "transparent",
               }}
             >
-              ASISTENTE TÉCNICO EN OBRAS
+              GESTIÓN DE LA CALIDAD E INOCUIDAD ALIMENTARIA
             </div>
             <div className="text-gray-700 mb-2 md:mb-6 font-montserrat text-2xl">
               <div className="flex items-center mb-2">
                 <img src="/icons/calendar.webp" alt="logo" />
-                <p className="font-semibold ml-1">Inicio 17 de febrero</p>
+                <p className="font-semibold ml-1">Inicio 25 de febrero</p>
               </div>
 
               <div className="flex items-center mb-2">
                 <img src="/icons/arrow.webp" alt="" className="mr-2" />
-                <p className="font-semibold">Modalidad online</p>
+                <p className="font-semibold">Modalidad Online via Zoom</p>
               </div>
 
               <div className="flex items-center mb-2">
@@ -57,7 +57,7 @@ const GraduateAlimentary = () => {
 
               <div className="flex items-center mb-2">
                 <img src="/icons/arrow.webp" alt="" className="mr-2" />
-                <p className="font-semibold">192 horas académicas</p>
+                <p className="font-semibold">420 horas académicas (<span className="credits">26 créditos</span>)</p>
               </div>
             </div>
 
