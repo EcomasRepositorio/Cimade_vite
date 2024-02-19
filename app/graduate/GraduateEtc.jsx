@@ -22,7 +22,7 @@ const GraduateAlimentary = () => {
           <div className="sm:w-96 mb-4 sm:mb-0">
             <img
               className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
-              src="/image/ing_small.jpg"
+              src="/image/forense.png"
               alt="icon"
             />
           </div>
@@ -84,11 +84,24 @@ const GraduateAlimentary = () => {
             {isAccordionOpen1 && (
               <div className="bg-white rounded-lg">
                 <div className="text-textblue text-left lg:text-xl text-sm py-4 font-sans font-semibold ml-4 ">
-                  <ul >
-                    {lista14.map((item, index) => (
-                      <li className="lg:p-2 p-2 mb-3 border rounded-md bg-slate-50 border-primaryceleste mr-4" key={index}>{item}</li>
-                    ))}
-                  </ul>
+                <ul>
+                  {lista14.map((item, index) => (
+                    <li
+                      className="lg:p-2 p-2 mb-3 border rounded-md bg-slate-50 border-primaryceleste mr-4"
+                      key={index}
+                    >
+                      <a
+                        href={`https://wa.me/51900102090/?text=${encodeURIComponent(
+                          item
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
                 </div>
               </div>
             )}
