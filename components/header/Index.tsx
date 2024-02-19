@@ -52,7 +52,7 @@ const Header = () => {
                     <Link href="/about" className="text-gray-900 hover:underline">Nosotros</Link>
                 </li>
                 <li>
-                    <Link href="#" className="text-gray-900 hover:underline">Blog</Link>
+                    <Link href="/shipments" className="text-gray-900 hover:underline">Envios</Link>
                 </li>
                 <li>
                 </li>
@@ -88,7 +88,7 @@ const Header = () => {
             <Link href='/about'>Nosotros</Link>
           </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
-            <Link href='/'>Blog</Link>
+            <Link href='/shipments'>Envios</Link>
           </li>
         </ul>
         <div className="flex flex-col justify-center items-center mt-16">
