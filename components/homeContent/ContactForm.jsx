@@ -23,7 +23,7 @@ const ContactForm = () => {
                 Contáctanos
               </h2>
                 {!isSubmitted ? (
-                  <form action="https://formsubmit.co/5443fc3929171a45094405b63b894a5b" method="POST" onSubmit={handleSubmit}>
+                  <form action="https://formsubmit.co/cimade.educacion@gmail.com" method="POST" onSubmit={handleSubmit}>
                     <div className="form-group mb-6">
                       <p className='font-semibold mb-2 text-slate-300'>Nombres y Apellidos:</p>
                       <input
