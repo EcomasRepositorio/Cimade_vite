@@ -53,7 +53,7 @@ const Header = () => {
                     <Link href="/graduate" className="hover:text-pink-500">Diplomados</Link>
                 </li>
                 <li>
-                    <Link href="/certificate" className="hover:text-pink-500">Certificados</Link>
+                    <Link href="/certs" className="hover:text-pink-500">Certificados</Link>
                 </li>
                 <li>
                     <Link href="/about" className="hover:text-pink-500">Nosotros</Link>
@@ -95,7 +95,7 @@ const Header = () => {
             <Link href='/graduate'>Diplomados</Link>
           </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
-            <Link href='/certificate'>Certificados</Link>
+            <Link href='/certs'>Certificados</Link>
           </li>
           <li onClick={handleMenu} className="py-5 hover:text-warning-800 cursor-pointer">
             <Link href='/about'>Nosotros</Link>

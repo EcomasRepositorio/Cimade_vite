@@ -23,7 +23,7 @@ const Certificate: React.FC = () => {
   };
 
   return (
-    <section className='p-2'>
+    <section id='certs' className='p-2'>
     <div className="max-w-screen-xl mx-auto mb-12 border mt-12 rounded-3xl shadow-2xl text-center lg:mb-20 p-2">
       <div className="mb-4 lg:mt-0 justify-center text-5xl font-extrabold tracking-tight text-gray-500">
       <div className='flex justify-center mb-4 lg:gap-10 mt-12'>
