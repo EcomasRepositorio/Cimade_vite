@@ -1,47 +1,128 @@
+"use client";
 import React from "react";
-import Whatsapp from '@/components/whatsapp/Index'
-// En tu archivo CSS o Sass
+import GraduateCivil from "../../components/graduate/GraduateCivil";
+import GraduateAmbiental from "../../components/graduate/GraduateAmbiental";
+import GraduateAgronomy from "../../components/graduate/GraduateAgronomy";
+import GraduateGenerally from "../../components/graduate/GraduateGenerally";
+import GraduateAlimentary from "../../components/graduate/GraduateAlimentary";
+import GraduateEtc from "../../components/graduate/GraduateEtc";
 
-const page = () => {
+
+
+const Page = () => {
+  
   return (
     <div id="/graduate">
       <div className=" p-5 flex flex-col ">
-        <div className="text text-center text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-4 font-bold text-primaryblue ">
-          DIPLOMADOS 2024
+        <div
+          className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
+          style={{
+            background: `linear-gradient(to right, #002e79, #006eb0)`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          DIPLOMADOS EN INGENIERIA CIVIL
         </div>
-        <main className="py-12 md:px-20 sm:px-14 px-6 flex flex-col sm:flex-row justify-center">
-          <div className="sm:w-96 mb-4 sm:mb-0">
-            <img
-              className="bg-cover w-full h-64 sm:h-auto rounded-3xl"
-              src="/image/ing_civil.jpg"
-              alt=""
-            />
-          </div>
-          <div className="sm:w-1/2 md:px-20 sm:px-5">
-            <div className="text-gray-800 font-bold text-5xl my-2">
-              Seguridad Industrial Salud Ocupacional & Formación de Auditor
-              Interno ISO 45001
-            </div>
-            <div className="text-gray-700 mb-2 md:mb-6">
-              <p>Inicio 17 de febrero</p>
-              <p>modalidad online</p>
-              <p>4 meses</p>
-              <p>192 horas académicas</p>
-            </div>
-            <div className="flex justify-left mb-2">
-              <button className="border bg-primaryblue items-center justify-center sm:inline-block hidden mb-4 text-white font-bold rounded-full h-16 w-36 ml-8">
-                Mas información
-              </button>
-              <button className="border bg-primaryblue items-center justify-center sm:inline-block hidden mb-4 text-white font-bold rounded-full h-16 w-36 ml- ">
-                Cursos
-              </button>
-            </div>
-          </div>
-        </main>
+
+        <GraduateCivil/>
+
+       
       </div>
-      <Whatsapp />
+
+      <div className=" p-5 flex flex-col ">
+        <div
+           className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
+          style={{
+            background: `linear-gradient(to right, #002e79, #006eb0)`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          DIPLOMADOS EN INGENIERIA AMBIENTAL
+        </div>
+
+        <GraduateAmbiental/>
+
+       
+      </div>
+
+      <div className=" p-5 flex flex-col ">
+        <div
+          className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
+          style={{
+            background: `linear-gradient(to right, #002e79, #006eb0)`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          DIPLOMADOS EN INGENIERÍA AGRÓNOMA
+        </div>
+
+        <GraduateAgronomy/>
+
+       
+      </div>
+
+      <div className=" p-5 flex flex-col ">
+        <div
+          className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
+          style={{
+            background: `linear-gradient(to right, #002e79, #006eb0)`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          DIPLOMADO PARA PROFESIONALES EN GENERAL 
+        </div>
+
+        <GraduateGenerally/>
+
+       
+      </div>
+      
+      <div className=" p-5 flex flex-col ">
+        <div
+          className="text text-center text-4xl  lg:text-6xl xl:text-6xl mb-4 font-bold font-poppins "
+          style={{
+            background: `linear-gradient(to right, #002e79, #006eb0)`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          DIPLOMADO EN INGENIERÍA ALIMENTARIA 
+        </div>
+
+        <GraduateAlimentary/>
+
+       
+      </div>
+
+      <div className=" p-5 flex flex-col ">
+        <div
+          className="flex text-center text-3xl  lg:text-5xl xl:text-5xl lg:w-3/4 mb-4 font-bold font-poppins lg:ml-72 "
+          style={{
+            background: `linear-gradient(to right, #002e79, #006eb0)`,
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+          }}
+        >
+          DIPLOMADO DIRIGIDOS PARA PSICOLOGÍA, MEDICINA, TECNOLOGÍA MÉDICA, ABOGADOS, EFECTIVOS DE LAS FUERZAS ARMADAS Y LA POLICÍA NACIONAL DEL PERÚ
+        </div>
+
+       <GraduateEtc/>
+
+       
+      </div>
+
     </div>
   );
 };
 
-export default page;
+export default Page;
