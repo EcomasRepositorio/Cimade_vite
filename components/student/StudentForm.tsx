@@ -71,13 +71,16 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
         });
         return;
       };
-      if (!isNum(data.code) || data.code. length !== 9) {
+      
+      if (!isNum(data.code) || data.code. length !== 8 && data.code.length !== 9) {
         setError('code', {
           type: 'manual',
           message: 'El codigo debe contener solo números y exactamente 9 digitos',
         });
         return;
       };
+
+
       if (!isNum(data.hour)) {
         setError('hour', {
           type: 'manual',
