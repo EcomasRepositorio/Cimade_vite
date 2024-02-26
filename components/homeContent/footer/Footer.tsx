@@ -44,7 +44,7 @@ export const Footer = () => {
                 <button className="a text mb-3 buttonFooter">Diplomados</button>
               </a>
 
-              <a href="/certificate">
+              <a href="/certs">
                 <button className="a text mb-3">Certificados</button>
               </a>
 

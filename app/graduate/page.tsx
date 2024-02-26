@@ -10,7 +10,7 @@ import GraduateEtc from "../../components/graduate/GraduateEtc";
 
 
 const Page = () => {
-  
+
   return (
     <div id="/graduate">
       <div className=" p-5 flex flex-col ">
@@ -25,10 +25,7 @@ const Page = () => {
         >
           DIPLOMADOS EN INGENIERIA CIVIL
         </div>
-
         <GraduateCivil/>
-
-       
       </div>
 
       <div className=" p-5 flex flex-col ">

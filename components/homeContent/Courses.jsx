@@ -40,7 +40,6 @@ const Courses = () => {
                     </p>
                     <a
                       href={`https://wa.me/51900102090/?text=${encodeURIComponent(
-                       
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -207,7 +206,6 @@ const Courses = () => {
                     </p>
                     <a
                       href={`https://wa.me/51900102090/?text=${encodeURIComponent(
-                       
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"

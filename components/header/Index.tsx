@@ -16,12 +16,12 @@ const Header = () => {
   return (
   <>
     <div className="bg-[#006eb0] border-gray-200">
-    <div className="flex lg:justify-between justify-center mx-auto max-w-screen-2xl p-2 ">
-      <div className="hidden lg:flex">
-      <Link href="/certificate" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
-      </div>
+    <div className="flex lg:justify-end justify-center mx-auto max-w-screen-2xl p-2 ">
+      {/* <div className="hidden lg:flex">
+      <Link href="/certs" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
+      </div> */}
         <div className="flex space-x-6 rtl:space-x-reverse">
-            <Link href="/certificate" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
+            <Link href="/certs" className="text-lg text-gray-50 hover:underline font-semibold">Verificar certificado</Link>
             <Link href="https://site2.q10.com/login?ReturnUrl=%2F&aplentId=0959465f-37c3-4032-803b-bbfc499af7a3"
               className="text-lg text-gray-50 hover:underline font-semibold" target='_blank'>
               Aula virtual

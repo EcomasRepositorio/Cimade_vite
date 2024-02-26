@@ -71,7 +71,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
         });
         return;
       };
-      
+
       if (!isNum(data.code) || data.code. length !== 8 && data.code.length !== 9) {
         setError('code', {
           type: 'manual',
