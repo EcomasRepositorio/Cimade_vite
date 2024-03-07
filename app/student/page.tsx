@@ -319,7 +319,7 @@ const Student = () => {
 
         <div className="flex justify-center mt-2 lg:mt-2 mb-1">
           <button
-            type="button"
+            type="submit"
             className="text-[#006eb0] uppercase hover:text-white border-2 border-[#006eb0] hover:bg-[#006eb0] focus:ring-4 focus:outline-none font-semibold rounded-lg text-xs px-3 py-2 text-center me-2 mb-1 dark:hover:text-white dark:focus:ring-[#BFE9FB] inline-flex items-center"
             onClick={handleOpenCreateForm}
           >
@@ -396,7 +396,7 @@ const Student = () => {
                   Instituto
                 </th>
                 <th scope="col" className="px-6 py-4">
-                  Hora
+                  Hora/Créditos
                 </th>
                 <th scope="col" className="px-6 py-4">
                   Fecha

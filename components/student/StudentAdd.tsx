@@ -43,10 +43,10 @@ const CreateStudentForm: React.FC<CreateStudentFormProps> = ({ onCloseModal, onC
         });
         return;
       }
-      if (!Num(data.code) || data.code.length !== 9) {
+      if (!Num(data.code) || (data.code.length !== 8 && data.code.length !== 9)) {
         setError('code', {
           type: 'manual',
-          message: 'El codigo debe contener solo números y exactamente 9 digitos',
+          message: 'El codigo debe contener solo números y exactamente 8 y 9 digitos',
         });
         return;
       }

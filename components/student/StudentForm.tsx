@@ -151,7 +151,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ id, onCloseModal, onUpdateSuc
         </div>
         <div  className='flex justify-between col-span-2 whitespace-pre-wrap'>
         <div className="mb-4">
-          <label className="text-xs font-bold">Hora: </label>
+          <label className="text-xs font-bold">Hora/Créditos: </label>
           <input {...register('hour')}
           className={`border rounded-lg p-2 lg:w-32 w-24 ${errors?.hour?.message ? 'border-red-500' : ''}`} />
           {errors?.hour && (
