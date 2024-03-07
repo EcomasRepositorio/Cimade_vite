@@ -50,13 +50,13 @@ const CreateStudentForm: React.FC<CreateStudentFormProps> = ({ onCloseModal, onC
         });
         return;
       }
-      if (!Num(data.hour)) {
+     /*  if (!Num(data.hour)) {
         setError('hour', {
           type: 'manual',
           message: 'La hora debe contener solo números',
         });
         return;
-      }
+      } */
       const response = await axios.post(`${URL()}/student`, data, tokenConfig(validToken));
       const createdStudentId = response.data.id;
       onCreateSuccess(createdStudentId);

@@ -215,7 +215,7 @@ const Student = () => {
 
   const memoryData = useMemo(() => studentData, [studentData]);
   //Pagination
-  const itemsPerPage = 20;
+  const itemsPerPage = 50;
   const handlePageChange = (newPage: number) => {
     setLimit(20);
     setOffset(10);
