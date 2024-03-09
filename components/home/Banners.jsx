@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import "./StyleBan.css";
+import Link from 'next/link';
 
 
 const Banners = () => {
@@ -84,7 +85,10 @@ const Banners = () => {
                 </div>
 
                 <div className="des"></div>
-                <button href='/graduate' className="seeMore">CONOCE MAS</button>
+                <button>
+                <Link href='/graduate' className="seeMore button">CONOCE MÁS</Link>
+                </button>
+               
               </div>
             </div>
 
@@ -96,7 +100,9 @@ const Banners = () => {
                 </div>
 
                 <div className="des"></div>
-                <button href='/graduate' className="seeMore">CONOCE MAS</button>
+                <button>
+                <Link href='/graduate' className="seeMore button">CONOCE MÁS</Link>
+                </button>
               </div>
             </div>
 
@@ -108,7 +114,9 @@ const Banners = () => {
                 </div>
 
                 <div className="des"></div>
-                <button className="seeMore">Inscribete Ahora</button>
+                <button >
+                <Link href='https://api.whatsapp.com/send?phone=51900102090' target="_blank" className="seeMore button _blank">INSCRIBETE AHORA</Link>
+                </button>
               </div>
             </div>
           </div>

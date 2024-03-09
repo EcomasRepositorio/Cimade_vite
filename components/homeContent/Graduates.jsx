@@ -1,4 +1,6 @@
 import "./Styles.css";
+import Link from 'next/link';
+
 
 const Graduates = () => {
   return (
@@ -22,6 +24,9 @@ const Graduates = () => {
           <li>
             <ul role="list" className="mt-3 flex gap-x-3">
               <div className="m-2 space-y-2">
+
+              <Link href="/graduate">
+
                 <div
                   className="group flex flex-col gap-1 rounded-lg p-5 text-gray "
                   tabIndex="1"
@@ -47,13 +52,20 @@ const Graduates = () => {
                     </div>
                   </div>
                 </div>
+                
+                </Link>
+
               </div>
+            
+
             </ul>
+     
           </li>
           {/* Repeat the above structure for each team member */}
           <li>
             <ul role="list" className="mt-3 flex gap-x-3">
               <div className="m-2 space-y-2">
+                <Link href="/graduate">
                 <div
                   className="group flex flex-col gap-1 rounded-lg p-5 text-gray "
                   tabIndex="1"
@@ -79,6 +91,7 @@ const Graduates = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               </div>
             </ul>
           </li>
@@ -86,6 +99,7 @@ const Graduates = () => {
           <li>
             <ul role="list" className="mt-3 flex gap-x-3">
               <div className="m-2 space-y-2">
+                <Link href="/graduate">
                 <div
                   className="group flex flex-col gap-1 rounded-lg p-5 text-gray "
                   tabIndex="1"
@@ -111,6 +125,7 @@ const Graduates = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               </div>
             </ul>
           </li>
@@ -118,6 +133,7 @@ const Graduates = () => {
           <li>
             <ul role="list" className="mt-3 flex gap-x-3">
               <div className="m-2 space-y-2">
+                <Link href="/graduate">
                 <div
                   className="group flex flex-col gap-1 rounded-lg p-5 text-gray "
                   tabIndex="1"
@@ -143,6 +159,7 @@ const Graduates = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               </div>
             </ul>
           </li>
@@ -150,6 +167,7 @@ const Graduates = () => {
           <li>
             <ul role="list" className="mt-3 flex gap-x-3">
               <div className="m-2 space-y-2">
+                <Link href="/graduate">
                 <div
                   className="group flex flex-col gap-1 rounded-lg p-5 text-gray "
                   tabIndex="1"
@@ -175,6 +193,7 @@ const Graduates = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               </div>
             </ul>
           </li>
@@ -182,6 +201,7 @@ const Graduates = () => {
           <li>
             <ul role="list" className="mt-3 flex gap-x-3">
               <div className="m-2 space-y-2">
+                <Link href="/graduate">
                 <div
                   className="group flex flex-col gap-1 rounded-lg p-5 text-gray "
                   tabIndex="1"
@@ -207,6 +227,7 @@ const Graduates = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               </div>
             </ul>
           </li>
