@@ -7,7 +7,7 @@ const Counter = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight;
-      const targetPosition = document.getElementById('counter-section');
+      const targetPosition = document.getElementById('counter-section'.offsetTop);
 
       if (scrollPosition >= targetPosition && !counterAnimated) {
         setCounterAnimated(true);

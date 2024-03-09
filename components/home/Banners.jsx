@@ -85,8 +85,8 @@ const Banners = () => {
                 </div>
 
                 <div className="des"></div>
-                <button>
-                <Link href='/graduate' className="seeMore button">CONOCE MÁS</Link>
+                <button className="seeMore">
+                <Link href='/graduate' >CONOCE MÁS</Link>
                 </button>
                
               </div>
@@ -100,8 +100,8 @@ const Banners = () => {
                 </div>
 
                 <div className="des"></div>
-                <button>
-                <Link href='/graduate' className="seeMore button">CONOCE MÁS</Link>
+                <button  className="seeMore">
+                <Link href='/graduate'>CONOCE MÁS</Link>
                 </button>
               </div>
             </div>
@@ -114,8 +114,8 @@ const Banners = () => {
                 </div>
 
                 <div className="des"></div>
-                <button >
-                <Link href='https://api.whatsapp.com/send?phone=51900102090' target="_blank" className="seeMore button _blank">INSCRIBETE AHORA</Link>
+                <button className="seeMore ">
+                <Link href='https://api.whatsapp.com/send?phone=51900102090' target="_blank"  >INSCRIBETE AHORA</Link>
                 </button>
               </div>
             </div>
