@@ -26,7 +26,7 @@ const texts = [
 const buttons = [
   { text: "CONOCE MÁS", link: "https://api.whatsapp.com/send?phone=51900102090" },
   { text: "CONOCE MÁS", link: "https://api.whatsapp.com/send?phone=51900102090" },
-  {text: "INSCRÍBETE AHORA",link: "https://api.whatsapp.com/send?phone=51900102090",},
+  { text: "INSCRÍBETE AHORA", link: "https://api.whatsapp.com/send?phone=51900102090" },
 ];
 
 const tittles = [
@@ -47,10 +47,12 @@ const tittles = [
 // Definición de los íconos sociales
 const socialLinks = [
   {
-    href: "https://www.facebook.com/CimadeEC",icon: FaFacebookF,},
+    href: "https://www.facebook.com/CimadeEC",
+    icon: FaFacebookF,
+  },
   { href: "https://www.instagram.com/cimade_ec/", icon: FaInstagram },
   { href: "https://www.instagram.com/cimade_ec/", icon: FaTiktok, disabled: false },
-  {href: "https://api.whatsapp.com/send?phone=51900102090",icon: FaWhatsapp,disabled: false,}, // Deshabilitado
+  { href: "https://api.whatsapp.com/send?phone=51900102090", icon: FaWhatsapp, disabled: false }, 
   { href: "https://www.youtube.com/@cimadeec", icon: FaYoutube, disabled: false },
 ];
 
@@ -59,30 +61,33 @@ const SocialLinks = memo(() => {
   const [showMessage, setShowMessage] = useState(false); // Estado para mostrar mensaje
 
   return (
-    <div className="text-gray-100 lg:text-4xl text-x1 inline-flex lg:gap-6 gap-4">
-      {socialLinks.map(({ href, icon: Icon, disabled }, idx) => (
-        <div key={idx} className="relative">
-          <Link
-            href={disabled ? "#" : href} // Previene la navegación si está deshabilitado
-            target={disabled ? undefined : "_blank"}
-            className={`p-2 rounded-full transition-transform transform hover:scale-150 shadow-xl ${
-              disabled ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            onClick={disabled ? (e) => e.preventDefault() : undefined} // Previene la acción si está deshabilitado
-            onMouseEnter={() => disabled && setShowMessage(true)} // Muestra mensaje al pasar el cursor
-            onMouseLeave={() => disabled && setShowMessage(false)} // Oculta mensaje al quitar el cursor
-          >
-            <Icon />
-          </Link>
-          {/* Mensaje de indisponibilidad */}
-          {disabled && showMessage && (
-            <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-red-500 text-sm">
-              Aún no disponible
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
+    <>
+      {/* Contenedor principal */}
+      <div className="text-gray-100 lg:text-4xl text-x1 inline-flex lg:gap-6 gap-4">
+        {socialLinks.map(({ href, icon: Icon, disabled }, idx) => (
+          <div key={idx} className="relative">
+            <Link
+              href={disabled ? "#" : href} // Previene la navegación si está deshabilitado
+              target={disabled ? undefined : "_blank"}
+              className={`p-2 rounded-full transition-transform transform hover:scale-150 shadow-xl ${
+                disabled ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              onClick={disabled ? (e) => e.preventDefault() : undefined} // Previene la acción si está deshabilitado
+              onMouseEnter={() => disabled && setShowMessage(true)} // Muestra mensaje al pasar el cursor
+              onMouseLeave={() => disabled && setShowMessage(false)} // Oculta mensaje al quitar el cursor
+            >
+              <Icon />
+            </Link>
+            {/* Mensaje de indisponibilidad */}
+            {disabled && showMessage && (
+              <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 text-red-500 text-sm">
+                Aún no disponible
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </>
   );
 });
 
@@ -112,6 +117,7 @@ function PrincipalHome() {
         backgroundImage: `url('/image/bannerD.jpg')`, // Usa url() para definir la imagen correctamente
         backgroundSize: "cover",
         backgroundPosition: "center",
+        paddingTop: "100px", // Añadimos padding superior
       }}
     >
       <motion.div
