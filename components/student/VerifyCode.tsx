@@ -152,7 +152,7 @@ const DuplicatedCode: React.FC<DuplicatedCodesDetectorProps> = ({ studentData, i
       )}
       {isNoDuplicatesModalOpen && (
         <Modal open={isNoDuplicatesModalOpen} onClose={handleTableModalClose}>
-          <div className='flex justify-center border p-4 rounded-xl font-semibold text-[#006eb0]'>
+          <div className='flex justify-center border p-4 rounded-xl font-semibold text-white'>
             No hay códigos duplicados.
           </div>
         </Modal>

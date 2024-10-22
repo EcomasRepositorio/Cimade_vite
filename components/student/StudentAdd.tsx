@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import tokenConfig, { URL } from '@/components/utils/format/tokenConfig';
-import Modal from '../share/Modal';
+import Modal from '../share/ModalAdmin';
 import { useRouteData } from '@/hooks/hooks';
 
 interface CreateStudentFormProps {
