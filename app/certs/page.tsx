@@ -23,7 +23,7 @@ const TestingPage: React.FC<Props> = () => {
         className=""
         style={{
           backgroundAttachment: "fixed",
-          backgroundImage: "url(/banner/bg_cert5.jpg)",
+          backgroundImage: "url(/banner/bg_certi5.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -31,7 +31,7 @@ const TestingPage: React.FC<Props> = () => {
         <div className="py-8 mt-24  mx-auto max-w-screen-xl lg:py-10">
           <div className="" style={{ position: "relative", width: "100%" }}>
             <div
-              className="bg-gradient-to-r from-[#183575]/60 to-[#CC007F]/60  border border-white/55  rounded-lg p-8 md:p-12 mb-28 mt-4 mx-2"
+              className="bg-gradient-to-t from-primaryceleste/30 to-primaryblue border border-white/55  rounded-lg p-8 md:p-12 mb-28 mt-4 mx-2"
               style={{
                 marginBottom: "20px",
               }}   
@@ -56,7 +56,7 @@ const TestingPage: React.FC<Props> = () => {
                       classNames={{
                         tabList:
                           "w-full flex flex-col md:flex-row bg-transparent rounded-md border border-gray-300/40",
-                        cursor: "bg-[#CB0080] text-gray-100 rounded-lg",
+                        cursor: "bg-primaryrosa/70 text-gray-100 rounded-lg",
                         tab: "py-2 px-4 rounded-t-lg text-gray-100",
                         tabContent:
                           "group-data-[selected=true]:text-gray-100 text-g-100 ",
