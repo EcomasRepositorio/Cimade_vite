@@ -34,8 +34,7 @@ const TestingPage: React.FC<Props> = () => {
               className="bg-gradient-to-t from-primaryceleste/30 to-primaryblue border border-white/55  rounded-lg p-8 md:p-12 mb-28 mt-4 mx-2"
               style={{
                 marginBottom: "20px",
-              }}   
-
+              }}
             >
               <div className="flex flex-col md:flex-row mx-auto max-w-screen-xl  md:mr-0 md:p-4  ">
                 <div className="md:mr-12">
@@ -114,7 +113,7 @@ const TestingPage: React.FC<Props> = () => {
                   </div>
                   <div>
                     <Image
-                      src="/certificate/UNP.png"
+                      src="/certificate/unp.png"
                       alt="cimade"
                       width={150}
                       height={150}
