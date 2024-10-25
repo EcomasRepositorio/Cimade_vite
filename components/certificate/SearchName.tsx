@@ -306,7 +306,7 @@ const SearchName: React.FC<SearchNameProps> = ({ onSearchName }) => {
                     >
                       <div className="flex justify-center items-center mb-4 gap-2">
                         <Image
-                          src={"/certificate/UNP.png"}
+                          src={"/certificate/unp.png"}
                           alt="cimade"
                           className="w-16 md:w-20 lg:w-24 object-contain mt-2"
                           width={200}
