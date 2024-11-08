@@ -4,12 +4,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css"; // Importar CSS de Swiper
-import "swiper/css/pagination"; // Importar CSS para paginación
-import "swiper/css/navigation"; // Importar CSS para navegación
-import { Pagination, Navigation, Autoplay } from "swiper/modules"; // Importar los módulos desde 'swiper/modules'
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, Autoplay } from "swiper/modules";
 
-// Datos de los diplomados destacados
 const diplomasData = [
   {
     img: "/image/ing_civil.png",
@@ -35,31 +34,74 @@ const diplomasData = [
     img: "/image/ing_riego.png",
     title: "Sistema de Riego Tecnificado",
   },
+
+
+
+
+
+
+  /* 
+  {
+    img: "/image/ing_civil.png",
+    title: "ASISTENTE TÉCNICO EN OBRAS",
+  },
+  {
+    img: "/image/ing_agricola.png",
+    title: "INGENIERÍA VIAL",
+  },
+  {
+    img: "/image/ing_ambiental.png",
+    title: "GESTIÓN Y MANEJO INTEGRAL DE RESIDUOS SÓLIDOS",
+  },
+  {
+    img: "/image/ing_alimentarias.png",
+    title: "MONITOREO Y EVALUACIÓN DE LA CALIDAD AMBIENTAL",
+  },
+  {
+    img: "/image/ing_vial.png",
+    title: "RIEGO Y FERTIRRIEGO",
+  },
+  {
+    img: "/image/ing_riego.png",
+    title: "SISTEMAS DE RIEGO TECNIFICADO",
+  },
+  {
+    img: "/image/ing_civil.png",
+    title: "SEGURIDAD, SALUD OCUPACIONAL Y MEDIO AMBIENTE",
+  },
+  {
+    img: "/image/ing_agricola.png",
+    title: "GESTIÓN DE LA CALIDAD E INOCUIDAD ALIMENTARIA",
+  },
+  {
+    img: "/image/ing_ambiental.png",
+    title: "PERITO FORENSE Y CRIMINALÍSTICO",
+  },
+   */
+  
 ];
 
-// Componente para la tarjeta de diplomado
 const DiplomaCard = ({ img, title }) => (
   <div className="group flex flex-col gap-5 rounded-lg p-5 shadow-md text-gray transform hover:scale-105 transition duration-300">
     <div
-      style={{ height: "400px", width: "320px" }} // Corregido el uso de style
+      style={{ height: "400px", width: "320px" }}
       className="group relative justify-center flex rounded-lg ring-gray-900/5"
     >
       <div className="z-10 h-full w-full overflow-hidden rounded-lg border border-gray-200 opacity-80 transition duration-200 ease-in-out group-hover:opacity-100">
         <img
-          src={img} // Usa la variable img pasada como prop
+          src={img}
           className="block h-full w-full object-cover object-center transition duration-300 group-hover:scale-110"
-          alt={title} // Usa la variable title como alt
+          alt={title}
         />
       </div>
       <div className="p-3 absolute bottom-0 z-20 m-0 pb-4 ps-4 w-full flex justify-center">
         <div className="border-white border rounded-lg text-lg font-bold text-white px-4 py-4 bg-opacity-70 backdrop-blur-sm">
-          {title} {/* Usa la variable title pasada como prop */}
+          Más Información
         </div>
       </div>
     </div>
   </div>
 );
-
 
 const Graduates = () => {
   return (
@@ -76,36 +118,36 @@ const Graduates = () => {
           </p>
         </div>
 
-        {/* Carrusel para móviles */}
-        <div className="block md:hidden">
-          <Swiper
-            modules={[Pagination, Autoplay]}
-            spaceBetween={16}
-            slidesPerView={1}
-            loop={true}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            pagination={{ clickable: true }}
-            className="space-x-4"
-          >
-            {diplomasData.map((diploma, index) => (
-              <SwiperSlide key={index}>
-                <DiplomaCard img={diploma.img} title={diploma.title} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+        {/* Carrusel para todos los tamaños de pantalla */}
+        <Swiper
+          modules={[Pagination, Autoplay]}
+          spaceBetween={20}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            640: { slidesPerView: 1, spaceBetween: 20 },
+            768: { slidesPerView: 2, spaceBetween: 30 },
+            1024: { slidesPerView: 3, spaceBetween: 40 },
+          }}
+          className="w-full mx-auto max-w-[1400px]"
+        >
+          {diplomasData.map((diploma, index) => {
+            const whatsappLink = `https://api.whatsapp.com/send?phone=51900102090&text=Hola, podría darme información sobre el diplomado de ${encodeURIComponent(diploma.title)}`;
 
-        {/* Grilla para Escritorio */}
-        <div className="hidden md:grid justify-items-center mx-auto mt-1 max-w-7xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {diplomasData.map((diploma, index) => (
-            <Link href="/graduate" key={index}>
-              <DiplomaCard img={diploma.img} title={diploma.title} />
-            </Link>
-          ))}
-        </div>
+            return (
+              <SwiperSlide key={index}>
+                <Link href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                  <DiplomaCard img={diploma.img} title={diploma.title} />
+                </Link>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
       </div>
     </div>
   );
