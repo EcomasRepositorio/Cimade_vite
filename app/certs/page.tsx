@@ -1,80 +1,142 @@
 "use client";
-import React, { useState } from 'react';
-import SearchCode from '@/components/certificate/SearchCode';
-import SearchDNI from '@/components/certificate/SearchDNI';
-import SearchName from '@/components/certificate/SearchName';
-import { BsQrCodeScan } from "react-icons/bs";
-import { BsPersonVcard, BsPersonSquare } from "react-icons/bs";
-import Whatsapp from '@/components/whatsapp/Index'
-import './Styles.css'
+import React from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
-const Certificate: React.FC = () => {
+const SearchCode = dynamic(() => import("@/components/certificate/SearchCode"));
+const SearchDNI = dynamic(() => import("@/components/certificate/SearchDNI"));
+const SearchName = dynamic(() => import("@/components/certificate/SearchName"));
 
-  const [isActive, setIsActive] = useState(false);
-  const [searchType, setSearchType] = useState<string | null>(null);
+interface Props {
+  // Define any props if needed
+}
 
-  const handleButton = (type: string) => {
-    setSearchType(type);
-    setIsActive(true);
-  };
-
-  const handleSearch = (data: string) => {
+const TestingPage: React.FC<Props> = () => {
+  const handleSearch = (data: any) => {
     console.log(data);
   };
 
   return (
-    <section id='certs' className='p-2'>
-    <div className="max-w-screen-xl mx-auto mb-12 border mt-12 rounded-3xl shadow-2xl text-center lg:mb-20 p-2">
-      <div className="mb-4 lg:mt-0 justify-center text-5xl font-extrabold tracking-tight text-gray-500">
-      <div className='flex justify-center mb-4 lg:gap-10 mt-12'>
-            <img src={'/certificate/logo_unp.png'} className="lg:w-44 lg:h-44 w-32 h-32 object-contain"/>
-            <img src={'/certificate/logo_cimade.png'} className="lg:w-44 lg:h-44 w-32 h-32 object-contain"/>
-            <img src={'/certificate/logo_cip_tacna.png'}className="lg:w-44 lg:h-44 w-32 h-32 object-contain "/>
+    <section className=" bg-fixed " style={{}}>
+      <div
+        className=""
+        style={{
+          backgroundAttachment: "fixed",
+          backgroundImage: "url(/banner/bg_certi5.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="py-8 mt-24  mx-auto max-w-screen-xl lg:py-10">
+          <div className="" style={{ position: "relative", width: "100%" }}>
+            <div
+              className="bg-gradient-to-t from-primaryceleste/30 to-primaryblue border border-white/55  rounded-lg p-8 md:p-12 mb-28 mt-4 mx-2"
+              style={{
+                marginBottom: "20px",
+              }}
+            >
+              <div className="flex flex-col md:flex-row mx-auto max-w-screen-xl  md:mr-0 md:p-4  ">
+                <div className="md:mr-12">
+                  <div className="flex flex-col">
+                    <h2 className=" mb-4 text-2xl font-extrabold text-center text-white md:mb-6 lg:text-4xl">
+                      VERIFICA TU CERTIFICADO
+                    </h2>
+                    <p className="text-white  font-light text-center md:text-xl mb-8  ">
+                      Verifica la autenticidad de tu certificado ingresando tu
+                      DNI, nombres o código de certificación proporcionado al
+                      obtenerlo. Nos aseguramos de proteger tu privacidad y la
+                      confidencialidad de tus datos.
+                    </p>
+
+                    <Tabs
+                      aria-label="Options"
+                      color="primary"
+                      classNames={{
+                        tabList:
+                          "w-full flex flex-col md:flex-row bg-transparent rounded-md border border-gray-300/40",
+                        cursor: "bg-primaryrosa/70 text-gray-100 rounded-lg",
+                        tab: "py-2 px-4 rounded-t-lg text-gray-100",
+                        tabContent:
+                          "group-data-[selected=true]:text-gray-100 text-g-100 ",
+                      }}
+                    >
+                      <Tab key="dni" title="Buscar por DNI" className="">
+                        <Card>
+                          <CardBody className="bg-transparent roun">
+                            <div className="">
+                              <SearchDNI onSearchDNI={handleSearch} />
+                            </div>
+                          </CardBody>
+                        </Card>
+                      </Tab>
+                      <Tab key="name" title="Buscar por Código">
+                        <Card>
+                          <CardBody className="bg-transparent dark:bg-blackblue2">
+                            <div>
+                              <SearchCode onSearchCode={handleSearch} />
+                            </div>
+                          </CardBody>
+                        </Card>
+                      </Tab>
+                      <Tab key="code" title="Buscar por nombres">
+                        <Card>
+                          <CardBody className="bg-transparent dark:bg-blackblue2">
+                            <div>
+                              <SearchName onSearchName={handleSearch} />
+                            </div>
+                          </CardBody>
+                        </Card>
+                      </Tab>
+                    </Tabs>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mt-4 md:mt-0 md:w-full  md:grid-cols-2 md:grid-rows-2 md:gap-y-8  justify-items-center md:items-center ">
+                  <div>
+                    <Image
+                      src="/certificate/logo_cimadee.png"
+                      alt="cimade"
+                      width={110}
+                      height={110}
+                      className=""
+                    />
+                  </div>
+                  <div>
+                    <Image
+                      src="/certificate/colegio.png"
+                      alt="cimade"
+                      width={150}
+                      height={150}
+                      className=""
+                    />
+                  </div>
+                  <div>
+                    <Image
+                      src="/certificate/unp.png"
+                      alt="cimade"
+                      width={150}
+                      height={150}
+                      className=""
+                    />
+                  </div>
+                  <div>
+                    <Image
+                      src="/certificate/funde.png"
+                      alt="cimade"
+                      width={130}
+                      height={130}
+                      className=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
-        <div className="">
-          <h2 className="mb-4 mt-20 text-4xl font-extrabold text-gray-500">
-            Certificados
-          </h2>
-          <p className="font-semibold text-gray-500 sm:text-xl">
-            En este módulo podrá realizar la búsqueda de certificados de los diferentes eventos ofrecidos por CIMADE.
-          </p>
-          <p className="mb-6 mt-6 lg:mt-10 text-xl tracking-tight font-semibold text-gray-500">
-            Buscar por:
-          </p>
-          <div className='lg:flex flex-wrap justify-center items-center text-center lg:ml-56 lg:mr-56'>
-            <button
-            onClick={() => handleButton('documentNumber')}
-            className={`buttonGlobal lg:mb-20 mb-4 font-bold rounded-lg text-md px-7 py-3 text-center inline-block
-              ${searchType === 'documentNumber' && ''}`}>
-              <BsPersonVcard className='text-xl inline-block align-text-top mr-1' />Buscar por DNI
-            </button>
-            <button
-            onClick={() => handleButton('name')}
-            className={`buttonGlobal lg:mb-20 mb-4 ml-6 mr-6 font-bold rounded-lg text-md px-3 py-3 text-center
-              ${searchType === 'name' && ''}`}>
-              <BsPersonSquare className='text-lg inline-block align-text-top mr-1' />Buscar por nombre
-            </button>
-            <button
-            onClick={() => handleButton('code')}
-            className={`buttonGlobal lg:mb-20 mb-5 font-bold rounded-lg text-md px-4 py-3 text-center inline-block
-            ${searchType === 'code' && ''}`}>
-              <BsQrCodeScan className='text-lg inline-block align-text-top mr-1' /> Buscar por código
-            </button>
-          </div>
-
-          {isActive && (
-        <div>
-          {searchType === 'documentNumber' && (<SearchDNI onSearchDNI={handleSearch} />)}
-          {searchType === 'name' && (<SearchName onSearchName={handleSearch} />)}
-          {searchType === 'code' && (<SearchCode onSearchCode={handleSearch} />)}
-        </div>
-      )}
-        </div>
-    </div>
-    <Whatsapp />
     </section>
-  )
-}
+  );
+};
 
-export default Certificate;
+export default TestingPage;

@@ -3,18 +3,18 @@ const Modal: React.FC<{
   onClose: () => void;
   children: React.ReactNode;
 }> = ({ open, onClose, children }) => {
-  const overlayClass = open ? 'visible bg-black bg-opacity-50' : 'invisible';
-  const modalClass = open ? 'scale-100 opacity-100 z-50' : 'scale-110 opacity-0';
+  const overlayClass = open ? 'visible  backdrop-blur-sm bg-opacity-20' : 'invisible';
+  const modalClass = open ? 'scale-100 opacity-100 z-100' : 'scale-110 opacity-0';
 
   return (
     <div
-      className={`fixed inset-0 p-4 flex justify-center items-center transition-colors ${overlayClass}`}
+      className={`fixed inset-0 p-4 z-50  flex justify-center items-center transition-colors ${overlayClass}`}
       onClick={onClose}>
       <div
-        className={`bg-white rounded-2xl shadow p-5 transition-all max-w-md sm:w-full w-full ${modalClass}`}
+        className={`bg-slate-800 rounded-2xl shadow p-5 transition-all max-w-md sm:w-full w-full ${modalClass}`}
         onClick={(e) => e.stopPropagation()}>
         <button
-          className="absolute top-2 right-2 py-1 px-2 border border-neutral-200 rounded-md text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-700"
+          className="absolute top-2 right-2 py-1 px-2 border border-neutral-200 rounded-md text-white bg-red-800 hover:bg-red-600  hover:text-gray-400"
           onClick={onClose}>
           X
         </button>

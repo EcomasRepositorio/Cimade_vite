@@ -145,7 +145,7 @@ const Login: React.FC = () => {
                   </h4>
                   <p className="text-lg font-semibold">
 
-                    Cimade Con una sólida trayectoria de 4 años, nuestra institución se destaca por su compromiso en la formación y desarrollo de profesionales.
+                    Cimade Con una sólida trayectoria de 2 años, nuestra institución se destaca por su compromiso en la formación y desarrollo de profesionales.
                     Ofrecemos cursos y diplomados de alta calidad que impulsan el crecimiento y la capacitación en áreas clave. Nuestra dedicación a la excelencia
                     educativa y la adaptabilidad a las demandas del mercado nos permiten marcar una diferencia significativa en la formación de profesionales.
 

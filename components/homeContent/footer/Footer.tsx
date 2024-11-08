@@ -3,6 +3,8 @@ import Social from "../content/Social";
 import { SlBookOpen } from "react-icons/sl";
 import './Styles.css';
 import Link from 'next/link';
+import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
+
 
 export const Footer = () => {
   return (
@@ -17,11 +19,11 @@ export const Footer = () => {
               <p className="mb-5 text-x1 font-bold tracking-wider text-gray-50 uppercase">Contáctanos</p>
               <a href="https://api.whatsapp.com/send?phone=51900102090" className="flex mb-3 text-lg font-medium transition md:mb-2">
                 <img src="/footer/footer_whatsapp.svg" alt="Phone Icon" className="w-6 h-6 mr-2" />
-                <button className="a text">900 102 090</button>
+                <p className="hover:text-primaryrosa hover:scale-100 duration-300 text">900 102 090</p>
               </a>
               <a href="mailto:capacitaciones@cimade.edu.pe" className="flex mb-3 text-lg font-medium transition md:mb-2">
               <img src="/footer/footer_correo.svg" alt="Correo Icono" className="w-6 h-6 mr-2" />
-                <button className="a text">capacitaciones@cimade.edu.pe</button>
+                <p className="hover:text-primaryrosa hover:scale-100 duration-300 text">capacitaciones@cimade.edu.pe</p>
               </a>
 
               <a className="flex mb-3 text-lg font-medium transition md:mb-2">
@@ -30,37 +32,58 @@ export const Footer = () => {
               </a>
             </nav>
             <div className='justify-items-center ml-12'>
-              <Social />
+            <div className="flex justify-self-start">
+              <Link href="https://www.facebook.com/CimadeEC" target="_blank"
+                className="mr-5 text-gray-100 hover:scale-150 ease-in duration-300 border border-white rounded-full p-2">
+                <FaFacebookF className='text-2xl' />
+              </Link>
+              <Link href="https://www.instagram.com/cimade_ec/" target="_blank"
+                className="mr-5 text-gray-100 hover:scale-150 ease-in duration-300 border border-white rounded-full p-2">
+                <FaInstagram className='text-2xl' />
+              </Link>
+              <Link href="https://www.tiktok.com/@consorciocimade?lang=es" target="_blank"
+                className="mr-5 text-gray-100 hover:scale-150 ease-in duration-300 border border-white rounded-full p-2">
+                <FaTiktok className='text-2xl' />
+              </Link>
+              <Link href="https://wa.me/51900102090?text=Hola,%20deseo%20más%20información%20sobre%20los%20diplomados" target="_blank"
+                className="mr-5 text-gray-100 hover:scale-150 ease-in duration-300 border border-white rounded-full p-2">
+                <FaWhatsapp className='text-2xl' />
+              </Link>
+              <Link href="https://www.youtube.com/@cimadeec" target="_blank"
+                className="mr-5 text-gray-100 hover:scale-150 ease-in duration-300 border border-white rounded-full p-2">
+                <FaYoutube className='text-2xl' />
+              </Link>
+            </div>
             </div>
           </div>
           <nav className="mb-4 ml-8">
             <p className="text-center mb-3 text-xl font-bold tracking-wider text-gray-50 uppercase">Nuestra Empresa</p>
             <div className="flex flex-col items-center">
               <a href="/">
-                <button className="a text mb-3 buttonFooter">Inicio</button>
+                <button className="hover:text-primaryrosa hover:scale-100 duration-300 text mb-3 buttonFooter">Inicio</button>
               </a>
 
               <a href="/graduate">
-                <button className="a text mb-3 buttonFooter">Diplomados</button>
+                <button className="hover:text-primaryrosa hover:scale-100 duration-300 text mb-3 buttonFooter">Diplomados</button>
               </a>
 
               <a href="/certs">
-                <button className="a text mb-3">Certificados</button>
+                <button className="hover:text-primaryrosa hover:scale-100 duration-300 text mb-3">Certificados</button>
               </a>
 
               <a href="/about">
-                <button className="a text mb-3">Nosotros</button>
+                <button className="hover:text-primaryrosa hover:scale-100 duration-300 text mb-3">Nosotros</button>
               </a>
 
               <a href="#">
-                <button className="a text">Blog</button>
+                <button className="hover:text-primaryrosa hover:scale-100 duration-300 text">Blog</button>
               </a>
             </div>
           </nav>
           <nav className="mb-4 ml-8">
             {/* INFORMACION DEL FOOTER */}
             <p className="text-center text-1 font-bold tracking-wider text-gray-50 uppercase mb-4 mr-8">Acerca de nosotros </p>
-            <p className="hidden md:block text-center mr-8">Corporación Cimade se erige como una destacada institución dedicada con firmeza a la excelencia, calidad y profesionalismo, orientada a ofrecer una educación online de primer nivel, marcando un estándar insuperable en el ámbito educativo.</p>
+            <p className="hidden md:block text-center mr-8">Corporación Cimade se rige como una destacada institución dedicada con firmeza a la excelencia, calidad y profesionalismo, orientada a ofrecer una educación online de primer nivel, marcando un estándar insuperable en el ámbito educativo.</p>
             <p className="md:hidden text-center mr-8">Corporación Cimade, calidad y profesionalismo dedicada a brindar una educación online de excelencia. </p>
             <Link href="#" className='flex items-center justify-center mt-6 font-bold text-xl'>
             <SlBookOpen className='mr-2'/>

@@ -12,7 +12,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="w-full lg:bg-white md:bg-white bg-white top-0 left-0 right-0 fixed z-50">
+      <nav className="w-full lg:bg-white md:bg-white bg-white top-0 left-0 right-0 absolute z-50">
         <div className='max-w-screen-xl flex flex-wrap items-center justify-center mx-auto p-0.5 backdrop-blur-md'>
           {/* Barra superior */}
           <div className='md:text-right text-center font-semibold w-full border-b border-blue-500 py-1'>
