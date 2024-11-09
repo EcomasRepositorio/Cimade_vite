@@ -4,14 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import Image from "next/image";
-import styles from '@/style/Index';
 
-//ingenieria vial
-//ingVial
-
-const modulesingVial
-= [
-  
+// Ingeniería Vial - módulos
+const modulesingVial = [
   { name: "Geología Geotecnia en obras viales", image: "/cursos_gpt/8ing_vial/1.webp" },
   { name: "Suelos y pavimentos", image: "/cursos_gpt/8ing_vial/2.webp" },
   { name: "Hidrología e hidráulica", image: "/cursos_gpt/8ing_vial/3.webp" },
@@ -25,8 +20,7 @@ const modulesingVial
   { name: "Topografía, diseño geométrico, señalización y seguridad vial", image: "/cursos_gpt/8ing_vial/11.webp" },
 ];
 
-const GraduateingVialCarousel= () => {
-  // Function to handle card click and open WhatsApp with a custom message
+const GraduateingVialCarousel = () => {
   const handleCardClick = (moduleName: string) => {
     const whatsappUrl = `https://wa.me/51984040264?text=${encodeURIComponent(
       `Hola, estoy interesado en el curso "${moduleName}" y me gustaría recibir más información.`
@@ -34,10 +28,9 @@ const GraduateingVialCarousel= () => {
     window.open(whatsappUrl, "_blank");
   };
 
-  
   return (
     <section className="bg-white px-6">
-      <div className={`${styles.paddings} relative z-10 max-w-[1400px] mx-auto`}>
+      <div className="py-10 relative z-10 max-w-[1400px] mx-auto">
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           loop
@@ -55,24 +48,23 @@ const GraduateingVialCarousel= () => {
         >
           {modulesingVial.map((module, idx) => (
             <SwiperSlide key={idx}>
-            <div
+              <div
                 className="relative w-full h-full sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] xl:w-[400px] xl:h-[400px] flex items-center justify-center cursor-pointer rounded-xl overflow-hidden"
                 onClick={() => handleCardClick(module.name)}
-            >
-              {/* Hidden title for accessibility and SEO */}
-              <h3 className="sr-only">{module.name}</h3>
-              <Image
+              >
+                <h3 className="sr-only">{module.name}</h3>
+                <Image
                   src={module.image}
                   alt={module.name}
-                  width={500} // Ajusta estos valores según el tamaño del contenedor
+                  width={500}
                   height={500}
-                  objectFit="cover" // Asegura que la imagen se ajuste al contenedor sin salirse
+                  objectFit="cover"
                   className="rounded-xl"
                   priority={true}
                   unoptimized={true}
                 />
-            </div>
-          </SwiperSlide>
+              </div>
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>

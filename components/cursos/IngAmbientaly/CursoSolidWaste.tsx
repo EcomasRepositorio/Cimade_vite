@@ -4,25 +4,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import Image from "next/image";
-import styles from '@/style/Index';
 
-
-
-//GESTIÓN Y MANEJO INTEGRAL DE RESIDUOS SÓLIDOS
-
-
+// Gestión y Manejo Integral de Residuos Sólidos - módulos
 const modulesSolidWaste = [
   { name: "Gestión y manejo de residuos sólidos en minería", image: "/cursos_gpt/2gestionymanejo/1.webp" },
   { name: "Gestión y manejo de residuos sólidos de construcción", image: "/cursos_gpt/2gestionymanejo/2.webp" },
-  { name: "Formulación de proyectos de inversión pública de residuos sólidos", image: "/CURSOS/inersion-publica.webp" },//esta cambiado
+  { name: "Formulación de proyectos de inversión pública de residuos sólidos", image: "/CURSOS/inersion-publica.webp" },
   { name: "Gestión y manejo de residuos sólidos industriales", image: "/cursos_gpt/2gestionymanejo/4.webp" },
   { name: "Tratamiento y reaprovechamiento de residuos sólidos", image: "/cursos_gpt/2gestionymanejo/5.webp" },
-  //{ name: "Gestión y manejo de residuos sólidos hospitalarios", image: "/cursos_gpt/2gestionymanejo/6.webp" },
-  //{ name: "Operatividad de las EO-RS", image: "/CURSOS/14.webp" },
-  //{ name: "Residuos sólidos y economía circular", image: "/CURSOS/15.webp" },
-  //{ name: "Gestión y manejo de residuos sólidos municipales", image: "/CURSOS/16.webp" },
-  //{ name: " Estudio de caracterización de residuos sólidos", image: "/CURSOS/17.webp" },
-  //{ name: "Valorización de residuos sólidos", image: "/CURSOS/18.webp" },
 ];
 
 const GraduateSolidWasteCarousel = () => {
@@ -34,10 +23,9 @@ const GraduateSolidWasteCarousel = () => {
     window.open(whatsappUrl, "_blank");
   };
 
-  
   return (
     <section className="bg-white px-6">
-      <div className={`${styles.paddings} relative z-10 max-w-[1400px] mx-auto`}>
+      <div className="py-10 relative z-10 max-w-[1400px] mx-auto">
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           loop
@@ -56,26 +44,24 @@ const GraduateSolidWasteCarousel = () => {
           }}
         >
           {modulesSolidWaste.map((module, idx) => (
-           <SwiperSlide key={idx}>
-           <div
-             className="relative w-full h-full sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] xl:w-[400px] xl:h-[400px] flex items-center justify-center cursor-pointer rounded-xl overflow-hidden"
-             onClick={() => handleCardClick(module.name)}
-           >
-
-
-             <h3 className="sr-only">{module.name}</h3>
-             <Image
-               src={module.image}
-               alt={module.name}
-               width={500} 
-               height={500}
-               objectFit="cover" 
-               className="rounded-xl"
-               priority={true}
-               unoptimized={true}
-             />
-           </div>
-         </SwiperSlide>
+            <SwiperSlide key={idx}>
+              <div
+                className="relative w-full h-full sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] xl:w-[400px] xl:h-[400px] flex items-center justify-center cursor-pointer rounded-xl overflow-hidden"
+                onClick={() => handleCardClick(module.name)}
+              >
+                <h3 className="sr-only">{module.name}</h3>
+                <Image
+                  src={module.image}
+                  alt={module.name}
+                  width={500}
+                  height={500}
+                  objectFit="cover"
+                  className="rounded-xl"
+                  priority={true}
+                  unoptimized={true}
+                />
+              </div>
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>
