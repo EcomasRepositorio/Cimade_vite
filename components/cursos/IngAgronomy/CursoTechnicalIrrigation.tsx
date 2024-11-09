@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import Image from "next/image";
-import styles from '@/style/index';
+import styles from '@/style/Index';
 
 
 //sistema de riego tecnificado 
