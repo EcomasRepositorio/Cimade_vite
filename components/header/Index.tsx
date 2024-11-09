@@ -1,14 +1,20 @@
 "use client";
-
 import React, { useState } from 'react'; // Agrega la importación de useState
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaUserCog } from "react-icons/fa";
-import { BsWhatsapp } from "react-icons/bs";
+import { FaUserCog, FaBan } from "react-icons/fa"; // Importa el ícono de bloqueo
+import { TfiMenuAlt } from "react-icons/tfi";
+import { GrClose } from "react-icons/gr";
 import { IoPersonAddOutline } from "react-icons/io5";
 
 function Navbar() {
   const [navbar, setNavbar] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(true); // Estado para controlar si el curso está bloqueado
+
+  // Función para cambiar el estado de bloqueado a desbloqueado
+  const toggleBlock = () => {
+    setIsBlocked((prev) => !prev);
+  };
 
   return (
     <>
@@ -64,31 +70,42 @@ function Navbar() {
               className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? 'p-12 md:p-0 block' : 'hidden'}`}
             >
               <ul className="h-screen md:h-12 lg:text-xl md:text-sm text-2xl items-center justify-center md:flex">
-                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-6 py-1 px-6 text-center md:border-b-0 hover:bg-blue-800 rounded transition-transform transform hover:scale-125">
+                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-6 py-1 px-6 text-center hover:bg-blue-800 rounded transition-transform transform hover:scale-125">
                   <Link href="/" onClick={() => setNavbar(!navbar)}>
                     Inicio
                   </Link>
                 </li>
-                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-6 py-1 px-6 text-center md:border-b-0 hover:bg-blue-800 rounded transition-transform transform hover:scale-125">
+                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-6 py-1 px-6 text-center hover:bg-blue-800 rounded transition-transform transform hover:scale-125">
                   <Link href="/graduate" onClick={() => setNavbar(!navbar)}>
                     Diplomados
                   </Link>
                 </li>
-                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-6 py-1 px-6 text-center md:border-b-0 hover:bg-blue-800 rounded transition-transform transform hover:scale-125">
+                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-6 py-1 px-6 text-center hover:bg-blue-800 rounded transition-transform transform hover:scale-125">
                   <Link href="/certs" onClick={() => setNavbar(!navbar)}>
                     Certificados
                   </Link>
                 </li>
-                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-6 py-1 px-6 text-center md:border-b-0 hover:bg-blue-800 rounded transition-transform transform hover:scale-125">
+
+                {/* Cursos - con mensaje de bloqueo */}
+                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-4 py-1 px-6 text-center hover:bg-blue-800 rounded transition-transform transform hover:scale-125 relative">
+                  {isBlocked ? (
+                    <div className="flex items-center justify-center gap-2 cursor-not-allowed opacity-50">
+                      <FaBan className="text-red-500" /> {/* Ícono de bloqueo */}
+                      <span className="text-gray-400">Curso Bloqueado</span>
+                    </div>
+                  ) : (
+                    <Link href="/curs" onClick={() => setNavbar(!navbar)}>
+                      Cursos
+                    </Link>
+                  )}
+                </li>
+
+                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-6 py-1 px-6 text-center hover:bg-blue-800 rounded transition-transform transform hover:scale-125">
                   <Link href="/about" onClick={() => setNavbar(!navbar)}>
                     Nosotros
                   </Link>
                 </li>
-                <li className="font-bold text-blue-500 hover:text-white lg:mb-0 md:mb-0 mb-6 py-1 px-6 text-center md:border-b-0 hover:bg-blue-800 rounded transition-transform transform hover:scale-125">
-                  <Link href="/blog" onClick={() => setNavbar(!navbar)}>
-                    Blog
-                  </Link>
-                </li>
+                
                 {/* Botón de login */}
                 <li className="lg:pl-40 flex justify-center items-center hover:text-blue-600 md:mt-0 mt-20">
                   <Link href="/login" className="bg-blue-600 py-1 px-4 rounded-xl text-white hover:bg-gray-100 hover:text-blue-600 hover:scale-125 duration-300">
@@ -100,8 +117,6 @@ function Navbar() {
           </div>
         </div>
       </nav>
-
-      
     </>
   );
 }
