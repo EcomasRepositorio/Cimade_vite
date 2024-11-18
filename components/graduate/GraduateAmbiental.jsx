@@ -51,8 +51,8 @@ const GraduateAmbiental = () => {
       <div className="py-12 md:px-20 sm:px-14 px-6 flex flex-col sm:flex-row justify-center">
         <div className="sm:w-96 mb-4 sm:mb-0">
           <img
-            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
-            src="/graduate/residuos_solidos.png"
+            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl border border-blue-500"
+            src="/dip/3.webp"
             alt="icon"
           />
         </div>
@@ -149,8 +149,8 @@ const GraduateAmbiental = () => {
       <div className="py-12 md:px-20 sm:px-14 px-6 flex flex-col sm:flex-row justify-center">
         <div className="sm:w-96 mb-4 sm:mb-0">
           <img
-            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
-            src="/graduate/monitoreo_ambiental.png"
+            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl border border-blue-500"
+            src="/dip/4.webp"
             alt="icon"
           />
         </div>

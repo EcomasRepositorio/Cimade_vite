@@ -31,8 +31,8 @@ const GraduateAgronomy = () => {
       <div className="py-12 md:px-20 sm:px-14 px-6 flex flex-col sm:flex-row justify-center">
         <div className="sm:w-96 mb-4 sm:mb-0">
           <img
-            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
-            src="/graduate/riego.png"
+            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl border border-blue-500"
+            src="/dip/5.webp"
             alt="icon"
           />
         </div>
@@ -123,8 +123,8 @@ const GraduateAgronomy = () => {
       <div className="py-12 md:px-20 sm:px-14 px-6 flex flex-col sm:flex-row justify-center">
         <div className="sm:w-96 mb-4 sm:mb-0">
           <img
-            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl"
-            src="/graduate/sistema_tecnificado.png"
+            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl border border-blue-500"
+            src="/dip/6.webp"
             alt="icon"
           />
         </div>

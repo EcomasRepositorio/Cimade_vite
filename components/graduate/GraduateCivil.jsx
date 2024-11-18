@@ -61,10 +61,10 @@ const GraduateCivil = () => {
   return (
     <div>
       <div className="py-12 md:px-20 sm:px-14 px-6 flex flex-col sm:flex-row justify-center">
-        <div className="sm:w-96 mb-4 sm:mb-0">
+        <div className="sm:w-96 mb-4 sm:mb-0 ">
           <img
-            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl transform hover:-translate-y-1 transition duration-600"
-            src="/graduate/tecnico_obras.png"
+            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl  border border-blue-500 transform hover:-translate-y-1 transition duration-600"
+            src="/dip/1.webp"
             alt="icon"
           />
         </div>
@@ -159,8 +159,8 @@ const GraduateCivil = () => {
       <div className="py-12 md:px-20 sm:px-14 px-6 flex flex-col sm:flex-row justify-center">
         <div className="sm:w-96 mb-4 sm:mb-0">
           <img
-            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl transform hover:-translate-y-1 transition duration-600"
-            src="/graduate/inge_vial.png"
+            className="bg-cover h-96 w-96 sm:h-auto rounded-3xl border border-blue-500 transform hover:-translate-y-1 transition duration-600"
+            src="/dip/2.webp"
             alt="icon"
           />
         </div>
